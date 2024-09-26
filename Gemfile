@@ -65,3 +65,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'haml-rails'
+gem 'html2haml'
+
+gem 'bcrypt',  '3.1.12'
+
+gem 'pry-rails'
