@@ -7,4 +7,18 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # ログイン画面
+  get 'login', to: 'sessions#new'          # ログインフォームを表示
+  post 'login', to: 'sessions#create'      # ログイン処理
+  delete 'logout', to: 'sessions#destroy'  # ログアウト処理
+
+  # 社員用ホーム画面
+  get 'user/home', to: 'users#home', as: 'user_home'
+
+  # 管理者用ホーム画面
+  get 'admin/home', to: 'admins#home', as: 'admin_home'
+
+  # ルートページをログイン画面に設定
+  root 'sessions#new'
 end
