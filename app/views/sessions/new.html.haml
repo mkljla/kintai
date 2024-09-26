@@ -1,0 +1,11 @@
+%h1 ログイン
+= form_with url: login_path, local: true do |f|
+  .form-group
+    = f.label :employee_number, "社員番号"
+    = f.text_field :employee_number, class: 'form-control', pattern: '[0-9]{4,}', required: true, title: '4桁以上の数字を入力してください'
+
+  .form-group
+    = f.label :password, "パスワード"
+    = f.password_field :password, class: 'form-control'
+
+  = f.submit "Log in", class: 'btn btn-primary'
