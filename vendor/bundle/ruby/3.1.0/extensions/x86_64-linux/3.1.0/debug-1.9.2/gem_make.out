@@ -1,0 +1,16 @@
+current directory: /apps/vendor/bundle/ruby/3.1.0/gems/debug-1.9.2/ext/debug
+/usr/local/bin/ruby -I /usr/local/lib/ruby/3.1.0 -r ./siteconf20240921-28-6dq3ly.rb extconf.rb
+creating Makefile
+
+current directory: /apps/vendor/bundle/ruby/3.1.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= clean
+
+current directory: /apps/vendor/bundle/ruby/3.1.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\=
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /apps/vendor/bundle/ruby/3.1.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20240921-28-eem71m/debug
