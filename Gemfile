@@ -72,3 +72,5 @@ gem 'html2haml'
 gem 'bcrypt',  '3.1.12'
 
 gem 'pry-rails'
+
+gem "sassc-rails"
