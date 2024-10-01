@@ -13,8 +13,6 @@
  *= require_tree .
  *= require_self
  */
-@import "self";
-@import "tree";
-@import "reset";
+@import "normalize";
 @import "header";
 @import "footer";
