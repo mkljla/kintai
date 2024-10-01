@@ -1,11 +1,28 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title 勤怠管理
-    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}/
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    // JavaScript読み込み
+    = javascript_include_tag 'application'
+
+    // BootstrapのCSS読み込み
+    %link{crossorigin: "anonymous", href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", integrity: "sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM", rel: "stylesheet"}/
   %body
+    // フラッシュメッセージの表示
+    - if flash[:alert]
+      // エラーメッセージ、警告メッセージ
+      .alert.alert-danger.flashWindow
+        = flash[:alert]
+    - if flash[:notice]
+      // 成功メッセージ
+      .alert.alert-success.flashWindow
+        = flash[:notice]
     = yield
+
+    // BootstrapのJS読み込み
+    %script{crossorigin: "anonymous", integrity: "sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz", src: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"}
