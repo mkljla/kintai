@@ -11,7 +11,8 @@
     // BootstrapのCSS読み込み
     %link{crossorigin: "anonymous", href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", integrity: "sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM", rel: "stylesheet"}/
   %body
-    =display_flash_messages
+    = render 'header'
+    = display_flash_messages
     = yield
 
     // BootstrapのJS読み込み
