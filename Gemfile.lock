@@ -105,6 +105,8 @@ GEM
     erubi (1.13.0)
     erubis (2.7.0)
     ffi (1.17.0)
+    font-awesome-sass (6.5.2)
+      sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     haml (6.3.0)
@@ -296,6 +298,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  font-awesome-sass
   haml-rails
   html2haml
   importmap-rails
