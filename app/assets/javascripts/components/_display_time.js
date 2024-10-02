@@ -2,10 +2,13 @@
 /* デジタル時計のコード（ゼロパディングあり）*/
 /***********************************/
 
+// 初期表示
 displayTime();
+
 //1秒ごとに関数を呼び出す。
 setInterval(displayTime, 1000);
 
+// 時間を表示する関数
 function displayTime() {
   //ゼロパディングして2桁にする
   const padZero = (value) => value.toString().padStart(2, "0");
