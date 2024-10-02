@@ -13,8 +13,29 @@
  *= require_tree .
  *= require_self
  */
-@import "normalize";
-@import "font-awesome";
-@import "flash_window";
-@import "header";
-@import "footer";
+
+// リセットスタイル (normalizeやresetなど)
+@import "normalize"; // ブラウザの標準スタイルをリセット
+
+// 変数とミキシン (ベースの設定)
+@import "variables"; // 全体で使う変数を定義
+@import "mixins"; // ヘルパーミキシンを追加
+
+// サードパーティのライブラリやフォント
+@import "font-awesome"; // 外部のライブラリやフォント
+
+// コンポーネント (再利用可能な部品、ボタンやフォームなど)
+@import "components/*";
+
+// レイアウト (ページ全体の構造、ヘッダーやフッターなど)
+@import "layouts/*";
+
+// ページ (各ページ固有のスタイル)
+@import "pages/*";
+
+// 全体のスタイル設定
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
