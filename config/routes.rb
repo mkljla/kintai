@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   # 社員用ホーム画面
   get 'user/home', to: 'users#home', as: 'user_home'
+  get 'user/:id', to: 'users#show', as: 'user_show'
+
 
   # 管理者用ホーム画面
   get 'admin/home', to: 'admins#home', as: 'admin_home'
