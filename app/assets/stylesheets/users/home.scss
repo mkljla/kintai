@@ -1,0 +1,14 @@
+.clock {
+  font-size: 4rem;
+  text-align: center;
+}
+.button_container {
+  display: flex; /* フレックスボックスを使用 */
+  justify-content: center; /* 水平方向に中央寄せ */
+  align-items: center; /* 垂直方向に中央寄せ（必要なら） */
+  button {
+    width: 150px;
+    height: 50px;
+    margin: 20px;
+  }
+}
