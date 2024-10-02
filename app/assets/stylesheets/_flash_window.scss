@@ -1,0 +1,8 @@
+.flash_window {
+  position: absolute !important;
+  top: 20px; /* 上からの位置 */
+  left: 50%; /* 水平中央 */
+  transform: translateX(-50%); /* 中央揃え */
+  z-index: 1000; /* 他の要素の上に表示 */
+  width: 300px; /* メッセージの幅を設定 */
+}
