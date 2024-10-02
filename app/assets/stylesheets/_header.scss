@@ -1,0 +1,118 @@
+// The Header Media Queries
+// Tweak as per your needs
+.site-header {
+  position: relative;
+  background-color: #def7ff;
+
+  .site-header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    @media (min-width: 800px) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .site-header__start {
+      display: flex;
+      align-items: center;
+      margin: auto 1rem;
+
+      .brand {
+        font-weight: bold;
+        font-size: 20px;
+        text-decoration: none;
+      }
+    }
+
+    .site-header__end {
+      display: flex;
+      align-items: center;
+
+      .nav {
+        &__toggle {
+          display: none;
+          i {
+            font-size: 2rem;
+          }
+
+          @media (max-width: 799px) {
+            display: flex;
+            margin: auto 1rem;
+          }
+        }
+
+        &__wrapper {
+          @media (min-width: 800px) {
+            display: flex;
+            background-color: khaki;
+            margin: auto 0;
+          }
+
+          @media (max-width: 799px) {
+            position: absolute;
+            top: calc(100%);
+            right: 0;
+            left: 0;
+            z-index: -1;
+            background-color: #d9f0f7;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+
+            &.active {
+              visibility: visible;
+              opacity: 0.9; // 不透明度
+              transform: translateY(0); // 垂直方向で再配置
+              z-index: 100; //ボックスの重ね合わせレベル
+              padding: 0;
+            }
+          }
+
+          .nav__item {
+            list-style: none;
+            &:not(:last-child) {
+            }
+
+            a {
+              display: block;
+              padding: 1rem;
+              border-left: 4px solid transparent;
+
+              @media (min-width: 800px) {
+                text-align: center;
+                border-left: 0;
+                border-bottom: 4px solid transparent;
+              }
+
+              &.active {
+                border-left-color: #222;
+
+                @media (min-width: 800px) {
+                  border-bottom-color: #222;
+                }
+              }
+            }
+
+            svg {
+              display: inline-block;
+              vertical-align: middle;
+              width: 28px;
+              height: 28px;
+              margin-right: 1rem;
+
+              @media (min-width: 800px) {
+                display: block;
+                margin: 0 auto 0.5rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

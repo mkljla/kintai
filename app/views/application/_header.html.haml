@@ -1,0 +1,17 @@
+%header.site-header
+  .wrapper.site-header__wrapper
+    .site-header__start
+      %a.brand{href: "#"} 勤怠管理
+    .site-header__end
+      %nav.nav
+        .nav__toggle{"aria-expanded" => "false", type: "button"}
+          %i.fa-solid.fa-bars
+        %ul.nav__wrapper
+          %li.nav__item
+            %a{href: user_home_path}
+              %i.fa-solid.fa-house
+                Home
+          %li.nav__item
+            %a{href: user_show_path(current_user.id)}
+              %i.fa-solid.fa-user
+                社員情報
