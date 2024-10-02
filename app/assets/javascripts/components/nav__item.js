@@ -19,4 +19,13 @@ $(document).ready(function () {
   if ($(".nav__item > a.active").length === 0) {
     $(".nav__item > a").first().addClass("active");
   }
+
+  // クリックイベント時にactiveクラスを更新
+  links.on("click", function (e) {
+    // すべてのリンクからactiveクラスを削除
+    links.removeClass("active");
+
+    // クリックされたリンクにactiveクラスを付与
+    $(this).addClass("active");
+  });
 });
