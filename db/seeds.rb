@@ -22,7 +22,16 @@ Department.create!(name: '経理')
     password: "password#{n + 1}", # password_digestではなく、passwordを指定
     department_id: n % 2 + 1
   )
+
 end
+User.create!(
+  employee_number: 6.to_s.rjust(4, '0'),
+  full_name: "テスト太郎6",
+  date_of_hire: Date.new(2015, 1, 1),
+  date_of_termination: Date.new(2021, 2, 10),
+  password: "password6", # password_digestではなく、passwordを指定
+  department_id: nil,
+)
 User.create!(
   employee_number: 0000,
   full_name: "管理者",
