@@ -15,3 +15,6 @@
             %a{href: user_show_path(current_user.id)}
               %i.fa-solid.fa-user
                 社員情報
+      // メニュー展開時ののログアウトボタン
+      .btn-logout-expand
+        = button_to 'ログアウト', logout_path, method: :delete, class: "btn btn-primary"
