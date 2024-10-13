@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :password_digest, presence: true
 
   # アソシエーション
-  belongs_to :department
+  belongs_to :department, optional: true #nilを許容
 
   # パスワードをハッシュ化
   has_secure_password

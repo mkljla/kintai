@@ -14,13 +14,20 @@ Department.create!(name: '経理')
 
 # ユーザーデータの作成
 5.times do |n|
-# ユーザーデータの作成
-User.create!(
-  employee_number: (n + 1).to_s.rjust(4, '0'),
-  full_name: "テスト太郎#{n + 1}",
-  date_of_hire: Date.new(2020, 1, 1),
-  password: "password#{n + 1}", # password_digestではなく、passwordを指定
-  department_id: n % 2 + 1
-)
-
+  # ユーザーデータの作成
+  User.create!(
+    employee_number: (n + 1).to_s.rjust(4, '0'),
+    full_name: "テスト太郎#{n + 1}",
+    date_of_hire: Date.new(2020, 1, 1),
+    password: "password#{n + 1}", # password_digestではなく、passwordを指定
+    department_id: n % 2 + 1
+  )
 end
+User.create!(
+  employee_number: 0000,
+  full_name: "管理者",
+  date_of_hire: Date.new(2000, 1, 1),
+  password: "admin",
+  is_admin: true,
+  department_id: nil,
+)

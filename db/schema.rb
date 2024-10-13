@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_09_26_102602) do
   create_table "attendances", force: :cascade do |t|
-    t.integer "employee_id"
+    t.integer "user_id"
     t.date "date", null: false
     t.datetime "check_in_time", precision: nil
     t.datetime "check_out_time", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["employee_id"], name: "index_attendances_on_employee_id"
+    t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -35,11 +35,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_102602) do
     t.date "date_of_termination"
     t.string "password_digest", null: false
     t.integer "department_id"
+    t.boolean "is_admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 
-  add_foreign_key "attendances", "employees"
+  add_foreign_key "attendances", "users"
   add_foreign_key "users", "departments"
 end
