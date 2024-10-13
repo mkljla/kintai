@@ -5,6 +5,10 @@ class AdminsController < ApplicationController
 
   end
 
+  def show_user
+    @user = User.find(params[:id])
+  end
+
   private
 
   # ユーザーの取得とフィルタリングを行うメソッド

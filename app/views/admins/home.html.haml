@@ -7,6 +7,7 @@
   %thead
     %tr
       %th 社員番号
+      %th
       %th 名前
       %th 入社日
       %th 退職日
@@ -14,6 +15,7 @@
     - @users.each do |user|
       %tr
         %td= user.employee_number.to_s.rjust(4, '0')
+        %td= link_to '詳細', admin_user_show_path(user.id), class: "btn btn-primary"
         %td= user.full_name
         %td= user.date_of_hire
         %td= user.date_of_termination ? user.date_of_termination : "-"

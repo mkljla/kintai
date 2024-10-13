@@ -1,0 +1,16 @@
+%nav
+  %ol.breadcrumb
+    %li
+      %a{href: admin_home_path} ホーム
+    %li ユーザー詳細
+%dl
+  %dt 社員番号
+  %dd= @user.employee_number.to_s.rjust(4, '0')
+  %dt 名前
+  %dd= @user.full_name
+  %dt 入社日
+  %dd= @user.date_of_hire
+  %dt 退職日
+  %dd= @user.date_of_termination || "-"
+  %dt
+  %dd
