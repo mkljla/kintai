@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   # 管理者用ユーザー詳細画面
   get 'admin/users/:id', to: 'admins#show_user', as: 'admin_user_show'
 
+  # 勤怠管理DB作成処理
+  post 'attendances/check_in', to: 'attendances#check_in'
+  post 'attendances/check_out', to: 'attendances#check_out'
 
   # ルートページをログイン画面に設定
   root 'sessions#new'

@@ -10,6 +10,7 @@ class User < ApplicationRecord
   # ===============
   # アソシエーション
   # ===============
+  has_many :attendances
   belongs_to :department, optional: true # nilを許容
 
   # パスワードをハッシュ化

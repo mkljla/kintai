@@ -2,5 +2,19 @@
 .date
 .clock
 .button_container
-  %button.btn.btn-success{type: "button"} 出勤
-  %button.btn.btn-danger{type: "button"} 退勤
+  = button_to "出勤", attendances_check_in_path, method: :post, class: "btn btn-success"
+  = button_to "退勤", attendances_check_out_path, method: :post, class: "btn btn-danger"
+
+- if @attendances
+  %table
+    %thead
+      %tr
+        %th 出勤時間
+        %th 退勤時間
+    %tbody
+      - @attendances.each do |attendance|
+        %tr
+          %td= attendance.check_in_time.strftime("%Y-%m-%d %H:%M:%S")
+          -if attendance.check_out_time
+            %td= attendance.check_out_time.strftime("%Y-%m-%d %H:%M:%S")
+

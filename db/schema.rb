@@ -13,7 +13,6 @@
 ActiveRecord::Schema[7.1].define(version: 2024_09_26_102602) do
   create_table "attendances", force: :cascade do |t|
     t.integer "user_id"
-    t.date "date", null: false
     t.datetime "check_in_time", precision: nil
     t.datetime "check_out_time", precision: nil
     t.datetime "created_at", null: false

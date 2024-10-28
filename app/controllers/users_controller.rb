@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def home
     @user = current_user
     # 社員用ホーム画面の表示ロジック
+    @attendances = current_user.attendances
   end
 
   def show
