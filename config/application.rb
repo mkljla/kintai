@@ -27,5 +27,9 @@ module Prpject3
     # アプリケーション全体のタイムゾーンをTokyoに設定
     config.time_zone = 'Tokyo'
     # config.active_record.default_timezone = :local # データベースもローカル時間で保存
+
+    # 曜日の日本語表現
+    config.i18n.default_locale = :ja
+
   end
 end
