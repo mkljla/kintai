@@ -2,11 +2,11 @@ class AdminsController < ApplicationController
   def home
     # ユーザーを取得し、フィルタリング処理を呼び出す
     @users = fetch_users
-
   end
 
   def show_user
     @user = User.find(params[:id])
+    @attendances = @user.attendances.order(created_at: :desc)
   end
 
   private

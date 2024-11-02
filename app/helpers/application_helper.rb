@@ -18,4 +18,29 @@ module ApplicationHelper
     safe_join(flash_messages)
   end
 
+  def formatted_date_with_weekday(datetime)
+    "#{datetime.strftime('%Y/%m/%d')}(#{I18n.t('date.abbr_day_names')[datetime.wday]})"
+  end
+
+  def formatted_time_only(datetime)
+    Time.at((datetime).to_i).in_time_zone('Tokyo').strftime("%H:%M")
+  end
+
+  # 前月と前月の年を返すメソッド
+  def previous_month_and_year(current_month, current_year)
+    if current_month == 1
+      [12, current_year - 1]
+    else
+      [current_month - 1, current_year]
+    end
+  end
+
+  # 翌月と翌月の年を返すメソッド
+  def next_month_and_year(current_month, current_year)
+    if current_month == 12
+      [1, current_year + 1]
+    else
+      [current_month + 1, current_year]
+    end
+  end
 end

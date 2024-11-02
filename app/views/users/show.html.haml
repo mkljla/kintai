@@ -1,1 +1,57 @@
 %h1 詳細画面
+%dl
+  %dt 社員番号
+  %dd= @user.employee_number.to_s.rjust(4, '0')
+  %dt 名前
+  %dd= @user.full_name
+  %dt 入社日
+  %dd= @user.date_of_hire
+  %dt 退職日
+  %dd= @user.date_of_termination || "-"
+
+
+- # 年と月のドロップダウン選択フォーム
+// turbo_stream
+-# = form_with url: user_show_path, method: :get, data: { turbo_frame: "attendance-table" }, local: false do |f|
+= form_with url: user_show_path, method: :get do |f|
+  %div
+    年:
+    = f.select :year, (@current_year - 5..@current_year).to_a.reverse, { selected: @year }, onchange: 'this.form.requestSubmit()'
+  %div
+    月:
+    - months = (1..12).map { |m| [m, m] }
+    - # 選択された年が現在の年の場合、現在の月までしか表示しない
+    - max_month = (@year == @current_year) ? @current_month : 12
+    = f.select :month, months.select { |m| m[1] <= max_month }, { selected: @month }, onchange: 'this.form.requestSubmit()'
+
+%nav
+  - # ナビゲーションリンクでの「前月」「翌月」の設定
+  - prev_month, prev_year = previous_month_and_year(@month, @year)
+  - next_month, next_year = next_month_and_year(@month, @year)
+
+  %a{ href: user_show_path(year: prev_year, month: prev_month) } 前月
+  %a{ href: user_show_path(year: @current_year, month: @current_month) } 今月
+  - if @year < @current_year || (@year == @current_year && @month < @current_month)
+    %a{ href: user_show_path(year: next_year, month: next_month) } 翌月
+
+  %table
+    %thead
+      %tr
+        %th 日付
+        %th 出勤時間
+        %th 退勤時間
+        %th 休憩時間
+        %th 勤務時間
+        %th 残業時間
+    %tbody
+      - @dates.each do |date|
+        %tr
+          %td= formatted_date_with_weekday(date) # 日付
+          - attendances = @attendances_by_date[date] || []
+          - if attendances.any?
+            - attendances.each do |attendance|
+              %td= formatted_time_only(attendance.check_in_datetime) # 出勤時間
+              %td= attendance.check_out_datetime ? formatted_time_only(attendance.check_out_datetime) : "-" # 退勤時間
+              %td=attendance.total_working_time_in_minutes/60
+              %td 勤務時間
+              %td 残業時間

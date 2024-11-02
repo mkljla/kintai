@@ -1,0 +1,2 @@
+class MWorkHourSetting < ApplicationRecord
+end

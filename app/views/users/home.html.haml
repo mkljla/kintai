@@ -1,20 +1,38 @@
-%h1 一般ユーザーホーム
+%h3 一般ユーザーホーム
 .date
 .clock
 .button_container
-  = button_to "出勤", attendances_check_in_path, method: :post, class: "btn btn-success"
-  = button_to "退勤", attendances_check_out_path, method: :post, class: "btn btn-danger"
+  = button_to "出勤", attendances_check_in_path, method: :post, class: "btn btn-success #{}"
+  = button_to "退勤", attendances_check_out_path, method: :post, class: "btn btn-danger #{ }"
+.button_container
+  = button_to "休憩開始", breaks_start_path, method: :post, class: "btn btn-primary"
+  = button_to "休憩終了", breaks_end_path, method: :post, class: "btn btn-primary"
 
-- if @attendances
-  %table
-    %thead
+%h3 今日の記録
+%table
+  %thead
+    %tr
+      %th 出勤時間
+      %th 退勤時間
+      %th 休憩時間
+  %tbody
+    - @attendances_today.each do |attendance|
       %tr
-        %th 出勤時間
-        %th 退勤時間
-    %tbody
-      - @attendances.each do |attendance|
-        %tr
-          %td= attendance.check_in_time.strftime("%Y-%m-%d %H:%M:%S")
-          -if attendance.check_out_time
-            %td= attendance.check_out_time.strftime("%Y-%m-%d %H:%M:%S")
+        %td= formatted_time_only(attendance.check_in_datetime) # 出勤時間
+        %td
+          -if attendance.check_out_datetime # 退勤時
+            = formatted_time_only(attendance.check_out_datetime)
+          -else
+            ="出勤中"
 
+        %td
+          - if attendance.breaks.any?
+            - attendance.breaks.each do |break_record|
+              %div
+                = formatted_time_only(break_record.break_start_datetime) # 休憩開始時間
+                - if break_record.break_end_datetime.present?
+                  = " - " + formatted_time_only(break_record.break_end_datetime) # 休憩終了時間がある場合
+                - else
+                  = "-休憩中" # 休憩がまだ終了していない場合
+          - else
+            = "" # 休憩がない場合の表示

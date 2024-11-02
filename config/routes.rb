@@ -27,6 +27,10 @@ Rails.application.routes.draw do
   post 'attendances/check_in', to: 'attendances#check_in'
   post 'attendances/check_out', to: 'attendances#check_out'
 
+  # 勤怠管理DB作成処理
+  post 'breaks/start', to: 'breaks#start'
+  post 'breaks/end', to: 'breaks#end'
+
   # ルートページをログイン画面に設定
   root 'sessions#new'
 end

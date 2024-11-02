@@ -14,3 +14,10 @@
   %dd= @user.date_of_termination || "-"
   %dt
   %dd
+
+- if @attendances
+  - @attendances.each do |attendance|
+    %tr
+      %td= formatted_time_only(attendance.check_in_datetime)
+      -if attendance.check_out_datetime
+        %td= formatted_time_only(attendance.check_out_datetime)
