@@ -6,7 +6,8 @@ class WorksController < ApplicationController
     return redirect_with_alert("すでに出勤済みです。") if @latest_work.working?
 
     # 出勤処理を実行しリダイレクト
-    register_check_in
+    flash[:notice] = Work.create_with_check_in(current_user) ? "出勤時間を登録しました。" : "出勤時間の登録に失敗しました。"
+
     redirect_to user_home_path
   end
 
@@ -20,7 +21,8 @@ class WorksController < ApplicationController
     return redirect_with_alert("休憩中です。") if @latest_break.taking_a_break?
 
     # 退勤処理を実行しリダイレクト
-    register_check_out
+    flash[:notice] = @latest_work.set_check_out ?  "退勤時間を登録しました。" :  "退勤時間の登録に失敗しました。"
+
     redirect_to user_home_path
   end
 
@@ -29,23 +31,6 @@ class WorksController < ApplicationController
 
 
 
-  # 出勤時間を登録する
-  def register_check_in
-    if Work.create_with_check_in(current_user)
-      flash[:notice] = "出勤時間を登録しました。"
-    else
-      flash[:alert] = "出勤時間の登録に失敗しました。"
-    end
-  end
-
-  # 退勤時間を登録する
-  def register_check_out
-    if @latest_work.set_check_out
-      flash[:notice] = "退勤時間を登録しました。"
-    else
-      flash[:alert] = "退勤時間の登録に失敗しました。"
-    end
-  end
 
 
   # # 労働時間を計算するメソッド
