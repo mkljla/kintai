@@ -5,10 +5,10 @@ class BreaksController < ApplicationController
   def start_break
 
     # 出勤していない場合の処理を早期リターンで処理
-    return redirect_with_alert("出勤していません。") unless @latest_work.checked_in?
+    return redirect_with_alert("出勤していません。") unless @latest_work.working?
 
     # 休憩開始している場合の処理を早期リターンで処理
-    return redirect_with_alert("すでに休憩中です。") if @latest_break.on_break?
+    return redirect_with_alert("すでに休憩中です。") if @latest_break.taking_a_break?
 
     # 休憩開始処理を実行しリダイレクト
     register_break_start
@@ -18,9 +18,9 @@ class BreaksController < ApplicationController
 
   def end_break
     # 出勤していない場合の処理を早期リターンで処理
-    return redirect_with_alert("出勤していません。") unless @latest_work.checked_in?
+    return redirect_with_alert("出勤していません。") unless @latest_work.working?
     # 休憩開始していない場合の処理を早期リターンで処理
-    return redirect_with_alert("休憩を開始していません。") unless @latest_break.on_break?
+    return redirect_with_alert("休憩を開始していません。") unless @latest_break.taking_a_break?
     # 休憩終了処理を実行しリダイレクト
     register_break_end
     redirect_to user_home_path

@@ -21,8 +21,8 @@ class Work < ApplicationRecord
   # メソッド
   # ===============
 
-  # 出勤済か判定
-  def checked_in?
+  # 勤務中か判定
+  def working?
     # 最新のレコードに出勤記録が存在する、かつ退勤記録が存在しない
     start_datetime.present? && end_datetime.nil?
   end

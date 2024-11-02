@@ -3,7 +3,7 @@ class WorksController < ApplicationController
   # 出勤処理
   def check_in
 
-    return redirect_with_alert("すでに出勤済みです。") if @latest_work.checked_in?
+    return redirect_with_alert("すでに出勤済みです。") if @latest_work.working?
 
     # 出勤処理を実行しリダイレクト
     register_check_in
@@ -14,10 +14,10 @@ class WorksController < ApplicationController
   # 退勤処理
   def check_out
     # 出勤していない場合の処理を早期リターンで処理
-    return redirect_with_alert("出勤していません。") unless @latest_work.checked_in?
+    return redirect_with_alert("出勤していません。") unless @latest_work.working?
 
     # 休憩中の場合の処理を早期リターンで処理
-    return redirect_with_alert("休憩中です。") if @latest_break.on_break?
+    return redirect_with_alert("休憩中です。") if @latest_break.taking_a_break?
 
     # 退勤処理を実行しリダイレクト
     register_check_out
