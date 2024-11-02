@@ -92,15 +92,15 @@ def create_works_for_user(user_id)
       created_at: start_datetime
     )
     # 休憩開始・終了時間を生成し、対応するBreakレコードを作成
-    break_start_datetime = generate_break_start_datetime(start_datetime, end_datetime)
-    break_end_datetime = generate_break_end_datetime(break_start_datetime)
+    start_datetime = generate_break_start_datetime(start_datetime, end_datetime)
+    end_datetime = generate_break_end_datetime(start_datetime)
 
     Break.create!(
       work_id: work.id,
-      break_start_datetime: break_start_datetime,
-      break_end_datetime: break_end_datetime,
-      total_break_time_in_minutes: ((break_end_datetime - break_start_datetime) / 60).to_i,
-      created_at: break_start_datetime
+      start_datetime: start_datetime,
+      end_datetime: end_datetime,
+      total_break_time_in_minutes: ((end_datetime - start_datetime) / 60).to_i,
+      created_at: start_datetime
     )
     count += 1
     # 一日さかのぼる
@@ -153,8 +153,8 @@ def generate_break_start_datetime(start_datetime, end_datetime)
 end
 
 # 休憩終了時間を生成
-def generate_break_end_datetime(break_start_datetime)
-  break_start_datetime + rand(30..60).minutes
+def generate_break_end_datetime(start_datetime)
+  start_datetime + rand(30..60).minutes
 end
 
 # Seed実行

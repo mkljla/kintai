@@ -13,8 +13,8 @@
 ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
   create_table "breaks", force: :cascade do |t|
     t.integer "work_id", null: false
-    t.datetime "break_start_datetime"
-    t.datetime "break_end_datetime"
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
     t.integer "total_break_time_in_minutes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

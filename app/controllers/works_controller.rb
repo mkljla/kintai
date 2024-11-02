@@ -58,8 +58,8 @@ class WorksController < ApplicationController
 
   # # 休憩時間を計算するメソッド
   # def calculate_break_time(break_time)
-  #   if break_time.break_start_datetime && break_time.break_end_datetime
-  #     break_seconds = break_time.break_end_datetime - break_time.break_start_datetime
+  #   if break_time.start_datetime && break_time.end_datetime
+  #     break_seconds = break_time.end_datetime - break_time.start_datetime
   #     break_time.total_break_time_in_minutes = (break_seconds / 60).to_i
   #   end
   # end

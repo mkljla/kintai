@@ -29,9 +29,9 @@
           - if work.breaks.any?
             - work.breaks.each do |break_record|
               %div
-                = formatted_time_only(break_record.break_start_datetime) # 休憩開始時間
-                - if break_record.break_end_datetime.present?
-                  = " - " + formatted_time_only(break_record.break_end_datetime) # 休憩終了時間がある場合
+                = formatted_time_only(break_record.start_datetime) # 休憩開始時間
+                - if break_record.end_datetime.present?
+                  = " - " + formatted_time_only(break_record.end_datetime) # 休憩終了時間がある場合
                 - else
                   = "-休憩中" # 休憩がまだ終了していない場合
           - else
