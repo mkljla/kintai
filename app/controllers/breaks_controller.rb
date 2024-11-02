@@ -24,6 +24,8 @@ class BreaksController < ApplicationController
     # 休憩終了処理を実行しリダイレクト
     flash[:notice] = @latest_break.set_end_time ? "休憩を終了しました。" : "休憩時間の登録に失敗しました。"
 
+    total_break_time = @latest_break.calculate_total_break_time_in_minutes(@latest_break)
+    @latest_break.register_total_break_time_in_minutes(total_break_time)
     redirect_to user_home_path
   end
 
