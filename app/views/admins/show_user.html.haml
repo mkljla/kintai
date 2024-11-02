@@ -15,9 +15,9 @@
   %dt
   %dd
 
-- if @attendances
-  - @attendances.each do |attendance|
+- if @works
+  - @works.each do |work|
     %tr
-      %td= formatted_time_only(attendance.start_datetime)
-      -if attendance.end_datetime
-        %td= formatted_time_only(attendance.end_datetime)
+      %td= formatted_time_only(work.start_datetime)
+      -if work.end_datetime
+        %td= formatted_time_only(work.end_datetime)

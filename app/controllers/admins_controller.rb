@@ -6,7 +6,7 @@ class AdminsController < ApplicationController
 
   def show_user
     @user = User.find(params[:id])
-    @attendances = @user.attendances.order(created_at: :desc)
+    @works = @user.works.order(created_at: :desc)
   end
 
   private

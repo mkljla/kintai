@@ -2,7 +2,7 @@ class Break < ApplicationRecord
   # ===============
   # アソシエーション
   # ===============
-  belongs_to :attendance
+  belongs_to :work
   # ===============
   # スコープ
   # ===============
@@ -22,8 +22,8 @@ class Break < ApplicationRecord
   end
 
   # 休憩の新規作成と開始時間を登録
-  def self.create_with_start_time(attendance)
-    break_record = new(attendance_id: attendance.id, break_start_datetime: Time.current)
+  def self.create_with_start_time(work)
+    break_record = new(work_id: work.id, break_start_datetime: Time.current)
     break_record.save
   end
 

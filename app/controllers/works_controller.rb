@@ -1,9 +1,9 @@
-class AttendancesController < ApplicationController
+class WorksController < ApplicationController
   before_action :set_latest_records, only: [:check_in, :check_out]
   # 出勤処理
   def check_in
 
-    return redirect_with_alert("すでに出勤済みです。") if @latest_attendance.checked_in?
+    return redirect_with_alert("すでに出勤済みです。") if @latest_work.checked_in?
 
     # 出勤処理を実行しリダイレクト
     register_check_in
@@ -14,7 +14,7 @@ class AttendancesController < ApplicationController
   # 退勤処理
   def check_out
     # 出勤していない場合の処理を早期リターンで処理
-    return redirect_with_alert("出勤していません。") unless @latest_attendance.checked_in?
+    return redirect_with_alert("出勤していません。") unless @latest_work.checked_in?
 
     # 休憩中の場合の処理を早期リターンで処理
     return redirect_with_alert("休憩中です。") if @latest_break.on_break?
@@ -31,7 +31,7 @@ class AttendancesController < ApplicationController
 
   # 出勤時間を登録する
   def register_check_in
-    if Attendance.create_with_check_in(current_user)
+    if Work.create_with_check_in(current_user)
       flash[:notice] = "出勤時間を登録しました。"
     else
       flash[:alert] = "出勤時間の登録に失敗しました。"
@@ -40,7 +40,7 @@ class AttendancesController < ApplicationController
 
   # 退勤時間を登録する
   def register_check_out
-    if @latest_attendance.set_check_out
+    if @latest_work.set_check_out
       flash[:notice] = "退勤時間を登録しました。"
     else
       flash[:alert] = "退勤時間の登録に失敗しました。"
@@ -49,10 +49,10 @@ class AttendancesController < ApplicationController
 
 
   # # 労働時間を計算するメソッド
-  # def calculate_working_hours(attendance)
-  #   if attendance.check_in_datetime && attendance.check_out_datetime
-  #     working_seconds = attendance.check_out_datetime - attendance.check_in_datetime
-  #     attendance.total_working_in_minutes = (working_seconds / 60).to_i
+  # def calculate_working_hours(work)
+  #   if work.start_datetime && work.end_datetime
+  #     working_seconds = work.end_datetime - work.start_datetime
+  #     work.total_working_in_minutes = (working_seconds / 60).to_i
   #   end
   # end
 

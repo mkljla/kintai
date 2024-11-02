@@ -8,12 +8,12 @@
 -#       %th 勤務時間(残業時間)
 -#   %tbody
 -#     - @dates.each do |date|
--#       - attendance = @attendances_by_date[date]&.first
+-#       - work = @works_by_date[date]&.first
 -#       %tr
 -#         %td= formatted_date_with_weekday(date) # 日付表示
--#         %td= attendance ? formatted_time_only(attendance.start_datetime) : "-"
--#         %td= attendance&.end_datetime ? formatted_time_only(attendance.end_datetime) : "-"
+-#         %td= work ? formatted_time_only(work.start_datetime) : "-"
+-#         %td= work&.end_datetime ? formatted_time_only(work.end_datetime) : "-"
 -#         %td
--#           - if attendance&.working_hours
--#             = "#{formatted_time_only(attendance.working_hours * 3600)} (#{formatted_time_only(attendance.overtime_hours * 3600)})"
+-#           - if work&.working_hours
+-#             = "#{formatted_time_only(work.working_hours * 3600)} (#{formatted_time_only(work.overtime_hours * 3600)})"
 -#           - else

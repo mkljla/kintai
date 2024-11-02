@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
     # 最新の出勤記録と休憩記録を取得
     def set_latest_records
-        @latest_attendance = current_user.attendances.order(created_at: :desc).first
+        @latest_work = current_user.works.order(created_at: :desc).first
         @latest_break = current_user.breaks.order(created_at: :desc).first
     end
 

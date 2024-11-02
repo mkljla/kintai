@@ -3,9 +3,9 @@ class User < ApplicationRecord
   # ===============
   # アソシエーション
   # ===============
-  has_many :attendances
+  has_many :works
   belongs_to :department, optional: true # nilを許容
-  has_many :breaks, through: :attendances # attendanceを経由してbreaksを取得
+  has_many :breaks, through: :works # workを経由してbreaksを取得
 
   # ===============
   # バリデーション
@@ -37,8 +37,8 @@ class User < ApplicationRecord
 
   # 勤務ステータスを返すメソッド
   def working_status
-    latest_attendance = attendances.order(created_at: :desc).first
-    if latest_attendance&.start_datetime.present? && latest_attendance.end_datetime.nil?
+    latest_work = works.order(created_at: :desc).first
+    if latest_work&.start_datetime.present? && latest_work.end_datetime.nil?
       "勤務中"
     else
       "退勤"

@@ -40,10 +40,10 @@ def create_admin_user
 end
 
 # ユーザーデータの作成
-def create_users_with_attendances
+def create_users_with_works
   USER_COUNT.times do |n|
     user = create_user(n)
-    create_attendances_for_user(user.id)
+    create_works_for_user(user.id)
   end
 end
 
@@ -65,7 +65,7 @@ def create_user(index)
 end
 
 # ユーザーの出勤記録を作成
-def create_attendances_for_user(user_id)
+def create_works_for_user(user_id)
 
   # ユーザーを取得
   user = User.find(user_id)
@@ -80,11 +80,11 @@ def create_attendances_for_user(user_id)
       next
     end
 
-    # attendance_dateに基づいてランダムな出勤時間を生成
+    # work_dateに基づいてランダムな出勤時間を生成
     start_datetime = generate_start_datetime(reference_date)
     # 出勤時間に基づいてランダムな退勤時間を生成
     end_datetime = generate_end_datetime(start_datetime)
-    attendance = Attendance.create!(
+    work = Work.create!(
       user_id: user_id,
       start_datetime: start_datetime,
       end_datetime: end_datetime,
@@ -96,7 +96,7 @@ def create_attendances_for_user(user_id)
     break_end_datetime = generate_break_end_datetime(break_start_datetime)
 
     Break.create!(
-      attendance_id: attendance.id,
+      work_id: work.id,
       break_start_datetime: break_start_datetime,
       break_end_datetime: break_end_datetime,
       total_break_time_in_minutes: ((break_end_datetime - break_start_datetime) / 60).to_i,
@@ -133,10 +133,10 @@ def generate_hire_date
 end
 
 # ランダムな出勤時間を生成
-def generate_start_datetime(attendance_date)
+def generate_start_datetime(work_date)
   hour = rand(7..9)  # 出勤時間の時間
   minute = rand(0..59)  # 出勤時間の分
-  Time.zone.local(attendance_date.year, attendance_date.month, attendance_date.day, hour, minute)
+  Time.zone.local(work_date.year, work_date.month, work_date.day, hour, minute)
 end
 
 # ランダムな退勤時間を生成
@@ -161,4 +161,4 @@ end
 create_departments
 create_m_work_hour_settings
 create_admin_user
-create_users_with_attendances
+create_users_with_works

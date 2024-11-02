@@ -1,4 +1,4 @@
-class Attendance < ApplicationRecord
+class Work < ApplicationRecord
 
   # ===============
   # アソシエーション
@@ -30,27 +30,28 @@ class Attendance < ApplicationRecord
 
   # 出勤記録の新規作成と出勤時間を登録
   def self.create_with_check_in(user)
-    attendance_record = new(user_id: user.id, start_datetime: Time.current)
-    attendance_record.save
+    work_record = new(user_id: user.id, start_datetime: Time.current)
+    work_record.save
   end
 
   # 退勤時間を設定する
   def set_check_out
     self.end_datetime = Time.current
+    save
   end
 
-  # 勤務時間を時間単位で計算するメソッド
-  def working_hours
-    return nil unless start_datetime && end_datetime
-    (end_datetime - start_datetime) / 3600.0
-  end
+  # # 勤務時間を時間単位で計算するメソッド
+  # def working_hours
+  #   return nil unless start_datetime && end_datetime
+  #   (end_datetime - start_datetime) / 3600.0
+  # end
 
-  # 残業時間を計算するメソッド
-  def overtime_hours(normal_hours = 8)
-    return nil unless working_hours
-    overtime = working_hours - normal_hours
-    overtime.positive? ? overtime : 0
-  end
+  # # 残業時間を計算するメソッド
+  # def overtime_hours(normal_hours = 8)
+  #   return nil unless working_hours
+  #   overtime = working_hours - normal_hours
+  #   overtime.positive? ? overtime : 0
+  # end
 
 
 end

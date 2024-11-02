@@ -3,15 +3,15 @@ class UsersController < ApplicationController
 
   # ホーム画面
   def home
-    @attendances = @user.attendances.sorted.limit(5) # 最新の出勤記録を5件取得
-    @attendances_today = @user.attendances.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).includes(:breaks).sorted
+    @works = @user.works.sorted.limit(5) # 最新の出勤記録を5件取得
+    @works_today = @user.works.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).includes(:breaks).sorted
 
   end
 
   # ユーザー詳細画面
   def show
 
-    @attendances = @user.attendances.sorted # ユーザーの出勤簿を取得
+    @works = @user.works.sorted # ユーザーの出勤簿を取得
 
 
     # 年月パラメータを受け取り、デフォルトは現在の年と月
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @dates = (start_date..end_date).to_a
 
     # 選択した期間内の出勤データを取得し、日付でグループ化
-    @attendances_by_date = @attendances.where(start_datetime: start_date..end_date).group_by { |attendance| attendance.start_datetime.to_date }
+    @works_by_date = @works.where(start_datetime: start_date..end_date).group_by { |work| work.start_datetime.to_date }
 
   end
 

@@ -2,8 +2,8 @@
 .date
 .clock
 .button_container
-  = button_to "出勤", attendances_check_in_path, method: :post, class: "btn btn-success #{}"
-  = button_to "退勤", attendances_check_out_path, method: :post, class: "btn btn-danger #{ }"
+  = button_to "出勤", works_check_in_path, method: :post, class: "btn btn-success #{}"
+  = button_to "退勤", works_check_out_path, method: :post, class: "btn btn-danger #{ }"
 .button_container
   = button_to "休憩開始", breaks_start_path, method: :post, class: "btn btn-primary"
   = button_to "休憩終了", breaks_end_path, method: :post, class: "btn btn-primary"
@@ -16,18 +16,18 @@
       %th 退勤時間
       %th 休憩時間
   %tbody
-    - @attendances_today.each do |attendance|
+    - @works_today.each do |work|
       %tr
-        %td= formatted_time_only(attendance.start_datetime) # 出勤時間
+        %td= formatted_time_only(work.start_datetime) # 出勤時間
         %td
-          -if attendance.end_datetime # 退勤時
-            = formatted_time_only(attendance.end_datetime)
+          -if work.end_datetime # 退勤時
+            = formatted_time_only(work.end_datetime)
           -else
             ="出勤中"
 
         %td
-          - if attendance.breaks.any?
-            - attendance.breaks.each do |break_record|
+          - if work.breaks.any?
+            - work.breaks.each do |break_record|
               %div
                 = formatted_time_only(break_record.break_start_datetime) # 休憩開始時間
                 - if break_record.break_end_datetime.present?

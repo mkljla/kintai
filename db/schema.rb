@@ -11,25 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
-  create_table "attendances", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.datetime "start_datetime", precision: nil
-    t.datetime "end_datetime", precision: nil
-    t.integer "total_working_time_in_minutes"
-    t.integer "total_overtime_in_minutes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_attendances_on_user_id"
-  end
-
   create_table "breaks", force: :cascade do |t|
-    t.integer "attendance_id", null: false
+    t.integer "work_id", null: false
     t.datetime "break_start_datetime"
     t.datetime "break_end_datetime"
     t.integer "total_break_time_in_minutes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["attendance_id"], name: "index_breaks_on_attendance_id"
+    t.index ["work_id"], name: "index_breaks_on_work_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -60,7 +49,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 
-  add_foreign_key "attendances", "users"
-  add_foreign_key "breaks", "attendances"
+  create_table "works", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "start_datetime", precision: nil
+    t.datetime "end_datetime", precision: nil
+    t.integer "total_working_time_in_minutes"
+    t.integer "total_overtime_in_minutes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_works_on_user_id"
+  end
+
+  add_foreign_key "breaks", "works"
   add_foreign_key "users", "departments"
+  add_foreign_key "works", "users"
 end

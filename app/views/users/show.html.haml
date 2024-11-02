@@ -12,7 +12,7 @@
 
 - # 年と月のドロップダウン選択フォーム
 // turbo_stream
--# = form_with url: user_show_path, method: :get, data: { turbo_frame: "attendance-table" }, local: false do |f|
+-# = form_with url: user_show_path, method: :get, data: { turbo_frame: "work-table" }, local: false do |f|
 = form_with url: user_show_path, method: :get do |f|
   %div
     年:
@@ -47,11 +47,11 @@
       - @dates.each do |date|
         %tr
           %td= formatted_date_with_weekday(date) # 日付
-          - attendances = @attendances_by_date[date] || []
-          - if attendances.any?
-            - attendances.each do |attendance|
-              %td= formatted_time_only(attendance.start_datetime) # 出勤時間
-              %td= attendance.end_datetime ? formatted_time_only(attendance.end_datetime) : "-" # 退勤時間
-              %td=attendance.total_working_time_in_minutes/60
+          - works = @works_by_date[date] || []
+          - if works.any?
+            - works.each do |work|
+              %td= formatted_time_only(work.start_datetime) # 出勤時間
+              %td= work.end_datetime ? formatted_time_only(work.end_datetime) : "-" # 退勤時間
+              %td=work.total_working_time_in_minutes/60
               %td 勤務時間
               %td 残業時間
