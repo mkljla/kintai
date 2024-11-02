@@ -1,8 +1,8 @@
 class BreaksController < ApplicationController
-  before_action :set_latest_records, only: [:start, :end]
+  before_action :set_latest_records, only: [:start_break, :end_break]
 
   # 休憩開始処理
-  def start
+  def start_break
 
     # 出勤していない場合の処理を早期リターンで処理
     return redirect_with_alert("出勤していません。") unless @latest_work.checked_in?
@@ -16,7 +16,7 @@ class BreaksController < ApplicationController
 
   end
 
-  def end
+  def end_break
     # 出勤していない場合の処理を早期リターンで処理
     return redirect_with_alert("出勤していません。") unless @latest_work.checked_in?
     # 休憩開始していない場合の処理を早期リターンで処理

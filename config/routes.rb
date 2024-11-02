@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
+  # to (コントローラー名)(実行するアクション)
+
   # ログイン画面
   get 'login', to: 'sessions#new'          # ログインフォームを表示
   post 'login', to: 'sessions#create'      # ログイン処理
@@ -28,8 +30,8 @@ Rails.application.routes.draw do
   post 'works/check_out', to: 'works#check_out'
 
   # 勤怠管理DB作成処理
-  post 'breaks/start', to: 'breaks#start'
-  post 'breaks/end', to: 'breaks#end'
+  post 'breaks/start_break', to: 'breaks#start_break'
+  post 'breaks/end_break', to: 'breaks#end_break'
 
   # ルートページをログイン画面に設定
   root 'sessions#new'
