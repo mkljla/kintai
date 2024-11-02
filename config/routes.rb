@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   get 'admin/users/:id', to: 'admins#show_user', as: 'admin_user_show'
 
   # 勤怠管理DB作成処理
-  post 'works/check_in', to: 'works#check_in'
-  post 'works/check_out', to: 'works#check_out'
+  post 'works/start_work', to: 'works#start_work'
+  post 'works/end_work', to: 'works#end_work'
 
   # 勤怠管理DB作成処理
   post 'breaks/start_break', to: 'breaks#start_break'

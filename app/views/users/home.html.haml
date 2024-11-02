@@ -2,8 +2,8 @@
 .date
 .clock
 .button_container
-  = button_to "出勤", works_check_in_path, method: :post, class: "btn btn-success #{}"
-  = button_to "退勤", works_check_out_path, method: :post, class: "btn btn-danger #{ }"
+  = button_to "出勤", works_start_work_path, method: :post, class: "btn btn-success #{}"
+  = button_to "退勤", works_end_work_path, method: :post, class: "btn btn-danger #{ }"
 .button_container
   = button_to "休憩開始", breaks_start_break_path, method: :post, class: "btn btn-primary"
   = button_to "休憩終了", breaks_end_break_path, method: :post, class: "btn btn-primary"
