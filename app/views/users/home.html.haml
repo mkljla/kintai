@@ -18,10 +18,10 @@
   %tbody
     - @attendances_today.each do |attendance|
       %tr
-        %td= formatted_time_only(attendance.check_in_datetime) # 出勤時間
+        %td= formatted_time_only(attendance.start_datetime) # 出勤時間
         %td
-          -if attendance.check_out_datetime # 退勤時
-            = formatted_time_only(attendance.check_out_datetime)
+          -if attendance.end_datetime # 退勤時
+            = formatted_time_only(attendance.end_datetime)
           -else
             ="出勤中"
 

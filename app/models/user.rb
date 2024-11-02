@@ -38,7 +38,7 @@ class User < ApplicationRecord
   # 勤務ステータスを返すメソッド
   def working_status
     latest_attendance = attendances.order(created_at: :desc).first
-    if latest_attendance&.check_in_datetime.present? && latest_attendance.check_out_datetime.nil?
+    if latest_attendance&.start_datetime.present? && latest_attendance.end_datetime.nil?
       "勤務中"
     else
       "退勤"

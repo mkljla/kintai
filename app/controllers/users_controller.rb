@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @dates = (start_date..end_date).to_a
 
     # 選択した期間内の出勤データを取得し、日付でグループ化
-    @attendances_by_date = @attendances.where(check_in_datetime: start_date..end_date).group_by { |attendance| attendance.check_in_datetime.to_date }
+    @attendances_by_date = @attendances.where(start_datetime: start_date..end_date).group_by { |attendance| attendance.start_datetime.to_date }
 
   end
 

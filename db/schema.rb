@@ -13,8 +13,8 @@
 ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
   create_table "attendances", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.datetime "check_in_datetime", precision: nil
-    t.datetime "check_out_datetime", precision: nil
+    t.datetime "start_datetime", precision: nil
+    t.datetime "end_datetime", precision: nil
     t.integer "total_working_time_in_minutes"
     t.integer "total_overtime_in_minutes"
     t.datetime "created_at", null: false

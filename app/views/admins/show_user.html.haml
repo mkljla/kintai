@@ -18,6 +18,6 @@
 - if @attendances
   - @attendances.each do |attendance|
     %tr
-      %td= formatted_time_only(attendance.check_in_datetime)
-      -if attendance.check_out_datetime
-        %td= formatted_time_only(attendance.check_out_datetime)
+      %td= formatted_time_only(attendance.start_datetime)
+      -if attendance.end_datetime
+        %td= formatted_time_only(attendance.end_datetime)

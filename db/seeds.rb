@@ -81,18 +81,18 @@ def create_attendances_for_user(user_id)
     end
 
     # attendance_dateに基づいてランダムな出勤時間を生成
-    check_in_datetime = generate_check_in_datetime(reference_date)
+    start_datetime = generate_start_datetime(reference_date)
     # 出勤時間に基づいてランダムな退勤時間を生成
-    check_out_datetime = generate_check_out_datetime(check_in_datetime)
+    end_datetime = generate_end_datetime(start_datetime)
     attendance = Attendance.create!(
       user_id: user_id,
-      check_in_datetime: check_in_datetime,
-      check_out_datetime: check_out_datetime,
+      start_datetime: start_datetime,
+      end_datetime: end_datetime,
       total_working_time_in_minutes: 60,
-      created_at: check_in_datetime
+      created_at: start_datetime
     )
     # 休憩開始・終了時間を生成し、対応するBreakレコードを作成
-    break_start_datetime = generate_break_start_datetime(check_in_datetime, check_out_datetime)
+    break_start_datetime = generate_break_start_datetime(start_datetime, end_datetime)
     break_end_datetime = generate_break_end_datetime(break_start_datetime)
 
     Break.create!(
@@ -133,23 +133,23 @@ def generate_hire_date
 end
 
 # ランダムな出勤時間を生成
-def generate_check_in_datetime(attendance_date)
+def generate_start_datetime(attendance_date)
   hour = rand(7..9)  # 出勤時間の時間
   minute = rand(0..59)  # 出勤時間の分
   Time.zone.local(attendance_date.year, attendance_date.month, attendance_date.day, hour, minute)
 end
 
 # ランダムな退勤時間を生成
-def generate_check_out_datetime(check_in_datetime)
+def generate_end_datetime(start_datetime)
   # 出勤時間から9〜11時間後の退勤時間を生成
-  hour = check_in_datetime.hour + rand(9..11)
+  hour = start_datetime.hour + rand(9..11)
   minute = rand(0..59)  # 退勤時間の分
-  Time.zone.local(check_in_datetime.year, check_in_datetime.month, check_in_datetime.day, hour, minute)
+  Time.zone.local(start_datetime.year, start_datetime.month, start_datetime.day, hour, minute)
 end
 
 # 休憩開始時間を生成
-def generate_break_start_datetime(check_in_datetime, check_out_datetime)
-  rand(check_in_datetime + 2.hours..check_out_datetime - 2.hours)
+def generate_break_start_datetime(start_datetime, end_datetime)
+  rand(start_datetime + 2.hours..end_datetime - 2.hours)
 end
 
 # 休憩終了時間を生成

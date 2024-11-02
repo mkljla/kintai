@@ -24,25 +24,25 @@ class Attendance < ApplicationRecord
   # 出勤済か判定
   def checked_in?
     # 最新のレコードに出勤記録が存在する、かつ退勤記録が存在しない
-    check_in_datetime.present? && check_out_datetime.nil?
+    start_datetime.present? && end_datetime.nil?
   end
 
 
   # 出勤記録の新規作成と出勤時間を登録
   def self.create_with_check_in(user)
-    attendance_record = new(user_id: user.id, check_in_datetime: Time.current)
+    attendance_record = new(user_id: user.id, start_datetime: Time.current)
     attendance_record.save
   end
 
   # 退勤時間を設定する
   def set_check_out
-    self.check_out_datetime = Time.current
+    self.end_datetime = Time.current
   end
 
   # 勤務時間を時間単位で計算するメソッド
   def working_hours
-    return nil unless check_in_datetime && check_out_datetime
-    (check_out_datetime - check_in_datetime) / 3600.0
+    return nil unless start_datetime && end_datetime
+    (end_datetime - start_datetime) / 3600.0
   end
 
   # 残業時間を計算するメソッド
