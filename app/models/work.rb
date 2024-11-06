@@ -40,11 +40,18 @@ class Work < ApplicationRecord
     save
   end
 
-  # # 勤務時間を時間単位で計算するメソッド
-  # def working_hours
-  #   return nil unless start_datetime && end_datetime
-  #   (end_datetime - start_datetime) / 3600.0
-  # end
+  # 労働時間を計算する
+  def calculate_total_working_time_in_minutes(work_record)
+    working_seconds = work_record.end_datetime - work_record.start_datetime
+    (working_seconds / 60).to_i
+  end
+
+
+  # 労働時間を登録する
+  def register_total_working_time(total_working_time)
+    self.total_working_time_in_minutes = total_working_time
+    save!
+  end
 
   # # 残業時間を計算するメソッド
   # def overtime_hours(normal_hours = 8)

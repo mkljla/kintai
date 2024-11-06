@@ -24,6 +24,8 @@ class WorksController < ApplicationController
     # 退勤処理を実行しリダイレクト
     flash[:notice] = @latest_work.register_work_end_time ?  "退勤時間を登録しました。" :  "退勤時間の登録に失敗しました。"
 
+    total_working_time = @latest_work.calculate_total_working_time_in_minutes(@latest_work)
+    @latest_work.register_total_working_time(total_working_time)
     redirect_to user_home_path
   end
 
