@@ -42,8 +42,8 @@ class Break < ApplicationRecord
 
   # 休憩時間を登録する
   def register_total_break_time_in_minutes(total_break_time_in_minutes)
-    self.total_break_time_in_minutes =total_break_time_in_minutes
-    save!
+    self.total_break_time_in_minutes = total_break_time_in_minutes
+    save
   end
 
 end
