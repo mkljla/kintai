@@ -32,25 +32,4 @@ class WorksController < ApplicationController
 
   private
 
-
-
-
-
-  # # 労働時間を計算するメソッド
-  # def calculate_working_hours(work)
-  #   if work.start_datetime && work.end_datetime
-  #     working_seconds = work.end_datetime - work.start_datetime
-  #     work.total_working_in_minutes = (working_seconds / 60).to_i
-  #   end
-  # end
-
-  # # 休憩時間を計算するメソッド
-  # def calculate_break_time(break_time)
-  #   if break_time.start_datetime && break_time.end_datetime
-  #     break_seconds = break_time.end_datetime - break_time.start_datetime
-  #     break_time.total_break_time_in_minutes = (break_seconds / 60).to_i
-  #   end
-  # end
-
-
 end
