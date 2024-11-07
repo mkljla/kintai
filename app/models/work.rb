@@ -53,6 +53,13 @@ class Work < ApplicationRecord
     save!
   end
 
+
+  # 累計休憩時間を登録する
+  def register_total_break_time_in_minutes(break_time_in_minutes)
+    self.total_break_time_in_minutes =+ break_time_in_minutes
+    save
+  end
+
   # # 残業時間を計算するメソッド
   # def overtime_hours(normal_hours = 8)
   #   return nil unless working_hours

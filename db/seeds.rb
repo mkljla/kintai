@@ -99,7 +99,6 @@ def create_works_for_user(user_id)
       work_id: work.id,
       start_datetime: start_datetime,
       end_datetime: end_datetime,
-      total_break_time_in_minutes: ((end_datetime - start_datetime) / 60).to_i,
       created_at: start_datetime
     )
     count += 1

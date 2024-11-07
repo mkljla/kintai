@@ -26,9 +26,9 @@ class BreaksController < ApplicationController
       # 休憩終了時間を登録
       raise ActiveRecord::Rollback unless @latest_break.set_end_time
       # 休憩時間を計算
-      total_break_time = @latest_break.calculate_total_break_time_in_minutes(@latest_break)
+      break_time = @latest_break.calculate_total_break_time_in_minutes(@latest_break)
       # 休憩時間を保存
-      raise ActiveRecord::Rollback unless @latest_break.register_total_break_time_in_minutes(total_break_time)
+      raise ActiveRecord::Rollback unless @latest_work.register_total_break_time_in_minutes(break_time)
     end
 
     flash[:notice] = "休憩を終了しました。"
