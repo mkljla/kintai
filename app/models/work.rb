@@ -30,13 +30,13 @@ class Work < ApplicationRecord
 
   # 出勤記録の新規作成と出勤時間を登録
   def self.create_work_record(user)
-    work_record = new(user_id: user.id, start_datetime: Time.current)
+    work_record = new(user_id: user.id, start_datetime: Time.current.change(sec: 0))
     work_record.save
   end
 
   # 退勤時間を設定する
   def register_work_end_time
-    self.end_datetime = Time.current
+    self.end_datetime = Time.current.change(sec: 0)
     save
   end
 

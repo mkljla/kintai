@@ -23,13 +23,13 @@ class Break < ApplicationRecord
 
   # 休憩の新規作成と開始時間を登録
   def self.create_with_start_time(work)
-    break_record = new(work_id: work.id, start_datetime: Time.current)
+    break_record = new(work_id: work.id, start_datetime: Time.current.change(sec: 0))
     break_record.save
   end
 
   # 休憩の終了時間を設定
   def set_end_time
-    self.end_datetime = Time.current
+    self.end_datetime = Time.current.change(sec: 0)
     save
   end
 
