@@ -5,6 +5,7 @@ default: &default
   username: postgres
   password: password
   pool: 5
+  timezone: "Asia/Tokyo" # タイムゾーンを日本時間に設定
 
 development:
   <<: *default
