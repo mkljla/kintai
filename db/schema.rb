@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
     t.bigint "work_id", null: false, comment: "Work ID"
     t.datetime "start_datetime", comment: "休憩開始時間"
     t.datetime "end_datetime", comment: "休憩終了時間"
+    t.integer "break_time_in_minutes", default: 0, comment: "休憩時間(分)"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["work_id"], name: "index_breaks_on_work_id"
@@ -55,9 +56,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
     t.bigint "user_id", null: false, comment: "ユーザーID"
     t.datetime "start_datetime", precision: nil, comment: "出勤時間"
     t.datetime "end_datetime", precision: nil, comment: "退勤時間"
-    t.integer "total_working_time_in_minutes", comment: "労働時間の合計"
-    t.integer "total_overtime_in_minutes", comment: "残業時間の合計"
-    t.integer "total_break_time_in_minutes", comment: "休憩時間の合計"
+    t.integer "total_work_time_in_minutes", default: 0, comment: "勤務開始から勤務終了までの合計時間"
+    t.integer "total_break_time_in_minutes", default: 0, comment: "休憩時間の合計"
+    t.integer "actual_work_time_in_minutes", default: 0, comment: "実労働時間"
+    t.integer "total_overtime_in_minutes", default: 0, comment: "残業時間の合計"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_works_on_user_id"
