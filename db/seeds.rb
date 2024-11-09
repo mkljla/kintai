@@ -84,11 +84,13 @@ def create_works_for_user(user_id)
     start_datetime = generate_start_datetime(reference_date)
     # 出勤時間に基づいてランダムな退勤時間を生成
     end_datetime = generate_end_datetime(start_datetime)
+    # 勤務時間を計算
+    total_working_time = calculate_total_working_time_in_minutes(start_datetime, end_datetime)
     work = Work.create!(
       user_id: user_id,
       start_datetime: start_datetime,
       end_datetime: end_datetime,
-      total_working_time_in_minutes: 60,
+      total_working_time_in_minutes: total_working_time,
       created_at: start_datetime
     )
     # 休憩開始・終了時間を生成し、対応するBreakレコードを作成
@@ -101,6 +103,13 @@ def create_works_for_user(user_id)
       end_datetime: end_datetime,
       created_at: start_datetime
     )
+
+    # 休憩時間を計算する
+    break_time = calculate_total_break_time_in_minutes(start_datetime, end_datetime)
+    work.total_break_time_in_minutes ||= 0  # nilの場合に0を設定
+    work.total_break_time_in_minutes += break_time
+    # 更新を保存
+    work.save!
     count += 1
     # 一日さかのぼる
     reference_date -= 1
@@ -153,8 +162,22 @@ end
 
 # 休憩終了時間を生成
 def generate_break_end_datetime(start_datetime)
-  start_datetime + rand(30..60).minutes
+  start_datetime + rand(60..90).minutes
 end
+
+# 労働時間を計算する
+def calculate_total_working_time_in_minutes(start_datetime, end_datetime)
+  working_seconds = end_datetime - start_datetime
+  (working_seconds / 60).to_i
+end
+
+# 休憩時間を計算する
+def calculate_total_break_time_in_minutes(start_datetime, end_datetime)
+  break_seconds = end_datetime - start_datetime
+  (break_seconds / 60).to_i
+end
+
+
 
 # Seed実行
 create_departments
