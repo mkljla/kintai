@@ -52,6 +52,6 @@
             - works.each do |work|
               %td= formatted_time_only(work.start_datetime) # 出勤時間
               %td= work.end_datetime ? formatted_time_only(work.end_datetime) : "-" # 退勤時間
-              %td=work.total_working_time_in_minutes/60
+              %td=work.total_work_time_in_minutes/60
               %td 勤務時間
               %td 残業時間

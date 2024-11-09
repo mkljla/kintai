@@ -28,36 +28,20 @@ class Work < ApplicationRecord
   end
 
 
-  # 出勤記録の新規作成と出勤時間を登録
-  def self.create_work_record(user)
-    work_record = new(user_id: user.id, start_datetime: Time.current.change(sec: 0))
-    work_record.save
+  # 労働時間を計算
+  def calculate_total_work_time
+    self.end_datetime - self.start_datetime
   end
 
-  # 退勤時間を設定する
-  def register_work_end_time
-    self.end_datetime = Time.current.change(sec: 0)
-    save
+  # 実労働時間を計算
+  def calculate_actual_work_time
+    self.total_work_time_in_minutes - self.total_break_time_in_minutes
   end
 
-  # 労働時間を計算する
-  def calculate_total_working_time_in_minutes(work_record)
-    working_seconds = work_record.end_datetime - work_record.start_datetime
-    (working_seconds / 60).to_i
-  end
-
-
-  # 労働時間を登録する
-  def register_total_working_time(total_working_time)
-    self.total_working_time_in_minutes = total_working_time - self.total_break_time_in_minutes
-    save
-  end
-
-
-  # 累計休憩時間を登録する
-  def register_total_break_time_in_minutes(break_time_in_minutes)
-    self.total_break_time_in_minutes =+ break_time_in_minutes
-    save
+  # 累計休憩時間を計算する
+  def calculate_total_break_time
+    # すべての関連する break レコードの break_time_in_minutes を合計
+    breaks.sum(:break_time_in_minutes)
   end
 
   # # 残業時間を計算するメソッド
