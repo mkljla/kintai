@@ -49,8 +49,8 @@ class Work < ApplicationRecord
 
   # 労働時間を登録する
   def register_total_working_time(total_working_time)
-    self.total_working_time_in_minutes = total_working_time
-    save!
+    self.total_working_time_in_minutes = total_working_time - self.total_break_time_in_minutes
+    save
   end
 
 
