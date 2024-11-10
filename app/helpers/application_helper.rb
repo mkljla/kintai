@@ -26,6 +26,13 @@ module ApplicationHelper
     Time.at((datetime).to_i).in_time_zone('Tokyo').strftime("%H:%M")
   end
 
+  # 分を「時間:分」形式に変換するメソッド
+  def minutes_to_hours_and_minutes(total_minutes)
+    hours = total_minutes / 60
+    minutes = total_minutes % 60
+    format("%d:%02d", hours, minutes) # 「1:05」のようにフォーマット
+  end
+
   # 前月と前月の年を返すメソッド
   def previous_month_and_year(current_month, current_year)
     if current_month == 1
