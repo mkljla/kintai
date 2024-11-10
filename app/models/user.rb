@@ -45,4 +45,17 @@ class User < ApplicationRecord
     end
   end
 
+  # 勤務中か判定
+  def working?
+    latest_work = works.order(created_at: :desc).first
+    # 最新のレコードに出勤記録が存在する、かつ退勤記録が存在しない
+    latest_work.start_datetime.present? && latest_work.end_datetime.nil?
+  end
+
+  # 休憩中か判定
+  def taking_a_break?
+    latest_break = breaks.order(created_at: :desc).first
+    # 最新の休憩レコードに休憩開始記録が存在、かつ休憩終了記録が存在しない
+    latest_break.start_datetime.present? && latest_break.end_datetime.nil?
+  end
 end

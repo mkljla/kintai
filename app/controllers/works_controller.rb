@@ -4,7 +4,7 @@ class WorksController < ApplicationController
   # 出勤処理
   def start_work
 
-    return redirect_with_alert("すでに出勤済みです。") if @latest_work.working?
+    return redirect_with_alert("すでに出勤済みです。") if current_user.working?
 
     # 出勤記録の新規作成
     work_record = Work.new(user_id: current_user.id, start_datetime: Time.current.change(sec: 0))
@@ -24,10 +24,10 @@ class WorksController < ApplicationController
   # 退勤処理
   def end_work
     # 出勤していない場合の処理を早期リターンで処理
-    return redirect_with_alert("出勤していません。") unless @latest_work.working?
+    return redirect_with_alert("出勤していません。") unless current_user.working?
 
     # 休憩中の場合の処理を早期リターンで処理
-    return redirect_with_alert("休憩中です。") if @latest_break.taking_a_break?
+    return redirect_with_alert("休憩中です。") if current_user.taking_a_break?
 
     begin
       ActiveRecord::Base.transaction do

@@ -21,13 +21,6 @@ class Work < ApplicationRecord
   # メソッド
   # ===============
 
-  # 勤務中か判定
-  def working?
-    # 最新のレコードに出勤記録が存在する、かつ退勤記録が存在しない
-    start_datetime.present? && end_datetime.nil?
-  end
-
-
   # 労働時間を計算
   def calculate_total_work_time
     self.end_datetime - self.start_datetime
