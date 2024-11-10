@@ -38,9 +38,10 @@ class WorksController < ApplicationController
         working_seconds = @latest_work.calculate_total_work_time
         @latest_work.total_work_time_in_minutes = (working_seconds / 60).to_i
 
-        # 実労働時間を計算して登録
+        # 実労働時間を計算
         @latest_work.actual_work_time_in_minutes = @latest_work.calculate_actual_work_time
-
+        # 残業時間を計算
+        @latest_work.total_overtime_in_minutes = @latest_work.calculate_overtime(MWorkHourSetting.standard_work_in_minutes)
         # 保存
         raise ActiveRecord::Rollback unless @latest_work.save
 

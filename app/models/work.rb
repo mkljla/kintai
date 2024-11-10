@@ -44,12 +44,11 @@ class Work < ApplicationRecord
     breaks.sum(:break_time_in_minutes)
   end
 
-  # # 残業時間を計算するメソッド
-  # def overtime_hours(normal_hours = 8)
-  #   return nil unless working_hours
-  #   overtime = working_hours - normal_hours
-  #   overtime.positive? ? overtime : 0
-  # end
+  # 残業時間を計算するメソッド
+  def calculate_overtime(standard_work_in_minutes)
+    overtime = self.actual_work_time_in_minutes - standard_work_in_minutes
+    overtime > 0 ? overtime : 0
+  end
 
 
 end

@@ -110,6 +110,12 @@ def create_works_for_user(user_id)
     work.total_break_time_in_minutes += break_time
     # 実労働時間
     work.actual_work_time_in_minutes = total_working_time -  work.total_break_time_in_minutes
+    # 残業時間
+    overtime = work.actual_work_time_in_minutes - MWorkHourSetting.first&.standard_working_time_minutes*60
+    if overtime < 0
+      overtime = 0
+    end
+    work.total_overtime_in_minutes = overtime
     # 更新を保存
     work.save!
 
