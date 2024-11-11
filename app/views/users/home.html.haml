@@ -1,5 +1,7 @@
 %h3 一般ユーザーホーム
-.date
+.date-container
+  .date
+  .weekday
 .clock
 .button_container
   = button_to "出勤", works_start_work_path, method: :post, class: "btn btn-success", disabled: current_user.working?
