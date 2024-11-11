@@ -33,11 +33,15 @@
 // ページ (各ページ固有のスタイル)
 @import "pages/*";
 
+// フォント
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP");
+
 // 全体のスタイル設定
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font-family: "Noto Sans JP", sans-serif;
 }
 turbo-frame {
   border: 1px red solid;
