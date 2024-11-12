@@ -32,8 +32,12 @@ end
 # 管理者ユーザーの作成
 def create_admin_user
   User.find_or_create_by!(employee_number: 0) do |user|
-    user.full_name = "管理者"
-    user.date_of_hire = Date.new(2000, 1, 1)
+    user.family_name = "管理者"
+    user.first_name = "アカウント"
+    user.family_name_kana = "かんりしゃ"
+    user.first_name_kana = "あかうんと"
+    user.birthday = Date.new(1950, 1, 1)
+    user.date_of_hire = Date.new(1950, 1, 1)
     user.password = "admin"
     user.is_admin = true
     user.department_id = nil
@@ -57,7 +61,12 @@ def create_user(index)
 
   User.create!(
     employee_number: index + 1,
+    family_name: "テスト",
+    first_name: "太郎#{index + 1}",
     full_name: "テスト太郎#{index + 1}",
+    family_name_kana: "てすと",
+    first_name_kana: "たろう",
+    birthday: Date.new(1990, 1, 1),
     date_of_hire: date_of_hire,
     date_of_termination: date_of_termination,
     password: "password#{index + 1}",

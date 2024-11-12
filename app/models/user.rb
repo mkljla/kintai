@@ -12,6 +12,8 @@ class User < ApplicationRecord
   # ===============
   validates :employee_number, presence: true, uniqueness: true
   validates :full_name, presence: true
+  validates :family_name, presence: true
+  validates :first_name, presence: true
   validates :date_of_hire, presence: true
   validates :password_digest, presence: true
 
