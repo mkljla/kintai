@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
                 redirect_to admin_home_path
             else
                 flash[:notice] = "ログインに成功しました"
-                redirect_to user_home_path
+                redirect_to home_users_path
             end
         else
             Rails.logger.warn "Login failed for employee number: #{session_params[:employee_number]}"

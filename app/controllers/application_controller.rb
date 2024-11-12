@@ -19,12 +19,12 @@ class ApplicationController < ActionController::Base
 
     def redirect_with_alert(message)
         flash[:alert] = message
-        redirect_to user_home_path
+        redirect_to home_users_path
     end
 
     def redirect_with_notice(message)
         flash[:notice] = message
-        redirect_to user_home_path
+        redirect_to home_users_path
     end
 
 

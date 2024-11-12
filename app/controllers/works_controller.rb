@@ -17,7 +17,7 @@ class WorksController < ApplicationController
     end
 
     # ホーム画面にリダイレクト
-    redirect_to user_home_path
+    redirect_to home_users_path
   end
 
 
@@ -46,13 +46,13 @@ class WorksController < ApplicationController
         raise ActiveRecord::Rollback unless @latest_work.save
 
         flash[:notice] = "退勤時間を登録しました。"
-        redirect_to user_home_path
+        redirect_to home_users_path
       end
 
     rescue StandardError => e
       # 例外処理
       flash[:alert] = "休憩の終了に失敗しました: #{e.message}"
-      redirect_to user_home_path
+      redirect_to home_users_path
     end
   end
 

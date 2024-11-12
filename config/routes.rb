@@ -15,10 +15,12 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'      # ログイン処理
   delete 'logout', to: 'sessions#destroy'  # ログアウト処理
 
-  # 社員用ホーム画面
-  get 'user/home', to: 'users#home', as: 'user_home'
-  get 'user/:id', to: 'users#show', as: 'user_show'
 
+  resources :users, only: [:show, :new, :create] do
+    collection do
+      get 'home', to: 'users#home', as: 'home'
+    end
+  end
 
   # 管理者用ホーム画面
   get 'admin/home', to: 'admins#home', as: 'admin_home'
