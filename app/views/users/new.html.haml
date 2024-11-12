@@ -1,0 +1,29 @@
+= form_with url: "/your_path", local: true do |f|
+  .mb-3
+    = f.label :employee_number, "社員番号", class: 'form-label'
+    = f.text_field :employee_number, class: 'form-control', value: @employee_number,disabled: "disabled"
+
+  .mb-3
+    = f.label :department_name, "部門", class: 'form-label'
+    = f.collection_select :department_name, @departments, :id, :name, { prompt: "選択してください" }, class: "form-select"
+
+  .mb-3
+    = f.label :first_name, "姓", class: 'form-label'
+    = f.text_field :first_name, class: 'form-control', id: "first_name"
+  .mb-3
+    = f.label :last_name, "名", class: 'form-label'
+    = f.text_field :last_name, class: 'form-control', id: "last_name"
+
+  .mb-3
+    = f.label :date_of_hire, "入社日", class: 'form-label'
+    = f.date_field :date_of_hire, class: 'form-control'
+
+  .mb-3
+    = f.label :password, "初期パスワード", class: 'form-label'
+    = f.password_field :password, class: 'form-control'
+
+  .mb-3
+    = f.label :password_confirmation, "初期パスワード(確認)", class: 'form-label'
+    = f.password_field :password_confirmation, class: 'form-control'
+
+  = f.submit "送信", class: 'btn btn-primary'

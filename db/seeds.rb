@@ -15,10 +15,11 @@ RETIREMENT_RATE = 30; # 退職率(%)
 # 部門データの作成
 def create_departments
   departments = ['総務', '経理']
-  departments.each do |department_name|
-    Department.find_or_create_by!(name: department_name)
+  departments.each_with_index do |department_name, index|
+    Department.create!(name: department_name, sort_no: index + 1)
   end
 end
+
 
 def create_m_work_hour_settings
   MWorkHourSetting.create!(

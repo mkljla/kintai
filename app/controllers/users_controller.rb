@@ -32,6 +32,14 @@ class UsersController < ApplicationController
 
   end
 
+  def new
+    @departments = Department.sorted
+    @employee_number = User.next_employee_number
+  end
+
+  def create
+  end
+
   private
 
   # ログイン中のユーザーを設定
