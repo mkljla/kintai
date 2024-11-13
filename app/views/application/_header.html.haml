@@ -9,9 +9,14 @@
             %i.fa-solid.fa-bars
           %ul.nav__wrapper
             %li.nav__item
-              %a{href: home_users_path}
-                %i.fa-solid.fa-house
-                  Home
+              -if current_user.is_admin?
+                %a{href: admin_home_path}
+                  %i.fa-solid.fa-house
+                    Home
+              -else
+                %a{href: home_users_path}
+                  %i.fa-solid.fa-house
+                    Home
         // メニュー展開時ののログアウトボタン
         .btn-logout-expand
           = button_to 'ログアウト', logout_path, method: :delete, class: "btn btn-primary"
