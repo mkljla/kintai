@@ -63,7 +63,7 @@ def create_user(index)
     employee_number: index + 1,
     family_name: "テスト",
     first_name: "太郎#{index + 1}",
-    full_name: "テスト太郎#{index + 1}",
+    full_name: "テスト 太郎#{index + 1}",
     family_name_kana: "てすと",
     first_name_kana: "たろう",
     birthday: Date.new(1990, 1, 1),
