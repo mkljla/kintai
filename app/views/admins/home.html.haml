@@ -19,7 +19,7 @@
       %tr
         %td= user.employee_number.to_s.rjust(4, '0') # 社員番号
         %td= link_to user.full_name, admin_user_show_path(user.id) # 名前
-        %td= user.working_status # ステータス
+        %td= working_status(user) # ステータス
         %td= user.date_of_hire # 入社日
         %td= user.date_of_termination ? user.date_of_termination : "-" # 退職日
         %td= link_to '編集', edit_user_path(user.id), class: 'btn btn-primary'# 編集

@@ -34,21 +34,11 @@ class User < ApplicationRecord
   # メソッド
   # ===============
 
-  # 勤務ステータスを返すメソッド
-  def working_status
-    latest_work = works.order(created_at: :desc).first
-    if latest_work&.start_datetime.present? && latest_work.end_datetime.nil?
-      "勤務中"
-    else
-      "退勤"
-    end
-  end
-
   # 勤務中か判定
   def working?
     latest_work = works.order(created_at: :desc).first
     # 最新のレコードに出勤記録が存在する、かつ退勤記録が存在しない
-    latest_work.start_datetime.present? && latest_work.end_datetime.nil?
+    latest_work.present? && latest_work.start_datetime.present? && latest_work.end_datetime.nil?
   end
 
   # 休憩中か判定
