@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :employee_number, :first_name, :family_name, :birthday, :date_of_hire, presence: true
   validates :employee_number, uniqueness: true
   validates :first_name, :family_name, length: { maximum: 30 }, format: { with: /\A[ぁ-んァ-ン一-龥]/ , message: "はひらがな、カタカナ、漢字、またはアルファベットで入力してください" }
-  validates :first_name_kana, :family_name_kana, length: { maximum: 30 }, format: { with: /\A[ぁ-ん]+\z/ , message: "はひらがなで入力してください" }
+  validates :first_name_kana, :family_name_kana, allow_blank: true, length: { maximum: 30 }, format: { with: /\A[ぁ-ん]+\z/ , message: "はひらがなで入力してください" }
 
 
   # ===============

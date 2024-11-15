@@ -39,8 +39,11 @@ class UsersController < ApplicationController
   end
 
   def create
+    @employee_number = User.next_employee_number
+    @departments = Department.sorted
 
-    User.create(user_params.merge(
+    @user = User.new(user_params.merge(
+      employee_number:  @employee_number,
       full_name: "#{user_params[:family_name]} #{user_params[:first_name]}",
       full_name_kana: "#{user_params[:family_name_kana]} #{user_params[:first_name_kana]}",
       password: Date.parse(user_params[:birthday]).strftime('%Y%m%d')
@@ -50,6 +53,7 @@ class UsersController < ApplicationController
       flash[:notice] = "新規ユーザーを登録しました。"
       redirect_to admin_home_path
     else
+      Rails.logger.debug("User save failed: #{@user.errors.full_messages}")
       flash[:alert] = "ユーザー登録に失敗しました。"
       # 値を保持
       render :new
@@ -71,13 +75,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+    @departments = Department.sorted
+    @employee_number = @user.employee_number.to_s.rjust(4, '0')
+  end
+
+  def update
+  end
+
   private
 
   def user_params
     params.require(:user).permit(
-      :employee_number, :family_name, :first_name, :family_name_kana, :first_name_kana,
-      :birthday, :date_of_hire, :department_id
+      :department_id, :family_name, :first_name, :family_name_kana, :first_name_kana,
+      :birthday, :date_of_hire
     )
+
   end
   # ログイン中のユーザーを設定
   def set_user
