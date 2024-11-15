@@ -15,7 +15,8 @@
     -if logged_in?
       = render 'header'
     = display_flash_messages
-    = yield
+    .container.m-4
+      = yield
     = render 'footer'
     // JavaScript読み込み
     = javascript_include_tag 'application'

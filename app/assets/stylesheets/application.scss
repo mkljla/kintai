@@ -42,6 +42,18 @@ body {
   flex-direction: column;
   min-height: 100vh;
   font-family: "Noto Sans JP", sans-serif;
+  .container {
+    min-width: 400px;
+    width: 100%;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      background-color: rgb(242, 170, 255);
+    }
+    @media screen and (min-width: 768px) {
+      width: 50%;
+      background-color: rgb(153, 255, 255);
+    }
+  }
 }
 turbo-frame {
   border: 1px red solid;
