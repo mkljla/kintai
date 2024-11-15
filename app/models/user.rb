@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_secure_password # パスワードをハッシュ化
   validates :employee_number, :first_name, :family_name, :birthday, :date_of_hire, presence: true
   validates :employee_number, uniqueness: true
-  validates :first_name, :family_name, length: { maximum: 30 }, format: { with: /\A[ぁ-んァ-ン一-龥]/ , message: "はひらがな、カタカナ、漢字、またはアルファベットで入力してください" }
+  validates :first_name, :family_name, length: { maximum: 30 }, format: { with: /\A[ぁ-んァ-ン一-龥a-zA-Z]/ , message: "はひらがな、カタカナ、漢字、またはアルファベットで入力してください" }
   validates :first_name_kana, :family_name_kana, allow_blank: true, length: { maximum: 30 }, format: { with: /\A[ぁ-ん]+\z/ , message: "はひらがなで入力してください" }
 
 
@@ -60,8 +60,8 @@ class User < ApplicationRecord
 
   # 新規ユーザーの社員番号を取得
   def self.next_employee_number
-    latest_employee_number = User.order(id: :desc).limit(1).pluck(:employee_number).first.to_i
-    (latest_employee_number + 1).to_s.rjust(4, '0')
+    latest_employee_number  = User.maximum(:employee_number).to_i
+    latest_employee_number + 1
   end
 
 end
