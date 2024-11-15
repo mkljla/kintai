@@ -4,23 +4,24 @@
   %label 絞り込み:
   = select_tag :filter, options_for_select([["全社員", "all"], ["在職中", "active"], ["退職済", "retired"]], params[:filter] || "all"), onchange: 'this.form.submit()'
 = button_to '新規作成', new_user_path, method: :get, class: "btn btn-primary"
-%table
+%table.table.table-bordered
   %thead
-    %tr
+    %tr.align-middle
       %th 社員番号
       %th 名前
       %th ステータス
       %th 入社日
-      %th 退社日
+      %th 退職日
+      %th
       %th
 
   %tbody
     - @users.each do |user|
-      %tr
+      %tr.align-middle
         %td= user.employee_number.to_s.rjust(4, '0') # 社員番号
         %td= link_to user.full_name, admin_user_show_path(user.id) # 名前
         %td= working_status(user) # ステータス
-        %td= user.date_of_hire # 入社日
-        %td= user.date_of_termination ? user.date_of_termination : "-" # 退職日
+        %td= user.date_of_hire.strftime('%Y/%m/%d') # 入社日
+        %td= user.date_of_termination ? user.date_of_termination : "" # 退職日
         %td= link_to '編集', edit_user_path(user.id), class: 'btn btn-primary'# 編集
         %td= link_to '削除', user_path(user.id), method: :delete, data: {confirm: "削除しますか？"}, class: 'btn btn-danger' # 削除
