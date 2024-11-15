@@ -46,32 +46,42 @@ end
 
 # ユーザーデータの作成
 def create_users_with_works
-  USER_COUNT.times do |n|
-    user = create_user(n)
-    create_works_for_user(user.id)
-  end
+
+  user = create_user
+
 end
 
 # ユーザーを作成
-def create_user(index)
+def create_user
   # 入社日を作成
   date_of_hire = generate_hire_date()
   # 退職日を作成
   date_of_termination = randomly_retired? ? generate_termination_date(date_of_hire) : nil
 
-  User.create!(
-    employee_number: index + 1,
-    family_name: "テスト",
-    first_name: "太郎#{index + 1}",
-    full_name: "テスト 太郎#{index + 1}",
-    family_name_kana: "てすと",
-    first_name_kana: "たろう",
-    birthday: Date.new(1990, 1, 1),
-    date_of_hire: date_of_hire,
-    date_of_termination: date_of_termination,
-    password: "password#{index + 1}",
-    department_id: nil,
-  )
+  names = [
+  { family_name: "田中", first_name: "太郎", family_name_kana: "たなか", first_name_kana: "たろう"},
+  { family_name: "鈴木", first_name: "次郎", family_name_kana: "すずき", first_name_kana: "じろう"},
+  { family_name: "佐藤", first_name: "三郎", family_name_kana: "さとう", first_name_kana: "さぶろう"},
+  { family_name: "高橋", first_name: "四郎", family_name_kana: "たかはし", first_name_kana: "しろう"},
+  { family_name: "山田", first_name: "五郎", family_name_kana: "やまだ", first_name_kana: "ごろう"},
+]
+  names.each_with_index do |name, index|
+    user=User.create!(
+      employee_number: index + 1,
+      family_name: name[:family_name],
+      first_name: name[:first_name],
+      full_name: "#{name[:family_name]} #{name[:first_name]}",
+      family_name_kana: name[:family_name_kana],
+      first_name_kana: name[:first_name_kana],
+      birthday: Date.new(1990, 1, 1),
+      date_of_hire: date_of_hire,
+      date_of_termination: date_of_termination,
+      password: "password#{index + 1}",
+      department_id: nil
+    )
+    # ユーザーごとに業務を作成する処理
+    create_works_for_user(user.id)
+  end
 end
 
 # ユーザーの出勤記録を作成
