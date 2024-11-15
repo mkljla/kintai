@@ -11,12 +11,14 @@
       %th ステータス
       %th 入社日
       %th 退社日
+      %th
 
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.employee_number.to_s.rjust(4, '0')
-        %td= link_to user.full_name, admin_user_show_path(user.id)
-        %td= user.working_status
-        %td= user.date_of_hire
-        %td= user.date_of_termination ? user.date_of_termination : "-"
+        %td= user.employee_number.to_s.rjust(4, '0') # 社員番号
+        %td= link_to user.full_name, admin_user_show_path(user.id) # 名前
+        %td= user.working_status # ステータス
+        %td= user.date_of_hire # 入社日
+        %td= user.date_of_termination ? user.date_of_termination : "-" # 退職日
+        %td= link_to '削除', user_path(user.id), method: :delete, data: {confirm: "削除しますか？"} # 削除

@@ -56,6 +56,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user.is_admin?
+      user = User.find(params[:id])
+      if user.destroy
+        flash[:notice] = "ユーザーを削除しました。"
+        redirect_to admin_home_path
+      else
+        flash[:alert] = "ユーザーの削除に失敗しました。"
+        render :home
+      end
+    else
+      flash[:alert] = "権限がありません。"
+    end
+  end
+
   private
 
   def user_params
