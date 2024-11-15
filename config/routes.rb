@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'  # ログアウト処理
 
 
-  resources :users, only: [:show, :new, :create, :destroy] do
+  resources :users, only: [:show, :new, :create, :destroy, :edit, :update] do
     collection do
       get 'home', to: 'users#home', as: 'home'
     end

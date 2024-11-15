@@ -34,16 +34,16 @@ class UsersController < ApplicationController
 
   def new
     @departments = Department.sorted
-    @employee_number = User.next_employee_number
+    @employee_number = User.next_employee_number.to_s.rjust(4, '0')
     @user = User.new
   end
 
   def create
-    @employee_number = User.next_employee_number
+    @employee_number = User.next_employee_number.to_s.rjust(4, '0')
     @departments = Department.sorted
 
     @user = User.new(user_params.merge(
-      employee_number:  @employee_number,
+      employee_number:  User.next_employee_number,
       full_name: "#{user_params[:family_name]} #{user_params[:first_name]}",
       full_name_kana: "#{user_params[:family_name_kana]} #{user_params[:first_name_kana]}",
       password: Date.parse(user_params[:birthday]).strftime('%Y%m%d')
@@ -82,6 +82,24 @@ class UsersController < ApplicationController
   end
 
   def update
+    # 表示用
+    @employee_number = User.next_employee_number
+    @departments = Department.sorted
+    @user = User.find(params[:id])
+
+    if @user.update(user_params.merge(
+      employee_number:  @user.employee_number,
+      full_name: "#{user_params[:family_name]} #{user_params[:first_name]}",
+      full_name_kana: "#{user_params[:family_name_kana]} #{user_params[:first_name_kana]}",
+      password: Date.parse(user_params[:birthday]).strftime('%Y%m%d')
+    ))
+    flash[:notice] = "ユーザー情報を更新しました。"
+    redirect_to admin_home_path
+    else
+      Rails.logger.debug("User update failed: #{@user.errors.full_messages}")
+      flash[:alert] = "ユーザー情報の更新に失敗しました。"
+      render :edit
+    end
   end
 
   private
