@@ -15,6 +15,8 @@ class BreaksController < ApplicationController
 
     # 休憩記録の保存
     if break_record.save
+      # ステータスを休憩中に更新
+      current_user.update!(working_status: :breaking)
       flash[:notice] = "休憩を開始しました。"
     else
       flash[:alert] = "休憩時間の登録に失敗しました。"
@@ -46,7 +48,8 @@ class BreaksController < ApplicationController
         @latest_work.total_break_time_in_minutes = @latest_work.calculate_total_break_time
 
         raise ActiveRecord::Rollback unless @latest_work.save
-
+        # ステータスを勤務中に更新
+        raise ActiveRecord::Rollback unless current_user.update!(working_status: :working)
         flash[:notice] = "休憩を終了しました。"
         redirect_to home_users_path
       end

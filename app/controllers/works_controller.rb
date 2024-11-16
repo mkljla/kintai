@@ -11,6 +11,8 @@ class WorksController < ApplicationController
 
     # 出勤記録の保存
     if work_record.save
+      # ステータスを勤務中に更新
+      current_user.update!(working_status: :working)
       flash[:notice] = "出勤時間を登録しました。"
     else
       flash[:alert] = "出勤時間の登録に失敗しました。"
@@ -44,6 +46,9 @@ class WorksController < ApplicationController
         @latest_work.total_overtime_in_minutes = @latest_work.calculate_overtime(MWorkHourSetting.standard_work_in_minutes)
         # 保存
         raise ActiveRecord::Rollback unless @latest_work.save
+
+        # ステータスを勤務外に更新
+        current_user.update!(working_status: :not_working)
 
         flash[:notice] = "退勤時間を登録しました。"
         redirect_to home_users_path

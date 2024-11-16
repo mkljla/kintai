@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
     t.string "password_digest", null: false, comment: "パスワード（ハッシュ）"
     t.bigint "department_id", comment: "部門ID"
     t.boolean "is_admin", default: false, null: false, comment: "管理者フラグ"
+    t.integer "working_status", comment: "ステータス"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_users_on_department_id"

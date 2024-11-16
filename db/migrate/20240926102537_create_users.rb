@@ -15,7 +15,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :password_digest, null: false, comment: "パスワード（ハッシュ）"
       t.references :department, foreign_key: true, comment: "部門ID"
       t.boolean :is_admin, default: false, null: false, comment: "管理者フラグ"
-
+      t.integer :working_status, comment: "ステータス"
       t.timestamps
     end
   end

@@ -8,6 +8,16 @@ class User < ApplicationRecord
   has_many :breaks, through: :works # workを経由してbreaksを取得
 
   # ===============
+  # enum 定義
+  # ===============
+  enum working_status: {
+    working: 0,       # 勤務している
+    breaking: 1,      # 休憩中
+    not_working: 2,   # 勤務していない
+    retired: 3        # 退職している
+  }
+
+  # ===============
   # バリデーション
   # ===============
   has_secure_password # パスワードをハッシュ化
@@ -52,6 +62,22 @@ class User < ApplicationRecord
   def self.next_employee_number
     latest_employee_number  = User.maximum(:employee_number).to_i
     latest_employee_number + 1
+  end
+
+  # working_statusを文字列に変換
+  def working_status_str
+    case working_status
+    when "working"
+      "勤務中"
+    when "breaking"
+      "休憩中"
+    when "not_working"
+      "勤務外"
+    when "retired"
+      "退職"
+    else
+      "未登録"
+    end
   end
 
 end

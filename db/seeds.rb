@@ -53,10 +53,7 @@ end
 
 # ユーザーを作成
 def create_user
-  # 入社日を作成
-  date_of_hire = generate_hire_date()
-  # 退職日を作成
-  date_of_termination = randomly_retired? ? generate_termination_date(date_of_hire) : nil
+
 
   names = [
   { family_name: "田中", first_name: "太郎", family_name_kana: "たなか", first_name_kana: "たろう"},
@@ -66,6 +63,10 @@ def create_user
   { family_name: "山田", first_name: "五郎", family_name_kana: "やまだ", first_name_kana: "ごろう"},
 ]
   names.each_with_index do |name, index|
+  # 入社日を作成
+  date_of_hire = generate_hire_date()
+  # 退職日を作成
+  date_of_termination = randomly_retired? ? generate_termination_date(date_of_hire) : nil
     user=User.create!(
       employee_number: index + 1,
       family_name: name[:family_name],
@@ -73,14 +74,37 @@ def create_user
       full_name: "#{name[:family_name]} #{name[:first_name]}",
       family_name_kana: name[:family_name_kana],
       first_name_kana: name[:first_name_kana],
+      full_name_kana: "#{name[:family_name_kana]} #{name[:first_name_kana]}",
       birthday: Date.new(1990, 1, 1),
       date_of_hire: date_of_hire,
       date_of_termination: date_of_termination,
       password: "password#{index + 1}",
       department_id: nil
     )
-    # ユーザーごとに業務を作成する処理
+    # 業務作成
     create_works_for_user(user.id)
+
+    # 勤務状態の決定
+    working_status = determine_working_status(user)
+
+    # ユーザーの勤務状態を更新
+    user.update(working_status: working_status)
+
+  end
+end
+
+# 勤務状態を決定するメソッド
+def determine_working_status(user)
+  return "retired" if user.date_of_termination.present?
+
+  # 最新の出勤履歴を取得
+  latest_work = user.works.order(created_at: :desc).first
+
+  # 最新の勤務記録があり、退勤記録がない場合は勤務中
+  if latest_work&.start_datetime.present? && latest_work.end_datetime.nil?
+    "working"
+  else
+    "not_working"
   end
 end
 
