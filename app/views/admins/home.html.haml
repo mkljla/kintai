@@ -15,7 +15,7 @@
         = sort_icon('full_name_kana')
       %th
         = link_to "ステータス", admin_home_path(sort_column: "working_status", sort_direction: @sort_column == 'working_status' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-        = sort_icon('employee_number')
+        = sort_icon('working_status')
       %th
         = link_to "入社日", admin_home_path( sort_column: "date_of_hire", sort_direction: @sort_column == 'date_of_hire' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
         = sort_icon('date_of_hire')
