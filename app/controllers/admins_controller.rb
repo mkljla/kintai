@@ -1,7 +1,15 @@
 class AdminsController < ApplicationController
+
   def home
-    # ユーザーを取得し、フィルタリング処理を呼び出す
-    @users = fetch_users
+    @sort_column = params[:sort_column] || 'employee_number' # デフォルトは社員番号
+    @sort_direction = params[:sort_direction] || 'asc'      # デフォルトは昇順
+    @filter = params[:filter] || 'all'                      # デフォルトは「全社員」
+
+    @users = fetch_users.non_admin # アドミンユーザーを除外
+    @users = filter_users(@users)  # フィルターを適用
+    # 並べ替え
+    @users = @users.order("#{sort_column} #{sort_direction}, id ASC") # 同じ値の場合idカラムの昇順に
+
   end
 
   def show_user
@@ -40,4 +48,14 @@ class AdminsController < ApplicationController
       users
     end
   end
+
+  def sort_column
+    # 許可されていないカラムの場合employee_numberを返す
+    %w[employee_number full_name_kana working_status date_of_hire date_of_termination].include?(params[:sort_column]) ? params[:sort_column] : 'employee_number'
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:sort_direction]) ? params[:sort_direction] : 'asc'
+  end
+
 end

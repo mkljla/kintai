@@ -50,4 +50,18 @@ module ApplicationHelper
       [current_month + 1, current_year]
     end
   end
+
+  def sort_icon(column)
+    if @sort_column == column.to_s
+      if @sort_direction == 'asc'
+        content_tag(:i, '', class: 'fas fa-sort-up ')
+      else
+        content_tag(:i, '', class: 'fas fa-sort-down')
+      end
+    else
+      # 並べ替えの列が設定されていない場合はデフォルトのアイコンを表示
+      content_tag(:i, '', class: 'fa-solid fa-sort')
+    end
+  end
+
 end

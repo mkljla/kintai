@@ -31,6 +31,9 @@ class User < ApplicationRecord
   # スコープ
   # ===============
 
+  # adminユーザー以外を取得
+  scope :non_admin, ->{ where(is_admin: false) }
+
   # 社員番号の小さい順に並び替え
   scope :ordered_by_employee_number, -> { order(:employee_number) }
 
