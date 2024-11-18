@@ -5,8 +5,8 @@ class AdminsController < ApplicationController
     @sort_direction = params[:sort_direction] || 'asc'      # デフォルトは昇順
     @filter = params[:filter] || 'all'                      # デフォルトは「全社員」
 
-    @users = fetch_users.non_admin # アドミンユーザーを除外
-    @users = filter_users(@users)  # フィルターを適用
+    @users = User.non_admin # アドミンユーザーを除外
+    @users = filter_users(@users, @filter)  # フィルターを適用
     # 並べ替え
     @users = @users.order("#{sort_column} #{sort_direction}, id ASC") # 同じ値の場合idカラムの昇順に
 
@@ -19,33 +19,15 @@ class AdminsController < ApplicationController
 
   private
 
-  # ユーザーの取得とフィルタリングを行うメソッド
-  def fetch_users
-    # 管理者以外のユーザーを取得
-    filtered_users = User.where(is_admin: false)
-
-    # フィルタリングを適用
-    filtered_users = filter_users(filtered_users)
-
-    # 最終的に社員番号の小さい順に並び替え
-    filtered_users.ordered_by_employee_number
-  end
-
   # フィルタリング条件に応じてユーザーを絞り込むメソッド
-  def filter_users(users)
-    case params[:filter]
+  def filter_users(users, filter)
+    case filter
     when 'active'
-      # 在職ユーザーのみを取得
-      users.active
+      users.active # 在職ユーザーのみを取得
     when 'retired'
-      # 退職済みユーザーのみを取得
-      users.retired
-    when 'all'
-      # 全ユーザーを返す
-      users
+      users.retired # 退職済みユーザーのみを取得
     else
-      # フィルターが指定されていない場合、全ユーザーを返す
-      users
+      users # 全ユーザーを返す
     end
   end
 
