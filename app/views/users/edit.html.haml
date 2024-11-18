@@ -1,4 +1,9 @@
-.fs-2.page-title.fw-bold.mb-3 社員編集
+%nav
+  %ol.breadcrumb
+    %li
+      %a{href: admin_home_path} ホーム
+    %li ユーザー編集
+.fs-2.page-title.fw-bold.mb-3 ユーザー編集
 
 = form_with  model: @user, local: true, html: { class: 'needs-validation', novalidate: true } do |f|
   = render "users/user_form", { f: f, user: @user}
