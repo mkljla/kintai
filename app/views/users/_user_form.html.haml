@@ -44,16 +44,16 @@
         名は30文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
   .row
     .col-4.mb-3
-      = f.label :first_name_kana, class: 'form-label d-flex align-items-center' do
+      = f.label :family_name_kana, class: 'form-label d-flex align-items-center' do
         .mb-0="姓(かな)"
-      = f.text_field :first_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
+      = f.text_field :family_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
       .valid-feedback
       .invalid-feedback
         姓(かな)は30字以内で、ひらがなで入力してください。
     .col-4.mb-3
-      = f.label :family_name_kana, class: 'form-label d-flex align-items-center' do
+      = f.label :first_name_kana, class: 'form-label d-flex align-items-center' do
         .mb-0= "名(かな)"
-      = f.text_field :family_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
+      = f.text_field :first_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
       .valid-feedback
       .invalid-feedback
         名(かな)は30字以内で、ひらがなで入力してください。
