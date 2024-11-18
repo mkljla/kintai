@@ -95,7 +95,7 @@ end
 
 # 勤務状態を決定するメソッド
 def determine_working_status(user)
-  return "retired" if user.date_of_termination.present?
+  return "retired" if user.retired?
 
   # 最新の出勤履歴を取得
   latest_work = user.works.order(created_at: :desc).first
@@ -180,9 +180,9 @@ def generate_termination_date(date_of_hire)
   Random.rand(date_of_hire..Date.today)
 end
 
-# 退職日が設定されていればtrueを返すメソッド
+# 退職日していればtrueを返すメソッド
 def retired?(user)
-  !user.date_of_termination.nil?
+  user.date_of_termination.present? && user.date_of_termination < Date.today
 end
 
 # ランダムな入社日を生成

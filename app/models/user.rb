@@ -37,11 +37,11 @@ class User < ApplicationRecord
   # 社員番号の小さい順に並び替え
   scope :ordered_by_employee_number, -> { order(:employee_number) }
 
-  #退職済みユーザー絞り込み
-  scope :retired, ->{where.not(date_of_termination: nil)}
+  #退職済みユーザー(退職カラムが存在するかつ、退職日が過去)
+  scope :retired, -> { where.not(date_of_termination: nil).where('date_of_termination < ?', Date.today) }
 
-  #在職ユーザー絞り込み
-  scope :active, -> { where(date_of_termination: nil) }
+  #在職ユーザー(退職カラムが存在しないもしくは、退職カラムが存在かつ退職日が今日以降)
+  scope :active, -> { where(date_of_termination: nil).or(where('date_of_termination >= ?', Date.today)) }
 
   # ===============
   # メソッド
