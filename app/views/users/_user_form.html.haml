@@ -17,6 +17,15 @@
         入力してください
 
     .col-4.mb-3
+      - if @user.persisted? # 編集の場合だけ退職日を表示
+        = f.label :date_of_termination, class: 'form-label d-flex align-items-center' do
+          .mb-0="退職日"
+
+        = f.date_field :date_of_termination, class: 'form-control'
+        .form-text
+          ※退職後はログインできなくなります
+
+    .col-4.mb-3
       = f.label :department_id, class: 'form-label d-flex align-items-center' do
         .mb-0="部門"
       = f.collection_select :department_id, @departments, :id, :name, { prompt: "未選択" }, class: "form-select"
