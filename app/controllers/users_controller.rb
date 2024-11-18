@@ -46,7 +46,8 @@ class UsersController < ApplicationController
       employee_number:  User.next_employee_number,
       full_name: "#{user_params[:family_name]} #{user_params[:first_name]}",
       full_name_kana: "#{user_params[:family_name_kana]} #{user_params[:first_name_kana]}",
-      password: Date.parse(user_params[:birthday]).strftime('%Y%m%d')
+      password: Date.parse(user_params[:birthday]).strftime('%Y%m%d'),
+      working_status: "not_working"
     ))
 
     if @user.save
