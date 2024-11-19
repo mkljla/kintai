@@ -30,7 +30,7 @@ module ApplicationHelper
   def minutes_to_hours_and_minutes(total_minutes)
     hours = total_minutes / 60
     minutes = total_minutes % 60
-    format("%d:%02d", hours, minutes) # 「1:05」のようにフォーマット
+    format("%d時間%02d分", hours, minutes)
   end
 
   # 前月と前月の年を返すメソッド
