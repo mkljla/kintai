@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user
+  before_action :set_latest_records, only: [:home]
 
   # ホーム画面
   def home
@@ -29,6 +30,9 @@ class UsersController < ApplicationController
 
     # 選択した期間内の出勤データを取得し、日付でグループ化
     @works_by_date = @works.where(start_datetime: start_date..end_date).group_by { |work| work.start_datetime.to_date }
+
+    # 日本の祝日リストを取得 (holiday_japan gemを使用)
+    @holidays = HolidayJapan.between(start_date, end_date)
 
   end
 

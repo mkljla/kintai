@@ -28,10 +28,8 @@ Rails.application.routes.draw do
   get 'admin/users/:id', to: 'admins#show_user', as: 'admin_user_show'
 
   # 勤怠管理DB作成処理
-  post 'works/start_work', to: 'works#start_work'
-  post 'works/end_work', to: 'works#end_work'
-  resources :works, only: [:show, :new, :create, :destroy, :edit, :update] do
-  end
+  resources :works, only: [:show, :new, :create, :destroy, :edit, :update]
+
   # 勤怠管理DB作成処理
   post 'breaks/start_break', to: 'breaks#start_break'
   post 'breaks/end_break', to: 'breaks#end_break'

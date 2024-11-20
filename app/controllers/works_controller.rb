@@ -1,8 +1,8 @@
 class WorksController < ApplicationController
-  before_action :set_latest_records, only: [:start_work, :end_work]
+  before_action :set_latest_records, only: [:create, :update]
 
   # 出勤処理
-  def start_work
+  def create
 
     return redirect_with_alert("すでに出勤済みです。") if current_user.working?
 
@@ -24,7 +24,7 @@ class WorksController < ApplicationController
 
 
   # 退勤処理
-  def end_work
+  def update
     # 出勤していない場合の処理を早期リターンで処理
     return redirect_with_alert("出勤していません。") unless current_user.working?
 
