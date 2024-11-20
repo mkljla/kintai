@@ -118,6 +118,7 @@ GEM
       activesupport (>= 5.1)
       haml (>= 4.0.6)
       railties (>= 5.1)
+    holiday_japan (1.4.4)
     html2haml (2.3.0)
       erubis (~> 2.7.0)
       haml (>= 4.0)
@@ -301,6 +302,7 @@ DEPENDENCIES
   debug
   font-awesome-sass
   haml-rails
+  holiday_japan
   html2haml
   importmap-rails
   jbuilder

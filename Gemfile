@@ -80,3 +80,5 @@ gem 'jquery-rails'
 gem "font-awesome-sass"
 
 gem 'pg'
+
+gem 'holiday_japan'
