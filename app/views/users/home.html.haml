@@ -7,8 +7,8 @@
   = button_to "出勤", works_path, method: :post, class: "btn btn-success", disabled: current_user.working?
   = button_to "退勤", work_path(@latest_work.id), method: :patch, class: "btn btn-danger", disabled: current_user.taking_a_break? || !current_user.working?
 .button_container
-  = button_to "休憩開始", breaks_start_break_path, method: :post, class: "btn btn-primary", disabled: current_user.taking_a_break? || !current_user.working?
-  = button_to "休憩終了", breaks_end_break_path, method: :post, class: "btn btn-primary", disabled: !current_user.taking_a_break?
+  = button_to "休憩開始", breaks_path, method: :post, class: "btn btn-primary", disabled: current_user.taking_a_break? || !current_user.working?
+  = button_to "休憩終了", break_path(@latest_break.id), method: :patch, class: "btn btn-primary", disabled: !current_user.taking_a_break?
 
 %h3 今日の記録
 %table

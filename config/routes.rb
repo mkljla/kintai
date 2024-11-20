@@ -31,8 +31,7 @@ Rails.application.routes.draw do
   resources :works, only: [:show, :new, :create, :destroy, :edit, :update]
 
   # 勤怠管理DB作成処理
-  post 'breaks/start_break', to: 'breaks#start_break'
-  post 'breaks/end_break', to: 'breaks#end_break'
+  resources :breaks, only: [:show, :new, :create, :destroy, :edit, :update]
 
   # ルートページをログイン画面に設定
   root 'sessions#new'
