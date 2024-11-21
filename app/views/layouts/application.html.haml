@@ -15,9 +15,15 @@
   %body
     -if logged_in?
       = render 'header'
+      .d-flex
+        = render 'side_menu'
+        .main_container.m-4.mx-5
+          = yield
+    - else
+      .main_container.m-4.mx-5
+        = yield
     = display_flash_messages
-    .main_container.m-4.mx-5
-      = yield
+
     = render 'footer'
     // JavaScript読み込み
     = javascript_include_tag 'application'
