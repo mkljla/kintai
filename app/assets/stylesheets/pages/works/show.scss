@@ -1,0 +1,30 @@
+.work_show {
+  .tables-container {
+    width: fit-content;
+    table {
+      white-space: nowrap; /* テキストを1行に収める */
+      color: var(--bs-gray-900);
+      table-layout: auto; /* 内容に基づいて列幅を調整 */
+      width: auto; /* テーブル幅も内容に応じて可変 */
+      white-space: nowrap; /* テキストを1行に収める */
+      font-size: 0.9rem;
+      thead {
+        tr {
+          th {
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            .date {
+              font-size: 0.8rem;
+            }
+            .time {
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,12 @@
 class WorksController < ApplicationController
   before_action :set_latest_records, only: [:create, :update]
 
+  def show
+    @work = Work.find(params[:id])
+    @breaks = Break.where(work_id: @work.id)
+
+  end
+
   # 出勤処理
   def create
 
