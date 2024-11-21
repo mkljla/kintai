@@ -42,12 +42,16 @@ body {
   flex-direction: column;
   min-height: 100vh;
   font-family: "Noto Sans JP", sans-serif;
-
+  background-color: var(--bs-tertiary-bg);
+  overflow-x: hidden;
   .main_container {
-    // min-width: 400px;
-    width: 100%;
-    width: fit-content;
+    justify-content: center;
     color: var(--bs-gray-900);
+
+    // min-width: 400px;
+
+    flex: 1; /* 空いたスペースを埋める */
+    min-width: fit-content;
     // background-color: #007bff;
 
     // @media screen and (max-width: 767px) {
@@ -61,9 +65,26 @@ body {
     //   border-style: solid;
     //   border-color: rgb(153, 255, 255);
     // }
-    .selected {
-      background-color: #007bff;
-      color: white;
+
+    .main_content_wrapper {
+      color: var(--bs-gray-900);
+      // width: 100%;
+      // width: fit-content;
+      width: 1000px;
+      .breadcrumb_container {
+        padding: 0rem 1rem;
+      }
+      .main_content {
+        height: 100%;
+        background-color: white;
+        border-radius: 20px;
+        padding: 1rem 2rem;
+
+        .selected {
+          background-color: #007bff;
+          color: white;
+        }
+      }
     }
   }
 }
