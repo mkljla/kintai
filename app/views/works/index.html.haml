@@ -1,0 +1,91 @@
+.works_index
+  .fs-5 勤務履歴
+  .border-top.pt-4.border-2
+
+
+
+  %nav.d-flex.align-items-center.mb-2
+    - # ナビゲーションリンクでの「前月」「翌月」の設定
+    - prev_month, prev_year = previous_month_and_year(@month, @year)
+    - next_month, next_year = next_month_and_year(@month, @year)
+
+    -# 今月
+    %a{ href: user_path(year: @current_year, month: @current_month) , class: "btn btn-light btn-sm me-3 "}
+      今月
+
+    -# 前月
+    %a{ href: user_path(year: prev_year, month: prev_month) , class:"btn btn-light btn-sm me-1 "}
+      %i.fa-solid.fa-chevron-left
+
+    -# 次月
+    - if @year < @current_year || (@year == @current_year && @month < @current_month)
+      %a{ href: user_path(year: next_year, month: next_month) , class:"btn btn-light btn-sm "}
+        %i.fa-solid.fa-chevron-right
+
+    = form_with url: user_path, method: :get, class: "d-flex mx-2" do |f|
+      .dropdown.mx-1
+        %button.btn.btn.btn-light.dropdown-toggle.btn-sm{"type" => "button", "data-bs-toggle" => "dropdown", "aria-expanded" => "false"}
+          = "#{@year} 年"
+        %ul.dropdown-menu
+          - (@current_year - 5..@current_year).to_a.reverse.each do |year|
+            %li
+              = f.radio_button :year, year, id: "year_#{year}", class: "form-check-input d-none", onchange: 'this.form.requestSubmit()', checked: year == @year
+              %label.dropdown-item{"for" => "year_#{year}", class: ("selected" if year == @year)}= "#{year} 年"
+
+      .dropdown.mx-1
+        %button.btn.btn-light.dropdown-toggle.btn-sm{"type" => "button", "data-bs-toggle" => "dropdown", "aria-expanded" => "false"}
+          = "#{@month} 月"
+        %ul.dropdown-menu
+          - months = (1..12).map { |m| [m, m] }
+          - max_month = (@year == @current_year) ? @current_month : 12
+          - months.select { |m| m[1] <= max_month }.each do |month, value|
+            %li
+              = f.radio_button :month, value, id: "month_#{value}", class: "form-check-input d-none", onchange: 'this.form.requestSubmit()', checked: value == @month
+              %label.dropdown-item{"for" => "month_#{value}", class: ("selected" if value == @month)}= "#{month} 月"
+
+  %table.table
+    %thead
+      %tr
+        %th 日付
+        %th 出勤時間
+        %th 退勤時間
+        %th 休憩時間
+        %th 勤務時間
+        %th 残業時間
+    %tbody.table-group-divider
+      - @dates.each do |date|
+        - holiday_name = @holidays[date] # 祝日名を取得
+        - is_holiday = @holidays.include?(date) # 祝日かどうか
+        - is_saturday = date.saturday? # 土曜かどうか
+        - is_sunday = date.sunday? # 日曜かどうか
+        - works = (@works_by_date[date] || []).sort_by { |work| work.start_datetime }
+        - if works.any?
+          - works.each_with_index do |work, index|
+            %tr.align-middle
+              - if index == 0
+                %td{ rowspan: works.size, class: ("holiday" if is_holiday) || ("saturday" if is_saturday) || ("sunday" if is_sunday) }
+                  .d-flex
+                    = formatted_date_with_weekday(date) # 日付
+                    - if is_holiday
+                      .holiday_name.ps-2.align-content-center= holiday_name # 祝日の名前を表示
+              - else
+
+              %td= formatted_time_only(work.start_datetime) # 出勤時間
+              %td= formatted_time_only(work.end_datetime) # 退勤時間
+              %td= minutes_to_hours_and_minutes(work.total_break_time_in_minutes) # 休憩時間
+              %td= minutes_to_hours_and_minutes(work.actual_work_time_in_minutes) # 勤務時間
+              %td= minutes_to_hours_and_minutes(work.total_overtime_in_minutes) # 残業時間
+              %td= button_to '詳細', work_path(work.id), method: :get, class: "btn btn-primary btn-sm"
+        - else
+          %tr
+            %td{ class: ("holiday" if is_holiday) || ("saturday" if is_saturday) || ("sunday" if is_sunday) }
+              .d-flex
+                = formatted_date_with_weekday(date) # 日付
+                - if is_holiday
+                  .holiday_name.ps-2.align-content-center= holiday_name # 祝日の名前を表示
+            %td
+            %td
+            %td
+            %td
+            %td
+            %td

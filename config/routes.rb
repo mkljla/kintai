@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     collection do
       get 'home', to: 'users#home', as: 'home'
     end
+    member do
+      get 'works', to: 'works#index', as: 'works'
+    end
   end
 
   # 管理者用ホーム画面

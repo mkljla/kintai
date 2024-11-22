@@ -36,11 +36,11 @@
         %i.bi.bi-clock-history.mx-2
         %span.menu-text タイムカード
     %li.nav-item
-      %a.nav-link.link-body-emphasis{"aria-current" => "page", href: user_path(current_user.id)}
+      %a.nav-link.link-body-emphasis{ href: user_path(current_user.id)}
         %i.bi.bi-person.mx-2
         %span.menu-text 社員情報
     %li
-      %a.nav-link.link-body-emphasis{href: "#"}
+      %a.nav-link.link-body-emphasis{href: works_user_path(current_user.id)}
         %i.bi.bi-file-ruled.mx-2
         %span.menu-text 記録
     %li

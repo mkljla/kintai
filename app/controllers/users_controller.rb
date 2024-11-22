@@ -12,27 +12,7 @@ class UsersController < ApplicationController
   # ユーザー詳細画面
   def show
 
-    @works = @user.works.sorted # ユーザーの出勤簿を取得
-
-
-    # 年月パラメータを受け取り、デフォルトは現在の年と月
-    @year = params[:year]&.to_i || Time.current.year
-    @month = params[:month]&.to_i || Time.current.month
-    @current_year = Time.current.year
-    @current_month = Time.current.month
-
-    # 選択した年月の1日と末日を取得
-    start_date = Date.new(@year, @month, 1)
-    end_date = start_date.end_of_month
-
-    # 表示する全ての日付リストを配列として作成
-    @dates = (start_date..end_date).to_a
-
-    # 選択した期間内の出勤データを取得し、日付でグループ化
-    @works_by_date = @works.where(start_datetime: start_date..end_date).group_by { |work| work.start_datetime.to_date }
-
-    # 日本の祝日リストを取得 (holiday_japan gemを使用)
-    @holidays = HolidayJapan.between(start_date, end_date)
+  
 
   end
 
