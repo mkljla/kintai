@@ -26,9 +26,10 @@
 
           %hr.my-2
           %li
-            %a.dropdown-item{href:logout_path}
+            = link_to logout_path, method: :delete, class: 'dropdown-item' do
               %i.bi.bi-box-arrow-right.me-1
               ログアウト
+
     %hr
 
     %li
