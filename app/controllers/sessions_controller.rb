@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
             # 管理者か確認
             if user.is_admin
                 flash[:notice] = "管理者としてログインしました"
-                redirect_to admin_home_path
+                redirect_to admin_users_path
             else
                 flash[:notice] = "ログインに成功しました"
                 redirect_to home_users_path

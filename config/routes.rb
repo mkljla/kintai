@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   # to (コントローラー名)(実行するアクション)
 
+
   # ログイン画面
   get 'login', to: 'sessions#new'          # ログインフォームを表示
   post 'login', to: 'sessions#create'      # ログイン処理
@@ -25,10 +26,18 @@ Rails.application.routes.draw do
     end
   end
 
-  # 管理者用ホーム画面
-  get 'admin/home', to: 'admins#home', as: 'admin_home'
-  # 管理者用ユーザー詳細画面
-  get 'admin/users/:id', to: 'admins#show_user', as: 'admin_user_show'
+  namespace :admin do
+    root to: 'users#index'
+    # ユーザー管理
+    resources :users, only: [:index, :show, :edit, :update, :new, :create, :destroy] do
+      # ユーザーの勤務履歴関連
+      resources :works, only: [:index, :edit, :update]
+    end
+  end
+  # # 管理者用ホーム画面
+  # get 'admin/home', to: 'admins#home', as: 'admin_home'
+  # # 管理者用ユーザー詳細画面
+  # get 'admin/users/:id', to: 'admins#show_user', as: 'admin_user_show'
 
   # 勤怠管理DB作成処理
   resources :works, only: [:show, :new, :create, :destroy, :edit, :update]

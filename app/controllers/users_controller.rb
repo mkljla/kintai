@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user
-  before_action :set_latest_records, only: [:home]
+  before_action :set_latest_records
 
   # ホーム画面
   def home
@@ -12,90 +12,11 @@ class UsersController < ApplicationController
   # ユーザー詳細画面
   def show
 
-  
-
   end
-
-  def new
-    @departments = Department.sorted
-    @employee_number = User.next_employee_number.to_s.rjust(4, '0')
-    @user = User.new
-  end
-
-  def create
-    @employee_number = User.next_employee_number.to_s.rjust(4, '0')
-    @departments = Department.sorted
-
-    @user = User.new(user_params.merge(
-      employee_number:  User.next_employee_number,
-      full_name: "#{user_params[:family_name]} #{user_params[:first_name]}",
-      full_name_kana: "#{user_params[:family_name_kana]} #{user_params[:first_name_kana]}",
-      password: Date.parse(user_params[:birthday]).strftime('%Y%m%d'),
-      working_status: "not_working"
-    ))
-
-    if @user.save
-      flash[:notice] = "新規ユーザーを登録しました。"
-      redirect_to admin_home_path
-    else
-      Rails.logger.debug("User save failed: #{@user.errors.full_messages}")
-      flash[:alert] = "ユーザー登録に失敗しました。"
-      # 値を保持
-      render :new
-    end
-  end
-
-  def destroy
-    if current_user.is_admin?
-      user = User.find(params[:id])
-      if user.destroy
-        flash[:notice] = "ユーザーを削除しました。"
-        redirect_to admin_home_path
-      else
-        flash[:alert] = "ユーザーの削除に失敗しました。"
-        render :home
-      end
-    else
-      flash[:alert] = "権限がありません。"
-    end
-  end
-
-  def edit
-    @user = User.find(params[:id])
-    @departments = Department.sorted
-    @employee_number = @user.employee_number.to_s.rjust(4, '0')
-  end
-
-  def update
-    # 表示用
-    @employee_number = User.next_employee_number
-    @departments = Department.sorted
-    @user = User.find(params[:id])
-
-    if @user.update(user_params.merge(
-      employee_number:  @user.employee_number,
-      full_name: "#{user_params[:family_name]} #{user_params[:first_name]}",
-      full_name_kana: "#{user_params[:family_name_kana]} #{user_params[:first_name_kana]}",
-      password: Date.parse(user_params[:birthday]).strftime('%Y%m%d')
-    ))
-    flash[:notice] = "ユーザー情報を更新しました。"
-    redirect_to admin_home_path
-    else
-      Rails.logger.debug("User update failed: #{@user.errors.full_messages}")
-      flash[:alert] = "ユーザー情報の更新に失敗しました。"
-      render :edit
-    end
-  end
-
+ 
   private
 
-  def user_params
-    params.require(:user).permit(
-      :department_id, :family_name, :first_name, :family_name_kana, :first_name_kana,
-      :birthday, :date_of_hire
-    )
 
-  end
   # ログイン中のユーザーを設定
   def set_user
     @user = current_user

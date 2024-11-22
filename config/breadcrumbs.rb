@@ -3,12 +3,12 @@ crumb :home_users do
 end
 
 crumb :admin_home do
-  link "Home", admin_home_path
+  link "Home", admin_users_path
 end
 
 crumb :user_new do
   link "ユーザー登録", new_user_path
-  parent :admin_home_path
+  parent :admin_users_path
 end
 
 # 以下にコードを追加する
