@@ -37,52 +37,55 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP");
 
 // 全体のスタイル設定
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: "Noto Sans JP", sans-serif;
-  background-color: var(--bs-tertiary-bg);
+html {
   overflow-x: hidden;
-  .main_container {
-    justify-content: center;
-    color: var(--bs-gray-900);
-
-    // min-width: 400px;
-
-    flex: 1; /* 空いたスペースを埋める */
-    min-width: fit-content;
-    // background-color: #007bff;
-
-    // @media screen and (max-width: 767px) {
-    //   width: 100%;
-    //   border-style: solid;
-    //   border-color: rgb(242, 170, 255);
-    // }
-    // @media screen and (min-width: 768px) {
-    //   width: 50%;
-    //   // background-color: rgb(153, 255, 255);
-    //   border-style: solid;
-    //   border-color: rgb(153, 255, 255);
-    // }
-
-    .main_content_wrapper {
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: "Noto Sans JP", sans-serif;
+    background-color: var(--bs-tertiary-bg);
+    overflow-x: hidden;
+    .main_container {
+      justify-content: center;
       color: var(--bs-gray-900);
-      // width: 100%;
-      // width: fit-content;
-      width: 1000px;
-      .breadcrumb_container {
-        padding: 0rem 1rem;
-      }
-      .main_content {
-        height: 100%;
-        background-color: white;
-        border-radius: 20px;
-        padding: 1rem 2rem;
 
-        .selected {
-          background-color: #007bff;
-          color: white;
+      // min-width: 400px;
+
+      flex: 1; /* 空いたスペースを埋める */
+      min-width: fit-content;
+      // background-color: #007bff;
+
+      // @media screen and (max-width: 767px) {
+      //   width: 100%;
+      //   border-style: solid;
+      //   border-color: rgb(242, 170, 255);
+      // }
+      // @media screen and (min-width: 768px) {
+      //   width: 50%;
+      //   // background-color: rgb(153, 255, 255);
+      //   border-style: solid;
+      //   border-color: rgb(153, 255, 255);
+      // }
+
+      .main_content_wrapper {
+        color: var(--bs-gray-900);
+        // width: 100%;
+        // width: fit-content;
+        width: 1000px;
+
+        .main_content {
+          height: 100%;
+          background-color: white;
+          border-radius: 20px;
+          padding: 1rem 2rem;
+          .page-title {
+          }
+
+          .selected {
+            background-color: #007bff;
+            color: white;
+          }
         }
       }
     }
@@ -105,4 +108,9 @@ turbo-frame::before {
   background-color: white;
   padding: 4px;
   border: 1px red solid;
+}
+.breadcrumb_container {
+  padding: 0rem 1rem;
+  font-size: 0.9rem;
+  color: var(--bs-secondary-color);
 }

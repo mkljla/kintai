@@ -2,38 +2,13 @@
   .wrapper.site-header__wrapper
     .site-header__start
       %a.brand{href: "#"} 勤怠管理
-    - if current_user.is_admin
-      .site-header__end
-        %nav.nav
-          .nav__toggle{"aria-expanded" => "false", type: "button"}
-            %i.fa-solid.fa-bars
-          %ul.nav__wrapper
-            %li.nav__item
-              -if current_user.is_admin?
-                %a{href: admin_home_path}
-                  %i.fa-solid.fa-house
-                    Home
-              -else
-                %a{href: home_users_path}
-                  %i.fa-solid.fa-house
-                    Home
-        // メニュー展開時ののログアウトボタン
-        .btn-logout-expand
-          = button_to 'ログアウト', logout_path, method: :delete, class: "btn btn-primary"
-    - else
-      .site-header__end
-        %nav.nav
-          .nav__toggle{"aria-expanded" => "false", type: "button"}
-            %i.fa-solid.fa-bars
-          %ul.nav__wrapper
-            %li.nav__item
-              %a{href: home_users_path}
-                %i.fa-solid.fa-house
-                  Home
-            %li.nav__item
-              %a{href: user_path(current_user.id)}
-                %i.fa-solid.fa-user
-                  社員情報
-        // メニュー展開時ののログアウトボタン
-        .btn-logout-expand
-          = button_to 'ログアウト', logout_path, method: :delete, class: "btn btn-primary"
+
+
+    .site-header__end
+      %div.status_area.d-flex
+        %span.status_icon
+          = working_status_icon(@current_user.working_status)
+        %span.status_text
+          = current_user.working_status_str
+
+

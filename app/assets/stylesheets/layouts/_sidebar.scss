@@ -1,15 +1,16 @@
-.nav-link.current {
-  font-weight: bold;
-  background-color: #e9ecef;
-}
-
 .sidebar {
-  width: 260px;
+  width: 200px;
   transition: width 0.3s;
   position: sticky;
   top: 0;
   margin: 1.5rem 0.5rem;
-
+  .nav-link.current {
+    font-weight: bold;
+    // background-color: #e9ecef;
+  }
+  .nav-link:hover {
+    background-color: #e9ecef;
+  }
   .icon {
     font-size: 1.2rem; /* アイコンのサイズを調整 */
   }

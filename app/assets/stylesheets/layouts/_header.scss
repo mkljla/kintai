@@ -8,19 +8,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: 0.5rem;
 
-    @media (min-width: 800px) {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
+    // @media (min-width: 800px) {
+    //   padding-top: 0;
+    //   padding-bottom: 0;
+    // }
 
     .site-header__start {
       display: flex;
       align-items: center;
       margin: auto 1rem;
-
+      white-space: nowrap;
       .brand {
         font-weight: bold;
         font-size: 20px;
@@ -29,87 +28,59 @@
     }
 
     .site-header__end {
+      white-space: nowrap;
       display: flex;
       align-items: center;
+      .status_area {
+        color: inherit;
 
-      .nav {
-        &__toggle {
-          display: none;
+        font-size: 0.9rem;
+
+        width: fit-content;
+        // padding: 0.3rem 0.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .status_text {
+        }
+        .status_icon {
+          // margin: auto 0.2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          // text-align: center;
           i {
-            font-size: 2rem;
-          }
-
-          @media (max-width: 799px) {
             display: flex;
-            margin: auto 1rem;
+            align-items: center;
+            justify-content: center;
+            // margin: 0.1rem;
           }
         }
-
-        &__wrapper {
-          @media (min-width: 800px) {
+      }
+      .nav-item.dropdown {
+      }
+      .nav-link {
+        margin: 0 0.5rem;
+        display: flex;
+        align-items: center;
+        .name_area {
+          &:hover {
+            font-weight: bold;
+          }
+          .name {
+            // background-color: aqua;
             display: flex;
-            background-color: khaki;
-            margin: auto 0;
+
+            align-items: center;
+            justify-content: center;
           }
-
-          @media (max-width: 799px) {
-            position: absolute;
-            top: calc(100%);
-            right: 0;
-            left: 0;
-            z-index: -1;
-            background-color: #d9f0f7;
-            visibility: hidden;
-            opacity: 0;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-
-            &.active {
-              visibility: visible;
-              opacity: 0.9; // 不透明度
-              transform: translateY(0); // 垂直方向で再配置
-              z-index: 100; //ボックスの重ね合わせレベル
-              padding: 0;
-            }
-          }
-
-          .nav__item {
-            list-style: none;
-            &:not(:last-child) {
-            }
-
-            a {
-              display: block;
-              padding: 1rem;
-              border-left: 4px solid transparent;
-
-              @media (min-width: 800px) {
-                text-align: center;
-                border-left: 0;
-                border-bottom: 4px solid transparent;
-              }
-
-              &.active {
-                border-left-color: #222;
-
-                @media (min-width: 800px) {
-                  border-bottom-color: #222;
-                }
-              }
-            }
-
-            svg {
-              display: inline-block;
-              vertical-align: middle;
-              width: 28px;
-              height: 28px;
-              margin-right: 1rem;
-
-              @media (min-width: 800px) {
-                display: block;
-                margin: 0 auto 0.5rem;
-              }
-            }
+          .san {
+            // background-color: burlywood;
+            display: flex;
+            align-items: end;
+            font-size: 0.9rem;
+            margin: 0 0.1rem;
           }
         }
       }
