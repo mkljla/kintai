@@ -19,6 +19,7 @@
       .main_container.d-flex.px-3
         = render 'sidebar'
         .main_content_wrapper.px-4.py-4
+          = breadcrumbs separator: " &rsaquo; "
           = yield
       = render 'footer'
     - else

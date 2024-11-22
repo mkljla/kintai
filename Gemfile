@@ -82,3 +82,5 @@ gem "font-awesome-sass"
 gem 'pg'
 
 gem 'holiday_japan'
+
+gem 'gretel'
