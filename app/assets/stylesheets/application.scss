@@ -10,31 +10,23 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+
  *= require_self
  */
 
-// リセットスタイル (normalizeやresetなど)
+// サードパーティのライブラリやフォント
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP"); // フォント
 @import "normalize"; // ブラウザの標準スタイルをリセット
+@import "font-awesome"; // アイコン
 
-// 変数とミキシン (ベースの設定)
+// ベーススタイル
 @import "variables"; // 全体で使う変数を定義
 @import "mixins"; // ヘルパーミキシンを追加
 
-// サードパーティのライブラリやフォント
-@import "font-awesome"; // 外部のライブラリやフォント
-
-// コンポーネント (再利用可能な部品、ボタンやフォームなど)
-@import "components/*";
-
-// レイアウト (ページ全体の構造、ヘッダーやフッターなど)
-@import "layouts/*";
-
-// ページ (各ページ固有のスタイル)
-@import "pages/*";
-
-// フォント
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP");
+// 自作スタイル
+@import "components/*"; // コンポーネント (再利用可能な部品、ボタンやフォームなど)
+@import "layouts/*"; // レイアウト (ページ全体の構造、ヘッダーやフッターなど)
+@import "pages/*"; // ページ (各ページ固有のスタイル)
 
 // 全体のスタイル設定
 html {
