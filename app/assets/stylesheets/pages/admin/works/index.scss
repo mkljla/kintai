@@ -1,4 +1,4 @@
-.works_index {
+body[data-controller="admin/works"][data-action="index"] {
   table {
     color: var(--bs-gray-900);
     table-layout: auto; /* 内容に基づいて列幅を調整 */

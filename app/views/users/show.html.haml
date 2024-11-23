@@ -1,18 +1,15 @@
 - breadcrumb :users_show
 - content_for(:title, '社員詳細')
 
-
-.users_show
-
-  .fs-5 基本情報
-  .border-top.pt-4.border-2
-  %dl
-    %dt 社員番号
-    %dd= @user.employee_number.to_s.rjust(4, '0')
-    %dt 名前
-    %dd= @user.full_name
-    %dt 入社日
-    %dd= @user.date_of_hire
-    %dt 退職日
-    %dd= @user.date_of_termination || "-"
+.fs-5 基本情報
+.border-top.pt-4.border-2
+%dl
+  %dt 社員番号
+  %dd= @user.employee_number.to_s.rjust(4, '0')
+  %dt 名前
+  %dd= @user.full_name
+  %dt 入社日
+  %dd= @user.date_of_hire
+  %dt 退職日
+  %dd= @user.date_of_termination || "-"
 

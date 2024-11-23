@@ -1,0 +1,33 @@
+body[data-controller="users"][data-action="home"] {
+  .clock {
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .date-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .date {
+      font-size: 1.5rem;
+      margin: auto 0;
+    }
+    .weekday {
+      font-size: 1.2rem;
+      margin: 0.2rem;
+    }
+  }
+
+  .button_container {
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 水平方向に中央寄せ */
+    align-items: center; /* 垂直方向に中央寄せ（必要なら） */
+    button {
+      width: 150px;
+      height: 50px;
+      margin: 20px;
+    }
+  }
+}

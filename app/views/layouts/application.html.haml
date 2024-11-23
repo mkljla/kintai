@@ -13,7 +13,10 @@
     // カスタムCSSの読み込み
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     %title=""
-  %body
+  %body{
+    "data-controller" => "#{controller.controller_path}", # ネームスペース込みのコントローラ名
+    "data-action" => "#{controller.action_name}"
+    }
     -if logged_in?
       = render 'header'
       .main_container.d-flex.px-3

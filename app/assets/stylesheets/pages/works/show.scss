@@ -1,4 +1,4 @@
-.work_show {
+body[data-controller="works"][data-action="show"] {
   .tables-container {
     width: fit-content;
     table {
