@@ -20,16 +20,18 @@
     -if logged_in?
       = render 'header'
       .main_container.d-flex.px-3.py-3
-        - if current_user.is_admin
-          =render 'admin/sidebar'
-        -else
-          = render 'sidebar'
+        .sidebar.my-1
+          - if current_user.is_admin
+            =render 'admin/sidebar'
+          -else
+            = render 'sidebar'
         .main_content_wrapper.px-4
           // パンくずリスト
           = breadcrumbs separator: " &nbsp;&rsaquo;&nbsp; "
           .main-content_outer
             // ページタイトル
-            .page-title= yield(:title)
+            .page-title
+              = yield(:title)
             //コンテンツ
             .main_content
               = yield

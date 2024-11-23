@@ -67,7 +67,20 @@ html {
       //   border-style: solid;
       //   border-color: rgb(153, 255, 255);
       // }
+      .sidebar {
+        width: 200px;
+        transition: width 0.3s;
+        position: sticky;
+        top: 0;
+        // margin: 1.5rem 0.5rem;
 
+        @media (max-width: 900px) {
+          width: fit-content;
+          width: 50px;
+          display: flex;
+          justify-content: center;
+        }
+      }
       .main_content_wrapper {
         color: var(--bs-gray-900);
         // width: 100%;
@@ -92,6 +105,7 @@ html {
             font-weight: bold;
           }
           .main_content {
+            font-size: 0.9rem;
             .headline {
               font-size: 1.1rem;
               font-weight: bold;

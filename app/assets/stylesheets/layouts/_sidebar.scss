@@ -1,43 +1,32 @@
-.sidebar {
-  width: 200px;
-  transition: width 0.3s;
-  position: sticky;
-  top: 0;
-  margin: 1.5rem 0.5rem;
-  .nav-link.current {
-    font-weight: bold;
-    // background-color: #e9ecef;
+.nav-link.current {
+  font-weight: bold;
+  // background-color: #e9ecef;
+}
+.nav-link:hover {
+  background-color: #e9ecef;
+}
+.icon {
+  font-size: 1.2rem; /* アイコンのサイズを調整 */
+}
+@media (max-width: 900px) {
+  .menu-text {
+    display: none; /* ラベルを非表示 */
   }
-  .nav-link:hover {
-    background-color: #e9ecef;
+
+  .nav-link {
+    display: flex; /* フレックスで中央寄せ */
+    align-items: center;
+    justify-content: center; /* 完全中央寄せ */
+    // padding: 0.5rem; /* 必要に応じて間隔を調整 */
+    padding: 1rem;
   }
-  .icon {
-    font-size: 1.2rem; /* アイコンのサイズを調整 */
-  }
-  @media (max-width: 900px) {
-    width: fit-content;
-    width: 50px;
-    justify-content: center;
 
-    .menu-text {
-      display: none; /* ラベルを非表示 */
-    }
-
-    .nav-link {
-      display: flex; /* フレックスで中央寄せ */
-      align-items: center;
-      justify-content: center; /* 完全中央寄せ */
-      // padding: 0.5rem; /* 必要に応じて間隔を調整 */
-      padding: 1rem;
-    }
-
-    i {
-      font-size: 1.2rem;
-      // margin-right: 0; /* アイコンだけの中央寄せ */
-      display: flex; /* フレックスで中央寄せ */
-      align-items: center;
-      justify-content: center; /* 完全中央寄せ */
-      margin: 0.5rem;
-    }
+  i {
+    font-size: 1.2rem;
+    // margin-right: 0; /* アイコンだけの中央寄せ */
+    display: flex; /* フレックスで中央寄せ */
+    align-items: center;
+    justify-content: center; /* 完全中央寄せ */
+    margin: 0.5rem;
   }
 }
