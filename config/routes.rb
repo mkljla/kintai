@@ -21,9 +21,9 @@ Rails.application.routes.draw do
     collection do
       get 'home', to: 'users#home', as: 'home'
     end
-    member do
-      get 'works', to: 'works#index', as: 'works'
-    end
+
+    resources :works, only: [:index, :show, :create, :update]
+
   end
 
   namespace :admin do
