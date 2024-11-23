@@ -1,12 +1,22 @@
-.nav-link {
-  color: $base-font-color;
+.sidebar_inner {
+  color: $text-color;
+  .nav-link {
+    .status_area {
+      font-size: 0.8rem;
 
-  &.current {
-    font-weight: bold;
-  }
+      .status_icon {
+      }
 
-  &:hover {
-    background-color: #e9ecef;
+      .status_text {
+      }
+    }
+    &.current {
+      font-weight: bold;
+    }
+
+    &:hover {
+      background-color: $background-hover-color;
+    }
   }
 }
 .icon {

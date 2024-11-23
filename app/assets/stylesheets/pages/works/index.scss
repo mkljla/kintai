@@ -1,6 +1,6 @@
 body[data-controller="works"][data-action="index"] {
   table {
-    color: $base-font-color;
+    color: $text-color;
     table-layout: auto; /* 内容に基づいて列幅を調整 */
     width: auto; /* テーブル幅も内容に応じて可変 */
     white-space: nowrap; /* テキストを1行に収める */
@@ -8,7 +8,7 @@ body[data-controller="works"][data-action="index"] {
     thead {
       tr {
         th {
-          color: $base-font-color;
+          color: $text-color;
           position: sticky;
           top: 0;
           z-index: 1;
@@ -17,11 +17,11 @@ body[data-controller="works"][data-action="index"] {
       }
     }
     tbody {
-      border-top-color: $base-font-color;
+      border-top-color: $text-color;
 
       tr {
         td {
-          color: $base-font-color;
+          color: $text-color;
           padding: 0.4rem 1rem;
         }
         .sunday,

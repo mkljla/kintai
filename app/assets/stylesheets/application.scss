@@ -41,16 +41,19 @@ html {
     flex-direction: column;
     min-height: 100vh;
     font-family: "Noto Sans JP", sans-serif;
-    background-color: var(--bs-tertiary-bg);
-    overflow-x: hidden;
+    background-color: $background-color;
+
     .main_container {
       justify-content: center;
-      color: $base-font-color;
+      color: $text-color;
 
       // min-width: 400px;
 
       flex: 1; /* 空いたスペースを埋める */
       min-width: fit-content;
+      // display: flex;
+      position: relative; // サイドメニュー固定のため
+
       // background-color: #007bff;
 
       // @media screen and (max-width: 767px) {
@@ -67,8 +70,10 @@ html {
       .sidebar {
         width: 200px;
         transition: width 0.3s;
-        position: sticky;
-        top: 0;
+
+        height: 100%; // サイドメニュー固定のため
+        position: sticky; // サイドメニュー固定のため
+        top: 0; // サイドメニュー固定のため
         // margin: 1.5rem 0.5rem;
 
         @media (max-width: 900px) {
@@ -79,7 +84,7 @@ html {
         }
       }
       .main_content_wrapper {
-        color: $base-font-color;
+        color: $text-color;
         // width: 100%;
         // width: fit-content;
         width: 1000px;
@@ -89,7 +94,7 @@ html {
           padding: 0rem 0.5rem;
           margin-bottom: 0.5rem;
           font-size: 0.8rem;
-          color: var(--bs-secondary-color);
+          color: $muted-text-color;
         }
         .main-content_outer {
           height: 100%;
@@ -98,8 +103,11 @@ html {
           padding: 1rem 2rem;
           flex-grow: 1; // 余白に合わせて伸張する
           .page-title {
-            font-size: 1.3em;
-            font-weight: bold;
+            // font-size: 1.4em;
+            // font-weight: bold;
+            // padding-bottom: 0.3rem;
+            // margin-bottom: 1.2rem;
+            // border-bottom: solid 1.5px #dbe1e8;
           }
           .main_content {
             font-size: 0.9rem;
@@ -107,7 +115,7 @@ html {
               font-size: 1.1rem;
               font-weight: bold;
               padding: 0.4rem 1rem;
-              border-left: 4px solid #334cca;
+              border-left: 4px solid $primary-color;
               margin: 1rem 0;
             }
             .selected {

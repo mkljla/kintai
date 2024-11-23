@@ -1,14 +1,39 @@
 %header.site-header
+
   .wrapper.site-header__wrapper
     .site-header__start
       %a.brand{href: "#"} 勤怠管理
 
 
     .site-header__end
+      // ステータス
       %div.status_area.d-flex
-        %span.status_icon
+        %span.status_icon.me-1
           = working_status_icon(@current_user.working_status)
         %span.status_text
           = current_user.working_status_str
+      .nav-item.dropdown
+        %a.nav-link{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}
+
+          .d-flex
+            .name_area.d-flex
+              %span.name
+                = current_user.full_name
+              %span.san さん
+            %i.bi.bi-chevron-down.mx-2
+
+        // ドロップダウン中身
+        %ul.dropdown-menu
+          %li
+            %a.dropdown-item{href:  user_path(current_user.id)}
+              %i.bi.bi-person.me-1
+              %span.menu-text 社員情報
+
+          %hr.my-2
+          %li
+            = link_to logout_path, method: :delete, class: 'dropdown-item' do
+              %i.bi.bi-box-arrow-right.me-1
+              ログアウト
+
 
 

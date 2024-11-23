@@ -1,9 +1,47 @@
 // The Header Media Queries
 // Tweak as per your needs
 .site-header {
-  position: relative;
-  background-color: #def7ff;
+  // position: relative;
+  // background-color: $header-bg-color;
+  // color: $header-text-color;
 
+  background-image: linear-gradient(
+      -45deg,
+      rgba(225, 245, 254, 0.6) 0%,
+      rgba(225, 245, 254, 0.6) 14.286%,
+      rgba(187, 222, 251, 0.6) 14.286%,
+      rgba(187, 222, 251, 0.6) 28.572%,
+      rgba(144, 202, 249, 0.6) 28.572%,
+      rgba(144, 202, 249, 0.6) 42.858%,
+      rgba(100, 181, 246, 0.6) 42.858%,
+      rgba(100, 181, 246, 0.6) 57.144%,
+      rgba(66, 165, 245, 0.6) 57.144%,
+      rgba(66, 165, 245, 0.6) 71.42999999999999%,
+      rgba(33, 150, 243, 0.6) 71.43%,
+      rgba(33, 150, 243, 0.6) 85.71600000000001%,
+      rgba(30, 136, 229, 0.6) 85.716%,
+      rgba(30, 136, 229, 0.6) 100.002%
+    ),
+    linear-gradient(
+      -135deg,
+      rgb(187, 222, 251) 0%,
+      rgb(187, 222, 251) 12.5%,
+      rgb(144, 202, 249) 12.5%,
+      rgb(144, 202, 249) 25%,
+      rgb(100, 181, 246) 25%,
+      rgb(100, 181, 246) 37.5%,
+      rgb(66, 165, 245) 37.5%,
+      rgb(66, 165, 245) 50%,
+      rgb(33, 150, 243) 50%,
+      rgb(33, 150, 243) 62.5%,
+      rgb(30, 136, 229) 62.5%,
+      rgb(30, 136, 229) 75%,
+      rgb(25, 118, 210) 75%,
+      rgb(25, 118, 210) 87.5%,
+      rgb(21, 101, 192) 87.5%,
+      rgb(21, 101, 192) 100%
+    );
+  padding: 0.5rem 1rem; /*余白*/
   .site-header__wrapper {
     display: flex;
     justify-content: space-between;
@@ -16,14 +54,14 @@
     // }
 
     .site-header__start {
+      font-size: 1.3rem;
       display: flex;
       align-items: center;
-      margin: auto 1rem;
       white-space: nowrap;
       .brand {
         font-weight: bold;
-        font-size: 20px;
         text-decoration: none;
+        color: $header-text-color;
       }
     }
 
@@ -31,6 +69,7 @@
       white-space: nowrap;
       display: flex;
       align-items: center;
+      color: $header-text-color;
       .status_area {
         color: inherit;
 
@@ -41,8 +80,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        .status_text {
-        }
         .status_icon {
           // margin: auto 0.2rem;
           display: flex;
@@ -57,30 +94,43 @@
             // margin: 0.1rem;
           }
         }
+        .status_text {
+        }
       }
-      .nav-item.dropdown {
-      }
-      .nav-link {
-        margin: 0 0.5rem;
-        display: flex;
-        align-items: center;
-        .name_area {
-          &:hover {
-            font-weight: bold;
-          }
-          .name {
-            // background-color: aqua;
-            display: flex;
+      // ドロップダウン
+      .nav-item {
+        .nav-link {
+          margin: 0 0.5rem;
+          display: flex;
+          align-items: center;
 
-            align-items: center;
-            justify-content: center;
+          .name_area {
+            &:hover {
+              font-weight: bold;
+            }
+            .name {
+              // background-color: aqua;
+              display: flex;
+
+              align-items: center;
+              justify-content: center;
+            }
+            .san {
+              // background-color: burlywood;
+              display: flex;
+              align-items: end;
+              font-size: 0.9rem;
+              margin: 0 0.1rem;
+            }
           }
-          .san {
-            // background-color: burlywood;
-            display: flex;
-            align-items: end;
-            font-size: 0.9rem;
-            margin: 0 0.1rem;
+        }
+        // 中身
+        .dropdown-menu {
+          .dropdown-item {
+            i {
+            }
+            .menu-text {
+            }
           }
         }
       }

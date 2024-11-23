@@ -3,7 +3,7 @@ body[data-controller="works"][data-action="show"] {
     width: fit-content;
     table {
       white-space: nowrap; /* テキストを1行に収める */
-      color: $base-font-color;
+      color: $text-color;
       table-layout: auto; /* 内容に基づいて列幅を調整 */
       width: auto; /* テーブル幅も内容に応じて可変 */
       white-space: nowrap; /* テキストを1行に収める */
