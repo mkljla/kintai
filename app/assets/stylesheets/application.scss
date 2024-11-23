@@ -45,7 +45,7 @@ html {
     overflow-x: hidden;
     .main_container {
       justify-content: center;
-      color: var(--bs-gray-900);
+      color: $base-font-color;
 
       // min-width: 400px;
 
@@ -79,7 +79,7 @@ html {
         }
       }
       .main_content_wrapper {
-        color: var(--bs-gray-900);
+        color: $base-font-color;
         // width: 100%;
         // width: fit-content;
         width: 1000px;
