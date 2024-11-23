@@ -1,8 +1,7 @@
+- breadcrumb :works_index, @user
+- content_for(:title, '勤務履歴')
+
 .works_index
-  .fs-5 勤務履歴
-  .border-top.pt-4.border-2
-
-
 
   %nav.d-flex.align-items-center.mb-2
     - # ナビゲーションリンクでの「前月」「翌月」の設定
@@ -10,19 +9,19 @@
     - next_month, next_year = next_month_and_year(@month, @year)
 
     -# 今月
-    %a{ href: user_path(year: @current_year, month: @current_month) , class: "btn btn-light btn-sm me-3 "}
+    %a{ href: user_works_path(year: @current_year, month: @current_month) , class: "btn btn-light btn-sm me-3 "}
       今月
 
     -# 前月
-    %a{ href: user_path(year: prev_year, month: prev_month) , class:"btn btn-light btn-sm me-1 "}
+    %a{ href:user_works_path(year: prev_year, month: prev_month) , class:"btn btn-light btn-sm me-1 "}
       %i.fa-solid.fa-chevron-left
 
     -# 次月
     - if @year < @current_year || (@year == @current_year && @month < @current_month)
-      %a{ href: user_path(year: next_year, month: next_month) , class:"btn btn-light btn-sm "}
+      %a{ href: user_works_path(year: next_year, month: next_month) , class:"btn btn-light btn-sm "}
         %i.fa-solid.fa-chevron-right
 
-    = form_with url: user_path, method: :get, class: "d-flex mx-2" do |f|
+    = form_with url: user_works_path, method: :get, class: "d-flex mx-2" do |f|
       .dropdown.mx-1
         %button.btn.btn.btn-light.dropdown-toggle.btn-sm{"type" => "button", "data-bs-toggle" => "dropdown", "aria-expanded" => "false"}
           = "#{@year} 年"
@@ -75,7 +74,7 @@
               %td= minutes_to_hours_and_minutes(work.total_break_time_in_minutes) # 休憩時間
               %td= minutes_to_hours_and_minutes(work.actual_work_time_in_minutes) # 勤務時間
               %td= minutes_to_hours_and_minutes(work.total_overtime_in_minutes) # 残業時間
-              %td= button_to '詳細', work_path(work.id), method: :get, class: "btn btn-primary btn-sm"
+              %td= button_to '詳細', user_work_path(@user, work), method: :get, class: "btn btn-primary btn-sm"
         - else
           %tr
             %td{ class: ("holiday" if is_holiday) || ("saturday" if is_saturday) || ("sunday" if is_sunday) }

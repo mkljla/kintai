@@ -12,15 +12,20 @@
     %link{href: "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css", rel: "stylesheet"}/
     // カスタムCSSの読み込み
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
-
+    %title=""
   %body
     -if logged_in?
       = render 'header'
       .main_container.d-flex.px-3
         = render 'sidebar'
         .main_content_wrapper.px-4.py-4
-          = breadcrumbs separator: " &rsaquo; "
-          = yield
+          // パンくずリスト
+          = breadcrumbs separator: " &nbsp;&rsaquo;&nbsp; "
+          // ページタイトル
+          .page-title.fw-bold= yield(:title)
+          //コンテンツ
+          .main_content
+            = yield
       = render 'footer'
     - else
       .main_container.m-4.mx-5

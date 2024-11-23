@@ -1,26 +1,45 @@
-crumb :home_users do
+crumb :users_home do
   link "Home", home_users_path
 end
 
-crumb :admin_home do
-  link "Home", admin_users_path
+crumb :users_show do
+  link "社員詳細", user_path(current_user.id)
+  parent :users_home
 end
 
-crumb :user_new do
-  link "ユーザー登録", new_user_path
-  parent :admin_users_path
+crumb :works_index  do |user|
+  link "勤務履歴",  user_works_path(current_user)
+  parent :users_home
 end
 
-# 以下にコードを追加する
-crumb :user_show do
-  link "ユーザー詳細", user_path(current_user.id)
-  parent :home_users
+crumb :works_show do |user, work|
+  link "勤務詳細", work_path(user, work)
+  parent :works_index
 end
 
-crumb work_show do
-  link "勤務詳細", user_path(@work.id)
-  parent :home_users
+# admin
+crumb :admin_users_index do
+  link "社員一覧", admin_users_path
 end
+
+crumb :admin_users_show do |user|
+  link "社員詳細", admin_user_path(user)
+  parent :admin_users_index
+end
+
+crumb :admin_users_new do
+  link "社員登録", new_admin_user_path
+  parent :admin_users_index
+end
+
+crumb :admin_users_edit do |user|
+  link "社員編集", edit_admin_user_path(user)
+  parent :admin_users_index
+end
+# crumb admin_users_index do
+#   link "勤務詳細", admin_users_path
+#   parent :admin/users/index
+# end
 
 # crumb :projects do
 #   link "Projects", projects_path

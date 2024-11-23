@@ -73,14 +73,15 @@ html {
         // width: 100%;
         // width: fit-content;
         width: 1000px;
-
+        .page-title {
+          font-size: 1.3rem;
+          font-weight: bold;
+        }
         .main_content {
           height: 100%;
           background-color: white;
           border-radius: 20px;
           padding: 1rem 2rem;
-          .page-title {
-          }
 
           .selected {
             background-color: #007bff;
@@ -110,7 +111,8 @@ turbo-frame::before {
   border: 1px red solid;
 }
 .breadcrumbs {
-  padding: 0rem 1rem;
+  // padding: 0rem 1rem;
+  // margin-bottom: 0.2rem;
   font-size: 0.9rem;
   color: var(--bs-secondary-color);
 }

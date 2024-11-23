@@ -1,4 +1,5 @@
-.fs-2.page-title.fw-bold.mb-3 社員登録
+- breadcrumb :admin_users_new
+- content_for(:title, '社員登録')
 
 = form_with model: @user, url: @user.new_record? ? admin_users_path : admin_user_path(@user), local: true, html: { class: 'needs-validation', novalidate: true } do |f|
   = render "admin/users/user_form", { f: f, user: @user }

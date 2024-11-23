@@ -1,25 +1,18 @@
+- breadcrumb :users_show
+- content_for(:title, '社員詳細')
 
--# - breadcrumb :user_show
-.breadcrumb_container
-  %nav
-    %ol.breadcrumb
-      %li
-        %a{href: home_users_path} ホーム
-      %li ユーザー詳細
 
-.main_content
-  .user_show
-    .fs-2.page-title.fw-bold.mb-3 ユーザー詳細
+.users_show
 
-    .fs-5 基本情報
-    .border-top.pt-4.border-2
-    %dl
-      %dt 社員番号
-      %dd= @user.employee_number.to_s.rjust(4, '0')
-      %dt 名前
-      %dd= @user.full_name
-      %dt 入社日
-      %dd= @user.date_of_hire
-      %dt 退職日
-      %dd= @user.date_of_termination || "-"
+  .fs-5 基本情報
+  .border-top.pt-4.border-2
+  %dl
+    %dt 社員番号
+    %dd= @user.employee_number.to_s.rjust(4, '0')
+    %dt 名前
+    %dd= @user.full_name
+    %dt 入社日
+    %dd= @user.date_of_hire
+    %dt 退職日
+    %dd= @user.date_of_termination || "-"
 
