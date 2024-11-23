@@ -19,19 +19,20 @@
     }
     -if logged_in?
       = render 'header'
-      .main_container.d-flex.px-3
+      .main_container.d-flex.px-3.py-3
         - if current_user.is_admin
           =render 'admin/sidebar'
         -else
           = render 'sidebar'
-        .main_content_wrapper.px-4.py-4
+        .main_content_wrapper.px-4
           // パンくずリスト
           = breadcrumbs separator: " &nbsp;&rsaquo;&nbsp; "
-          // ページタイトル
-          .page-title.fw-bold= yield(:title)
-          //コンテンツ
-          .main_content
-            = yield
+          .main-content_outer
+            // ページタイトル
+            .page-title.fw-bold= yield(:title)
+            //コンテンツ
+            .main_content
+              = yield
       = render 'footer'
     - else
       .main_container.m-4.mx-5
