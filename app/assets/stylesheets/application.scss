@@ -89,6 +89,13 @@ html {
             font-weight: bold;
           }
           .main_content {
+            .headline {
+              font-size: 1.1rem;
+              font-weight: bold;
+              padding: 0.4rem 1rem;
+              border-left: 4px solid #334cca;
+              margin: 1rem 0;
+            }
             .selected {
               background-color: #007bff;
               color: white;

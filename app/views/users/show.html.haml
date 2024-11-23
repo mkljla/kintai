@@ -1,8 +1,8 @@
 - breadcrumb :users_show
 - content_for(:title, '社員詳細')
 
-.fs-5 基本情報
-.border-top.pt-4.border-2
+.headline 基本情報
+
 %dl
   %dt 社員番号
   %dd= @user.employee_number.to_s.rjust(4, '0')
