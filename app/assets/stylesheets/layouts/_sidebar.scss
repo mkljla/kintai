@@ -1,13 +1,18 @@
-.nav-link.current {
-  font-weight: bold;
-  // background-color: #e9ecef;
-}
-.nav-link:hover {
-  background-color: #e9ecef;
+.nav-link {
+  color: var(--bs-gray-900);
+
+  &.current {
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: #e9ecef;
+  }
 }
 .icon {
-  font-size: 1.2rem; /* アイコンのサイズを調整 */
+  font-size: 1.2rem; // アイコンのサイズを調整
 }
+
 @media (max-width: 900px) {
   .menu-text {
     display: none; /* ラベルを非表示 */
