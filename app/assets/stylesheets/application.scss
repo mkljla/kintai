@@ -26,7 +26,12 @@
 // 自作スタイル
 @import "components/*"; // コンポーネント (再利用可能な部品、ボタンやフォームなど)
 @import "layouts/*"; // レイアウト (ページ全体の構造、ヘッダーやフッターなど)
-@import "pages/*"; // ページ (各ページ固有のスタイル)
+
+// 各ページスタイル
+@import "pages/admin/users/*";
+@import "pages/admin/works/*";
+@import "pages/users/*";
+@import "pages/works/*";
 
 // 全体のスタイル設定
 html {
