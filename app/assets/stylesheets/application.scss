@@ -73,6 +73,8 @@ html {
         // width: 100%;
         // width: fit-content;
         width: 1000px;
+        display: flex;
+        flex-direction: column;
         .breadcrumbs {
           padding: 0rem 0.5rem;
           margin-bottom: 0.5rem;
@@ -84,6 +86,7 @@ html {
           background-color: white;
           border-radius: 20px;
           padding: 1rem 2rem;
+          flex-grow: 1; // 余白に合わせて伸張する
           .page-title {
             font-size: 1.3em;
             font-weight: bold;
