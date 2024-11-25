@@ -1,10 +1,4 @@
 body[data-controller="users"][data-action="home"] {
-  .clock {
-    font-size: 3rem;
-    display: flex;
-    justify-content: center;
-  }
-
   .date-container {
     display: flex;
     align-items: center;
@@ -19,15 +13,27 @@ body[data-controller="users"][data-action="home"] {
       margin: 0.2rem;
     }
   }
+  .clock {
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+  }
 
   .button_container {
-    display: flex; /* フレックスボックスを使用 */
-    justify-content: center; /* 水平方向に中央寄せ */
-    align-items: center; /* 垂直方向に中央寄せ（必要なら） */
-    button {
-      width: 150px;
-      height: 50px;
-      margin: 20px;
+    width: 18rem;
+    .btn {
+      display: flex; /* コンテンツを中央に揃える */
+      flex-direction: column;
+      align-items: center; /* 縦中央 */
+      justify-content: center; /* 横中央 */
+      text-align: center; /* テキスト中央 */
+      .bi-box-arrow-in-right,
+      .bi-box-arrow-right {
+        font-size: 1.4rem;
+      }
+      .bi-cup-hot {
+        font-size: 1.2rem;
+      }
     }
   }
 }

@@ -1,4 +1,8 @@
 body[data-controller="works"][data-action="index"] {
+  .date-btn-group {
+    color: $text-color;
+  }
+
   table {
     color: $text-color;
     table-layout: auto; /* 内容に基づいて列幅を調整 */

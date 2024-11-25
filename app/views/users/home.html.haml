@@ -5,12 +5,28 @@
   .date
   .weekday
 .clock
-.button_container
-  = button_to "出勤", works_path(@user.id), method: :post, class: "btn btn-success", disabled: current_user.working?
-  = button_to "退勤", work_path(@latest_work.id), method: :patch, class: "btn btn-danger", disabled: current_user.taking_a_break? || !current_user.working?
-.button_container
-  = button_to "休憩開始", breaks_path, method: :post, class: "btn btn-primary", disabled: current_user.taking_a_break? || !current_user.working?
-  = button_to "休憩終了", break_path(@latest_break.id), method: :patch, class: "btn btn-primary", disabled: !current_user.taking_a_break?
+.button_container.mx-auto.d-grid.gap-3.my-3
+  -# 出勤ボタン
+  .work-btn-group.d-flex.g-col-12.column-gap-3
+    = link_to works_path(@user.id), method: :post, class: "btn btn-primary flex-grow-1 btn-lg #{'disabled' if current_user.working?}" do
+      %i.bi.bi-box-arrow-in-right
+      .text 出勤
+    -# 退勤ボタン
+    = link_to work_path(@latest_work.id), method: :patch, class: "btn btn-primary flex-grow-1 btn-lg #{'disabled' if current_user.taking_a_break? || !current_user.working?}" do
+      %i.bi.bi-box-arrow-right
+      .text 退勤
+  .break-btn-group.d-flex.g-col-12
+    - # 休憩開始ボタン
+    - unless current_user.taking_a_break?
+      = link_to breaks_path, class: "btn btn-secondary flex-grow-1 #{'disabled' unless current_user.working?}", method: :post do
+        %i.bi.bi-cup-hot
+        .text 休憩開始
+
+    - # 休憩終了ボタン
+    - if current_user.taking_a_break?
+      = link_to break_path(@latest_break.id), method: :patch, class: "btn btn-secondary flex-grow-1 " do
+        %i.bi.bi-cup-hot
+        .text 休憩終了
 
 %h3 今日の記録
 %table
