@@ -1,0 +1,28 @@
+.main_container {
+  justify-content: center;
+  color: $text-color;
+  flex: 1;
+  min-width: fit-content;
+  position: relative;
+
+  .sidebar {
+    width: 200px;
+    transition: width 0.3s;
+    height: 100%;
+    position: sticky;
+    top: 0;
+
+    @media (max-width: 900px) {
+      width: 50px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .main_content_wrapper {
+    color: $text-color;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+  }
+}

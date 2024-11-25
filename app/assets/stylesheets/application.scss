@@ -13,15 +13,15 @@
 
  *= require_self
  */
-
 // サードパーティのライブラリやフォント
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP"); // フォント
-@import "normalize"; // ブラウザの標準スタイルをリセット
 @import "font-awesome"; // アイコン
 
 // ベーススタイル
-@import "variables"; // 全体で使う変数を定義
-@import "mixins"; // ヘルパーミキシンを追加
+@import "base/normalize";
+@import "base/variables";
+@import "base/mixins";
+@import "base/global";
 
 // 自作スタイル
 @import "components/*"; // コンポーネント (再利用可能な部品、ボタンやフォームなど)
@@ -32,117 +32,3 @@
 @import "pages/admin/works/*";
 @import "pages/users/*";
 @import "pages/works/*";
-
-// 全体のスタイル設定
-html {
-  overflow-x: hidden;
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-family: "Noto Sans JP", sans-serif;
-    background-color: $background-color;
-
-    .main_container {
-      justify-content: center;
-      color: $text-color;
-
-      // min-width: 400px;
-
-      flex: 1; /* 空いたスペースを埋める */
-      min-width: fit-content;
-      // display: flex;
-      position: relative; // サイドメニュー固定のため
-
-      // background-color: #007bff;
-
-      // @media screen and (max-width: 767px) {
-      //   width: 100%;
-      //   border-style: solid;
-      //   border-color: rgb(242, 170, 255);
-      // }
-      // @media screen and (min-width: 768px) {
-      //   width: 50%;
-      //   // background-color: rgb(153, 255, 255);
-      //   border-style: solid;
-      //   border-color: rgb(153, 255, 255);
-      // }
-      .sidebar {
-        width: 200px;
-        transition: width 0.3s;
-
-        height: 100%; // サイドメニュー固定のため
-        position: sticky; // サイドメニュー固定のため
-        top: 0; // サイドメニュー固定のため
-        // margin: 1.5rem 0.5rem;
-
-        @media (max-width: 900px) {
-          width: fit-content;
-          width: 50px;
-          display: flex;
-          justify-content: center;
-        }
-      }
-      .main_content_wrapper {
-        color: $text-color;
-        // width: 100%;
-        // width: fit-content;
-        width: 1000px;
-        display: flex;
-        flex-direction: column;
-        .breadcrumbs {
-          padding: 0rem 0.5rem;
-          margin-bottom: 0.5rem;
-          font-size: 0.8rem;
-          color: $muted-text-color;
-        }
-        .main-content_outer {
-          height: 100%;
-          background-color: white;
-          border-radius: 20px;
-          padding: 1rem 2rem;
-          flex-grow: 1; // 余白に合わせて伸張する
-          .page-title {
-            // font-size: 1.4em;
-            // font-weight: bold;
-            // padding-bottom: 0.3rem;
-            // margin-bottom: 1.2rem;
-            // border-bottom: solid 1.5px #dbe1e8;
-          }
-          .main_content {
-            font-size: 0.9rem;
-            .headline {
-              font-size: 1.1rem;
-              font-weight: bold;
-              padding: 0.4rem 1rem;
-              border-left: 4px solid $primary-color;
-              margin: 1rem 0;
-            }
-            .selected {
-              background-color: #007bff;
-              color: white;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-turbo-frame {
-  border: 1px red solid;
-  display: block;
-}
-
-turbo-frame::before {
-  content: "Frame: #" attr(id);
-  position: relative;
-  top: -14px;
-  right: -4px;
-  display: inline-block;
-  color: red;
-  font-size: 12px;
-  z-index: 9999;
-  background-color: white;
-  padding: 4px;
-  border: 1px red solid;
-}

@@ -1,0 +1,8 @@
+// テキストカラーを設定
+.dropdown-menu {
+  li {
+    .dropdown-item {
+      color: $text-color;
+    }
+  }
+}
