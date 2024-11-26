@@ -2,19 +2,21 @@
 
   .wrapper.site-header__wrapper
     .site-header__start
-      %a.brand{href: "#"} 勤怠管理
+      %a.brand{href: "#"} 勤怠管理アプリケーション
 
 
-    .site-header__end
+    .site-header__end.text-primary-emphasis
+
       // ステータス
       %div.status_area.d-flex
         %span.status_icon.me-1
           = working_status_icon(@current_user.working_status)
         %span.status_text
           = current_user.working_status_str
+
       .nav-item.dropdown
         %a.nav-link{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}
-
+          // 名前
           .d-flex
             .name_area.d-flex
               %span.name

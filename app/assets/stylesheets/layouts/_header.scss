@@ -4,6 +4,9 @@
   position: relative;
   background-color: $header-bg-color;
   color: $header-text-color;
+  position: sticky;
+  top: 0rem;
+  z-index: 10;
 
   background-image: linear-gradient(
       -45deg,
@@ -103,24 +106,22 @@
           margin: 0 0.5rem;
           display: flex;
           align-items: center;
-
+          &:hover {
+            font-weight: bold;
+          }
           .name_area {
-            &:hover {
-              font-weight: bold;
-            }
             .name {
-              // background-color: aqua;
-              display: flex;
-
               align-items: center;
               justify-content: center;
             }
             .san {
-              // background-color: burlywood;
               display: flex;
               align-items: end;
               font-size: 0.9rem;
               margin: 0 0.1rem;
+            }
+            // トグル
+            i {
             }
           }
         }

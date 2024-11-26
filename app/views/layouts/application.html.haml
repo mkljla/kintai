@@ -25,10 +25,10 @@
             =render 'admin/sidebar'
           -else
             = render 'sidebar'
-        .main_content_wrapper.px-4
+        .main_content_wrapper.d-flex.flex-column.px-4.text-dark
           // パンくずリスト
           = breadcrumbs separator: " &nbsp;&rsaquo;&nbsp; "
-          .main-content_outer
+          .main-content_outer.d-grow
             // ページタイトル
             .page-title
               = yield(:title)

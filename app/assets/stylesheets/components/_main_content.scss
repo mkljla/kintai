@@ -1,35 +1,42 @@
 .main_content_wrapper {
-  color: $text-color;
-
   width: 1000px;
-  display: flex;
-  flex-direction: column;
 
   .main-content_outer {
     height: 100%;
     background-color: white;
     border-radius: 20px;
     padding: 1rem 2rem;
-    flex-grow: 1; // 余白に合わせて伸張する
+    // flex-grow: 1; // 余白に合わせて伸張する
     .page-title {
       font-size: 1.4em;
       font-weight: bold;
       padding: 0.4rem 1rem;
       border-left: 4px solid $primary-color;
-      margin: 0.5rem 0 2rem 0;
+      margin: 0.5rem 0 1.5rem 0;
     }
     .main_content {
       font-size: 0.9rem;
       .headline {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: bold;
-        padding: 0.4rem 1rem;
-        border-left: 4px solid $primary-color;
-        margin: 1rem 0;
+        margin-bottom: 1rem;
+        color: #052c65;
       }
-      .selected {
-        background-color: #007bff;
-        color: white;
+      .dropdown {
+        li {
+          // 選択されている状態
+          .selected {
+            background-color: #0d6efd;
+            color: white;
+          }
+          // クリックした状態
+          .dropdown-item {
+            &:active {
+              background-color: #0d6efd;
+              color: white;
+            }
+          }
+        }
       }
     }
   }
