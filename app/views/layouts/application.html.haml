@@ -19,7 +19,7 @@
     }
     -if logged_in?
       = render 'header'
-      .main_container.d-flex.px-3.py-3.justify-content-center
+      .main_container.d-flex.px-3.justify-content-center
         .sidebar
           - if current_user.is_admin
             =render 'admin/sidebar'
