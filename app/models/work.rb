@@ -16,7 +16,10 @@ class Work < ApplicationRecord
 
   # created_atカラムを降順で取得する
   scope :sorted, -> { order(created_at: :desc) }
-
+  # 今日作成されたレコード
+  scope :today, -> { where(created_at: Time.current.beginning_of_day..Time.current.end_of_day) }
+  # 最新のレコード
+  scope :latest_one, -> { order(created_at: :desc).limit(1) }
   # ===============
   # メソッド
   # ===============

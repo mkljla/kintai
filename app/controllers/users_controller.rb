@@ -4,9 +4,9 @@ class UsersController < ApplicationController
 
   # ホーム画面
   def home
-    @works = @user.works.sorted.limit(5) # 最新の出勤記録を5件取得
-    @works_today = @user.works.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).includes(:breaks).sorted
-
+    @works_today = @user.works.today.includes(:breaks).sorted
+    @latest_work = @works_today.latest_one.first
+    @breaks = @latest_work.breaks
   end
 
   # ユーザー詳細画面

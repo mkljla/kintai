@@ -1,4 +1,14 @@
 body[data-controller="users"][data-action="home"] {
+  .home_status_area {
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: large;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+    padding: 0.5rem 1rem;
+  }
   .date-container {
     display: flex;
     align-items: center;
@@ -34,6 +44,11 @@ body[data-controller="users"][data-action="home"] {
       .bi-cup-hot {
         font-size: 1.2rem;
       }
+    }
+  }
+  table {
+    tbody {
+      border-top-color: #052c65;
     }
   }
 }

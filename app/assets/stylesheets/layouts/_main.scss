@@ -1,16 +1,16 @@
 .main_container {
-  justify-content: center;
   color: $text-color;
   flex: 1;
-  min-width: fit-content;
+  // min-width: fit-content;
   position: relative;
+  width: auto;
 
   .sidebar {
     width: 200px;
+    height: 100%; // 画面全体の高さ
     transition: width 0.3s;
-    height: 100%;
-    position: sticky;
-    top: 4rem;
+    position: sticky; // サイドバーを画面の高さ内でスクロール固定
+    top: 4rem; // ヘッダーの下に配置
 
     @media (max-width: 900px) {
       width: 50px;

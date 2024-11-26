@@ -7,9 +7,11 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: 100%;
   font-family: "Noto Sans JP", sans-serif;
   background-color: $background-color;
-  position: relative;
+  // position: relative;
   width: 100%;
-  overflow: hidden; // はみ出しを隠す
+  // overflow: hidden; // はみ出しを隠す
+  min-width: 700px;
 }
