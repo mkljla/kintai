@@ -6,7 +6,7 @@
     .site-header__end.text-primary-emphasis
 
       // ステータス
-      %div.status_area.d-flex
+      %div.status_area.d-flex.badge.text-bg-light.rounded-pill
         %span.status_icon.me-1
           = working_status_icon(@current_user.working_status)
         %span.status_text
