@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
 
     # ログイン処理
     def create
-        user = User.find_by(employee_number: session_params[:employee_number].downcase)
-        if user && user.authenticate(session_params[:password])# パスワードの確認
+        user = User.find_by(employee_number: params[:session][:employee_number].downcase)
+        if user && user.authenticate(params[:session][:password])# パスワードの確認
             log_in user
             Rails.logger.info "Login successful for user: #{user.full_name} (Employee Number: #{user.employee_number})"
 
