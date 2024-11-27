@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+  before_action :require_admin
 
   def home
     @sort_column = params[:sort_column] || 'employee_number' # デフォルトは社員番号
