@@ -1,7 +1,7 @@
-.main_content_wrapper {
+.content-wrapper {
   width: 1000px;
 
-  .main-content_outer {
+  .main-content {
     height: 100%;
     background-color: white;
     border-radius: 20px;
@@ -14,7 +14,7 @@
       border-left: 4px solid $primary-color;
       margin: 0.5rem 0 1.5rem 0;
     }
-    .main_content {
+    .content-body {
       font-size: 0.9rem;
       .headline {
         font-size: 1.2rem;

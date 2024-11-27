@@ -1,6 +1,6 @@
 // The Header Media Queries
 // Tweak as per your needs
-.site-header {
+.app-header {
   position: sticky; // ヘッダーを画面上部に固定
   background-color: $header-bg-color;
   color: $header-text-color;
@@ -46,7 +46,7 @@
       rgb(21, 101, 192) 100%
     );
 
-  .wrapper.site-header__wrapper {
+  .wrapper.app-header__wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,7 +59,7 @@
     //   padding-bottom: 0;
     // }
 
-    .site-header__start {
+    .app-header__start {
       font-size: 1.3rem;
       display: flex;
       align-items: center;
@@ -72,7 +72,7 @@
       }
     }
 
-    .site-header__end {
+    .app-header__end {
       white-space: nowrap;
       display: flex;
       align-items: center;

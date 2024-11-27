@@ -1,4 +1,4 @@
-.sidebar_inner {
+.app-sidebar_inner {
   .nav-link {
     color: $text-color;
     i {
@@ -21,7 +21,7 @@
 }
 
 @media (max-width: 900px) {
-  .sidebar_inner {
+  .app-sidebar_inner {
     .menu-text {
       display: none; /* ラベルを非表示 */
     }

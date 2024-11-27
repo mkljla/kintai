@@ -1,4 +1,4 @@
-.main_container {
+.app-layout {
   color: $text-color;
   // flex: 1;
   // min-width: fit-content;
@@ -9,7 +9,7 @@
   padding-bottom: 1rem;
   min-height: 100vh;
 
-  .sidebar {
+  .app-sidebar {
     width: 200px;
     height: 100%; // 画面全体の高さ
     transition: width 0.3s;
@@ -23,7 +23,7 @@
     }
   }
 
-  .main_content_wrapper {
+  .content-wrapper {
     color: $text-color;
     width: 1000px;
     display: flex;
