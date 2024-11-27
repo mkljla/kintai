@@ -40,4 +40,10 @@ class AdminsController < ApplicationController
     %w[asc desc].include?(params[:sort_direction]) ? params[:sort_direction] : 'asc'
   end
 
+  def require_admin
+    unless current_user.is_admin
+      flash[:alert] = "権限がありません"
+      redirect_to login_path
+    end
+  end
 end

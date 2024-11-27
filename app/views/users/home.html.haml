@@ -19,7 +19,7 @@
       %i.bi.bi-box-arrow-in-right
       .text 出勤
     -# 退勤ボタン
-    = link_to work_path(@latest_work.id), method: :patch, class: "btn btn-primary flex-grow-1 btn-lg #{'disabled' if current_user.taking_a_break? || !current_user.working?}" do
+    = link_to work_path(@latest_work&.id || '#'), method: :patch, class: "btn btn-primary flex-grow-1 btn-lg #{'disabled' if current_user.taking_a_break? || !current_user.working?}" do
       %i.bi.bi-box-arrow-right
       .text 退勤
   .break-btn-group.d-flex.g-col-12

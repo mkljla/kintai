@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def home
     @works_today = @user.works.today.includes(:breaks).sorted
     @latest_work = @works_today.latest_one.first
-    @breaks = @latest_work.breaks
+    @breaks =  @latest_work&.breaks
   end
 
   # ユーザー詳細画面
