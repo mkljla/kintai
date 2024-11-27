@@ -4,9 +4,10 @@
   position: sticky; // ヘッダーを画面上部に固定
   background-color: $header-bg-color;
   color: $header-text-color;
-  position: sticky;
-  top: 0rem;
-  z-index: 10; //他の要素よりも前面に表示
+  // position: sticky;
+  top: 0;
+  z-index: 10;
+  // z-index: 10; //他の要素よりも前面に表示
 
   background-image: linear-gradient(
       -45deg,
@@ -45,12 +46,14 @@
       rgb(21, 101, 192) 100%
     );
 
-  .site-header__wrapper {
+  .wrapper.site-header__wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.6rem 1rem;
-
+    // position: sticky;
+    // top: 0rem;
+    // z-index: 10; //他の要素よりも前面に表示
     // @media (min-width: 800px) {
     //   padding-top: 0;
     //   padding-bottom: 0;

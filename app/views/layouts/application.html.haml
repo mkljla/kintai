@@ -18,24 +18,26 @@
     "data-action" => "#{controller.action_name}"
     }
     -if logged_in?
-      = render 'header'
-      .main_container.d-flex.px-3.justify-content-center
-        .sidebar
-          - if current_user.is_admin
-            =render 'admin/sidebar'
-          -else
-            = render 'sidebar'
-        .main_content_wrapper.d-flex.flex-column.px-4.text-dark
-          // パンくずリスト
-          = breadcrumbs separator: " &nbsp;&rsaquo;&nbsp; "
-          .main-content_outer.d-grow
-            // ページタイトル
-            .page-title
-              = yield(:title)
-            //コンテンツ
-            .main_content
-              = yield
-      = render 'footer'
+      .main_container.justify-content-center.d-flex.flex-column
+        = render 'header'
+        .d-flex.justify-content-center.pt-3{  style:"flex: 1;"}
+          .sidebar
+            - if current_user.is_admin
+              =render 'admin/sidebar'
+            -else
+              = render 'sidebar'
+          .main_content_wrapper.d-flex.flex-column.px-4.text-dark
+            // パンくずリスト
+            = breadcrumbs separator: " &nbsp;&rsaquo;&nbsp; "
+            .main-content_outer.d-grow
+              // ページタイトル
+              .page-title
+                = yield(:title)
+              //コンテンツ
+              .main_content
+                = yield
+      .footer-outer.pt-5
+        = render 'footer'
     - else
       .main_container.m-4.mx-5
         = yield

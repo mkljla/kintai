@@ -1,11 +1,13 @@
 .main_container {
   color: $text-color;
-  flex: 1;
+  // flex: 1;
   // min-width: fit-content;
   position: relative;
   width: auto;
-  padding-top: 1rem;
-  padding-bottom: 7rem;
+  // padding-top: 1rem;
+  // padding-bottom: 7rem;
+  padding-bottom: 1rem;
+  min-height: 100vh;
 
   .sidebar {
     width: 200px;
