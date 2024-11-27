@@ -18,31 +18,39 @@
     "data-action" => "#{controller.action_name}"
     }
     -if logged_in?
-      .app-layout.justify-content-center.d-flex.flex-column
+      .app-layout
         .app-header
           = render 'header'
-        .main-layout.d-flex.justify-content-center.pt-3{  style:"flex: 1;"}
+        .main-layout
           .app-sidebar
             - if current_user.is_admin
               =render 'admin/sidebar'
             -else
               = render 'sidebar'
-          .content-wrapper.d-flex.flex-column.px-4.text-dark
+          .content-wrapper
             // パンくずリスト
             .breadcrumb-container
               = breadcrumbs separator: " &nbsp;&rsaquo;&nbsp; "
-            .main-content.d-grow
+            .main-content
               // ページタイトル
               .page-title
                 = yield(:title)
               //コンテンツ
               .content-body
                 = yield
-      .app-footer.pt-5
+      .app-footer
         = render 'footer'
     - else
-      .app-layout.m-4.mx-5
-        = yield
+      .app-layout
+        .main-layout
+          .content-wrapper
+            .main-content
+              // ページタイトル
+              .page-title
+                = yield(:title)
+              //コンテンツ
+              .content-body
+                = yield
     = display_flash_messages
 
     // JavaScript読み込み

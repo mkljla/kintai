@@ -1,0 +1,67 @@
+.app-layout {
+  color: $text-color;
+  position: relative; // ヘッダーを画面上部に固定
+  width: auto;
+  padding-bottom: 1rem;
+  min-height: 100vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+
+  .app-header {
+    position: sticky; // ヘッダーを画面上部に固定
+    top: 0;
+    z-index: 10;
+  }
+
+  .main-layout {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding-top: 1rem;
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+
+    .app-sidebar {
+      width: 190px;
+      height: 100%;
+      transition: width 0.3s;
+      position: sticky; // サイドバーを画面の高さ内でスクロール固定
+      top: 5rem; // ヘッダーの下に配置
+      @media (max-width: 1100px) {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .content-wrapper {
+      color: $text-color;
+      width: 1000px;
+      display: flex;
+      flex-direction: column;
+
+      .breadcrumb-container {
+      }
+
+      .main-content {
+        height: 100%;
+        background-color: white;
+        border-radius: 20px;
+        padding: 1rem 2rem;
+
+        .page-title {
+          font-size: 1.4em;
+          font-weight: bold;
+          padding: 0.4rem 1rem;
+          border-left: 4px solid #0d6efd;
+          margin: 0.5rem 0 1.5rem 0;
+        }
+      }
+
+      .content-body {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
