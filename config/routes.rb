@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
 
     resources :works, only: [:index, :show, :create, :update]
+    resources :breaks, only: [:index, :show, :create, :update]
 
   end
 
