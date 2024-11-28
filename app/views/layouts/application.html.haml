@@ -20,13 +20,13 @@
     -if logged_in?
       .app-layout
         .app-header
-          = render 'header'
+          = render 'layouts/header'
         .main-layout
           .app-sidebar
             - if current_user.is_admin
-              =render 'admin/sidebar'
+              =render 'layouts/admin_sidebar'
             -else
-              = render 'sidebar'
+              = render 'layouts/sidebar'
           .content-wrapper
             // パンくずリスト
             .breadcrumb-container
@@ -39,7 +39,7 @@
               .content-body
                 = yield
       .app-footer
-        = render 'footer'
+        = render 'layouts/footer'
     - else
       .app-layout
         .main-layout
