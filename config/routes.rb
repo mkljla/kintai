@@ -27,21 +27,21 @@ Rails.application.routes.draw do
 
   end
 
-  namespace :admin do
-    root to: 'users#index'
-    # ユーザー管理
-    resources :users, only: [:index, :show, :edit, :update, :new, :create, :destroy] do
-      # ユーザーの勤務履歴関連
-      resources :works, only: [:index, :edit, :update]
-    end
-  end
+  # namespace :admin do
+  #   root to: 'users#index'
+  #   # ユーザー管理
+  #   resources :users, only: [:index, :show, :edit, :update, :new, :create, :destroy] do
+  #     # ユーザーの勤務履歴関連
+  #     resources :works, only: [:index, :edit, :update]
+  #   end
+  # end
 
 
-  # 勤怠管理DB作成処理
-  resources :works, only: [:show, :new, :create, :destroy, :edit, :update]
+  # # 勤怠管理DB作成処理
+  # resources :works, only: [:show, :new, :create, :destroy, :edit, :update]
 
-  # 勤怠管理DB作成処理
-  resources :breaks, only: [:show, :new, :create, :destroy, :edit, :update]
+  # # 勤怠管理DB作成処理
+  # resources :breaks, only: [:show, :new, :create, :destroy, :edit, :update]
 
   # ルートページをログイン画面に設定
   root 'sessions#new'

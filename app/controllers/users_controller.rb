@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_current_user, only:[:home] # ログイン中のユーザーを@userにセット
   before_action :set_user_by_id, only:[:show] # params[:id]を@userにセット
-  before_action :verify_user_by_id, only:[:show] # params[:id]とログイン中のユーザが一致するかチェック
+  before_action :verify_user_by_id, only:[:show] , unless: -> { current_user.is_admin } # params[:id]とログイン中のユーザが一致するかチェック
 
   before_action :require_admin, only:[:index, :new, :create, :destroy, :edit, :update]
 
   # ホーム画面
   def home
+
     @works_today = @user.works.today.includes(:breaks).sorted
     @latest_work = @works_today.latest_one.first
     @breaks =  @latest_work&.breaks
@@ -69,7 +70,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash[:alert] = "ユーザーの削除に失敗しました。"
-      render :home
+      redirect_to users_path
     end
 
   end
