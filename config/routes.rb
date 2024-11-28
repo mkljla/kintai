@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'  # ログアウト処理
 
 
-  resources :users, only: [:show, :new, :create, :destroy, :edit, :update] do
+  resources :users, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
     collection do
       get 'home', to: 'users#home', as: 'home'
     end
@@ -35,10 +35,7 @@ Rails.application.routes.draw do
       resources :works, only: [:index, :edit, :update]
     end
   end
-  # # 管理者用ホーム画面
-  # get 'admin/home', to: 'admins#home', as: 'admin_home'
-  # # 管理者用ユーザー詳細画面
-  # get 'admin/users/:id', to: 'admins#show_user', as: 'admin_user_show'
+
 
   # 勤怠管理DB作成処理
   resources :works, only: [:show, :new, :create, :destroy, :edit, :update]

@@ -79,4 +79,11 @@ class ApplicationController < ActionController::Base
             redirect_to(user_works_path(@user))
         end
     end
+
+    def require_admin
+        unless current_user.is_admin
+            flash[:alert] = "権限がありません"
+            redirect_to login_path
+        end
+    end
 end

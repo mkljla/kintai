@@ -1,6 +1,0 @@
-- breadcrumb :admin_users_edit, @user
-- content_for(:title, '社員編集')
-
-= form_with model: @user, url: @user.new_record? ? admin_users_path : admin_user_path(@user), local: true, html: { class: 'needs-validation', novalidate: true } do |f|
-  = render "admin/users/user_form", { f: f, user: @user }
-  = f.submit "更新", class: 'btn btn-primary'
