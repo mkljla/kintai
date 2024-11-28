@@ -17,7 +17,7 @@ crumb :works_index  do |user|
 end
 
 crumb :works_show do |user, work|
-  link "勤務詳細", work_path(user, work)
+  link "勤務詳細", user_work_path(user, work)
   parent :works_index
 end
 
