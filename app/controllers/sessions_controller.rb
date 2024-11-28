@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+
     def new
         # ログインフォームの表示
     end

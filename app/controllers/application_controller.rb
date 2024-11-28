@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    before_action :logged_in_user
+    before_action :logged_in_user, unless: -> { controller_name == 'sessions' }
 
     #作成したヘルパーメソッドを全てのページで使えるようにする
     include SessionsHelper
