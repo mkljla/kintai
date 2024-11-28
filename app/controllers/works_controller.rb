@@ -1,9 +1,8 @@
 class WorksController < ApplicationController
-  before_action :set_user_by_user_id, only:[:index]
-  before_action :verify_user_by_user_id
-  before_action :set_work_by_id, only:[:show]
-  before_action :verify_work_by_id, only:[:show]
-  before_action :set_latest_records
+  before_action :set_user_by_user_id, only:[:index] # params[:user_id]を@userにセット
+  before_action :verify_user_by_user_id # params[:user_id]とログイン中のユーザーが一致するか確認
+  before_action :set_work_by_id, :verify_work_by_id, only:[:show] # params[:id]を@workにセット
+  before_action :set_latest_records, only:[:update] # 最新のworkとbreakを取得
 
   def index
     @works = @user.works.sorted # ユーザーの出勤簿を取得
