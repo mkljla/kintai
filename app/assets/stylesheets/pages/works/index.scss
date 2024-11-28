@@ -4,6 +4,7 @@ body[data-controller="works"][data-action="index"] {
     width: auto; /* テーブル幅も内容に応じて可変 */
     white-space: nowrap; /* テキストを1行に収める */
     font-size: 0.9rem;
+    border-collapse: collapse;
     thead {
       tr {
         th {

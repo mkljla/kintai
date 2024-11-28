@@ -6,17 +6,23 @@ body[data-controller="works"][data-action="show"] {
       color: $text-color;
       table-layout: auto; /* 内容に基づいて列幅を調整 */
       width: auto; /* テーブル幅も内容に応じて可変 */
-      white-space: nowrap; /* テキストを1行に収める */
+
       font-size: 1rem;
+      border-collapse: collapse;
+      border: none;
       thead {
         tr {
           th {
+            border: none;
+            font-size: 0.8rem;
+            padding-bottom: 0;
           }
         }
       }
       tbody {
         tr {
           td {
+            border: none;
             .date {
             }
             .time {
