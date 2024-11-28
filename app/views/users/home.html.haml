@@ -31,7 +31,7 @@
 
     - # 休憩終了ボタン
     - if current_user.taking_a_break?
-      = link_to user_break_path(@user, @latest_break.id), method: :patch, class: "btn btn-secondary flex-grow-1 " do
+      = link_to user_break_path(@user, @latest_break&.id || '#'), method: :patch, class: "btn btn-secondary flex-grow-1 " do
         %i.bi.bi-cup-hot
         .text 休憩終了
 

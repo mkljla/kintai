@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user
-  before_action :set_latest_records
+  before_action :set_current_user, only:[:home]
+  before_action :set_user_by_id, only:[:show]
+  before_action :verify_user_by_id, only:[:show]
 
   # ホーム画面
   def home
@@ -13,12 +14,9 @@ class UsersController < ApplicationController
   def show
 
   end
- 
+
   private
 
 
-  # ログイン中のユーザーを設定
-  def set_user
-    @user = current_user
-  end
+
 end
