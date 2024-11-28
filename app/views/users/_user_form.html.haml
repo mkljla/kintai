@@ -1,37 +1,35 @@
-.fs-5 会社情報
-.border-top.pt-4.border-2
-  .col-12
-    .col-4.mb-3
-      = f.label :employee_number, class: 'form-label d-flex align-items-center' do
-        .mb-0= "社員番号"
-        %span.badge.rounded-pill.text-bg-danger.mx-1 必須
-      = f.text_field :employee_number, class: 'form-control', value: @employee_number, readonly: true, required: true, disabled: true
+.headline 会社情報
+.col-12.mb-5
+  .col-4.mb-3
+    = f.label :employee_number, class: 'form-label d-flex align-items-center' do
+      .mb-0= "社員番号"
+      %span.badge.rounded-pill.text-bg-danger.mx-1 必須
+    = f.text_field :employee_number, class: 'form-control', value: @employee_number, readonly: true, required: true, disabled: true
 
-    .col-4.mb-3
-      = f.label :date_of_hire, class: 'form-label d-flex align-items-center' do
-        .mb-0= "入社日"
-        %span.badge.rounded-pill.text-bg-danger.mx-1 必須
-      = f.date_field :date_of_hire, class: 'form-control', required: true
-      .valid-feedback
-      .invalid-feedback
-        入力してください
+  .col-4.mb-3
+    = f.label :date_of_hire, class: 'form-label d-flex align-items-center' do
+      .mb-0= "入社日"
+      %span.badge.rounded-pill.text-bg-danger.mx-1 必須
+    = f.date_field :date_of_hire, class: 'form-control', required: true
+    .valid-feedback
+    .invalid-feedback
+      入力してください
 
-    .col-4.mb-3
-      - if @user.persisted? # 編集の場合だけ退職日を表示
-        = f.label :date_of_termination, class: 'form-label d-flex align-items-center' do
-          .mb-0="退職日"
+  .col-4.mb-3
+    - if @user.persisted? # 編集の場合だけ退職日を表示
+      = f.label :date_of_termination, class: 'form-label d-flex align-items-center' do
+        .mb-0="退職日"
 
-        = f.date_field :date_of_termination, class: 'form-control'
-        .form-text
-          ※退職後はログインできなくなります
+      = f.date_field :date_of_termination, class: 'form-control'
+      .form-text
+        ※退職後はログインできなくなります
 
-    .col-4.mb-3
-      = f.label :department_id, class: 'form-label d-flex align-items-center' do
-        .mb-0="部門"
-      = f.collection_select :department_id, @departments, :id, :name, { prompt: "未選択" }, class: "form-select"
+  .col-4.mb-3
+    = f.label :department_id, class: 'form-label d-flex align-items-center' do
+      .mb-0="部門"
+    = f.collection_select :department_id, @departments, :id, :name, { prompt: "未選択" }, class: "form-select"
 
-.fs-5.pt-4 社員情報
-.border-top.pt-4.border-2
+.headline 社員情報
 .col-12
   .row
     .col-4.mb-3

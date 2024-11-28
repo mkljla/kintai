@@ -61,6 +61,15 @@
 
       .content-body {
         font-size: 0.9rem;
+        padding: 0 0.5rem;
+        .headline {
+          color: $text-color;
+          font-size: 1.25rem;
+
+          border-bottom: 1px solid $headline-boeder-color;
+          padding-bottom: 0.2rem;
+          margin-bottom: 1.5rem;
+        }
       }
     }
   }
