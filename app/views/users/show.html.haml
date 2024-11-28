@@ -3,13 +3,22 @@
 
 .headline 基本情報
 
-%dl
-  %dt 社員番号
-  %dd= @user.employee_number.to_s.rjust(4, '0')
-  %dt 名前
-  %dd= @user.full_name
-  %dt 入社日
-  %dd= @user.date_of_hire
-  %dt 退職日
-  %dd= @user.date_of_termination || "-"
+%table.vertical-table.mb-3
+  %tbody
+    %tr
+      %th 社員番号
+      %td= @user.employee_number.to_s.rjust(4, '0')
+    %tr
+      %th 名前
+      %td= @user.full_name
+    %tr
+      %th 入社日
+      %td= @user.date_of_hire
+    %tr
+      %th 退職日
+      %td= @user.date_of_termination || "-"
+
+.d-flex.gap-2
+  = link_to '戻る', users_path, class: 'btn btn-secondary'
+  = link_to '編集',  edit_user_path(@user), class: 'btn btn-primary'# 編集
 

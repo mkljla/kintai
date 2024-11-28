@@ -1,74 +1,86 @@
 .headline 会社情報
-.col-12.mb-5
-  .col-4.mb-3
-    = f.label :employee_number, class: 'form-label d-flex align-items-center' do
-      .mb-0= "社員番号"
-      %span.badge.rounded-pill.text-bg-danger.mx-1 必須
-    = f.text_field :employee_number, class: 'form-control', value: @employee_number, readonly: true, required: true, disabled: true
-
-  .col-4.mb-3
-    = f.label :date_of_hire, class: 'form-label d-flex align-items-center' do
-      .mb-0= "入社日"
-      %span.badge.rounded-pill.text-bg-danger.mx-1 必須
-    = f.date_field :date_of_hire, class: 'form-control', required: true
-    .valid-feedback
-    .invalid-feedback
-      入力してください
-
-  .col-4.mb-3
+%table.vertical-table
+  %tbody
+    %tr
+      %th
+        = f.label :employee_number, class: ' d-flex align-items-center' do
+          %span 社員番号
+          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
+      %td
+        = f.text_field :employee_number, class: 'form-control', value: @employee_number, readonly: true, required: true, disabled: true
+    %tr
+      %th
+        = f.label :date_of_hire, class: 'form-label d-flex align-items-center' do
+          %span 入社日
+          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
+      %td
+        = f.date_field :date_of_hire, class: 'form-control', required: true
+        .invalid-feedback
+          入力してください
     - if @user.persisted? # 編集の場合だけ退職日を表示
-      = f.label :date_of_termination, class: 'form-label d-flex align-items-center' do
-        .mb-0="退職日"
+      %tr
+        %th
+          = f.label :date_of_termination, class: 'form-label d-flex align-items-center' do
+            %span 退職日
+        %td
+          = f.date_field :date_of_termination, class: 'form-control'
+          .form-text
+            ※退職後はログインできなくなります
+          .invalid-feedback
+            入力してください
 
-      = f.date_field :date_of_termination, class: 'form-control'
-      .form-text
-        ※退職後はログインできなくなります
-
-  .col-4.mb-3
-    = f.label :department_id, class: 'form-label d-flex align-items-center' do
-      .mb-0="部門"
-    = f.collection_select :department_id, @departments, :id, :name, { prompt: "未選択" }, class: "form-select"
+    %tr
+      %th
+        = f.label :department_id, class: 'form-label d-flex align-items-center' do
+          %span 部門
+          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
+      %td
+        = f.collection_select :department_id, @departments, :id, :name, { prompt: "未選択" }, class: "form-select"
+        .invalid-feedback
+          入力してください
 
 .headline 社員情報
-.col-12
-  .row
-    .col-4.mb-3
-      = f.label :family_name, class: 'form-label d-flex align-items-center' do
-        .mb-0="姓"
-        %span.badge.rounded-pill.text-bg-danger.mx-1 必須
-      = f.text_field :family_name, class: 'form-control', required: true, pattern: "[ぁ-んァ-ン一-龥a-zA-Z]{1,30}"
-      .form-text
-      .valid-feedback
-      .invalid-feedback.text-wrap
-        姓は30文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
-    .col-4.mb-3
-      = f.label :first_name, class: 'form-label d-flex align-items-center' do
-        .mb-0="名"
-        %span.badge.rounded-pill.text-bg-danger.mx-1 必須
-      = f.text_field :first_name, class: 'form-control', required: true, pattern: "[ぁ-んァ-ン一-龥a-zA-Z]{1,30}"
-      .valid-feedback
-      .invalid-feedback
-        名は30文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
-  .row
-    .col-4.mb-3
-      = f.label :family_name_kana, class: 'form-label d-flex align-items-center' do
-        .mb-0="姓(かな)"
-      = f.text_field :family_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
-      .valid-feedback
-      .invalid-feedback
-        姓(かな)は30字以内で、ひらがなで入力してください。
-    .col-4.mb-3
-      = f.label :first_name_kana, class: 'form-label d-flex align-items-center' do
-        .mb-0= "名(かな)"
-      = f.text_field :first_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
-      .valid-feedback
-      .invalid-feedback
-        名(かな)は30字以内で、ひらがなで入力してください。
-  .col-4.mb-3
-    = f.label :birthday, class: 'form-label d-flex align-items-center' do
-      .mb-0= "生年月日"
-      %span.badge.rounded-pill.text-bg-danger.mx-1 必須
-    = f.date_field :birthday, class: 'form-control', required: true
-    .valid-feedback
-    .invalid-feedback
-      入力してください
+%table.vertical-table
+  %tbody
+    %tr
+      %th
+        = f.label :family_name, class: 'form-label d-flex align-items-center' do
+          %span 姓
+          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
+      %td
+        = f.text_field :family_name, class: 'form-control', required: true, pattern: "[ぁ-んァ-ン一-龥a-zA-Z]{1,30}"
+        .invalid-feedback.text-wrap
+          姓は30文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
+    %tr
+      %th
+        = f.label :first_name, class: 'form-label d-flex align-items-center' do
+          %span 名
+          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
+      %td
+        = f.text_field :first_name, class: 'form-control', required: true, pattern: "[ぁ-んァ-ン一-龥a-zA-Z]{1,30}"
+        .invalid-feedback
+          名は30文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
+    %tr
+      %th
+        = f.label :family_name_kana, class: 'form-label d-flex align-items-center' do
+          %span姓(かな)
+      %td
+        = f.text_field :family_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
+        .invalid-feedback
+          姓(かな)は30字以内で、ひらがなで入力してください。
+    %tr
+      %th
+        = f.label :first_name_kana, class: 'form-label d-flex align-items-center' do
+          %span 名(かな)
+      %td
+        = f.text_field :first_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
+        .invalid-feedback
+          名(かな)は30字以内で、ひらがなで入力してください。
+    %tr
+      %th
+        = f.label :first_name, class: 'form-label d-flex align-items-center' do
+          %span 生年月日
+      %td
+        = f.date_field :birthday, class: 'form-control', required: true
+        .invalid-feedback
+          生年月日を入力してください
