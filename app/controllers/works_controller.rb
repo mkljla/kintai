@@ -26,6 +26,9 @@ class WorksController < ApplicationController
 
     # 日本の祝日リストを取得 (holiday_japan gemを使用)
     @holidays = HolidayJapan.between(start_date, end_date)
+
+    # 表示している月の overtime 合計値を計算
+    @total_monthly_overtime = @works.where(start_datetime: start_date..end_date).sum(:total_overtime_in_minutes)
   end
 
   def show

@@ -41,6 +41,9 @@
           %li
             = f.radio_button :month, value, id: "month_#{value}", class: "form-check-input d-none", onchange: 'this.form.requestSubmit()', checked: value == @month
             %label.dropdown-item{"for" => "month_#{value}", class: ("selected" if value == @month)}= "#{month} 月"
+%div.mb-1
+  合計残業時間：
+  =minutes_to_hours_and_minutes(@total_monthly_overtime)
 .table-wrapper
   %table.table
     %thead
