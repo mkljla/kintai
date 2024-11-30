@@ -20,11 +20,11 @@ class UsersController < ApplicationController
   def index
     @sort_column = params[:sort_column] || 'employee_number' # デフォルトは社員番号
     @sort_direction = params[:sort_direction] || 'asc'      # デフォルトは昇順
-    @filter = params[:filter] || 'all'                      # デフォルトは「全社員」
+    @filter = params[:filter] || 'active'                      # デフォルトは「在職」
 
     @users = User.non_admin # アドミンユーザーを除外
     @users = filter_users(@users, @filter)  # フィルターを適用
-  
+
     # 部門でソートする場合の処理
     if @sort_column == 'department_sort_no'
       @users = @users.joins(:department)

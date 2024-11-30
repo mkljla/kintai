@@ -3,7 +3,7 @@
 
 = form_with url: users_path, method: :get, local: true do
   %label 絞り込み:
-  = select_tag :filter, options_for_select([["全社員", "all"], ["在職中", "active"], ["退職済", "retired"]], params[:filter] || "all"), onchange: 'this.form.submit()'
+  = select_tag :filter, options_for_select([["全社員", "all"], ["在職中", "active"], ["退職済", "retired"]], params[:filter] || "active"), onchange: 'this.form.submit()'
 = button_to '新規作成', new_user_path, method: :get, class: "btn btn-primary"
 %table.table.table-bordered
   %thead
