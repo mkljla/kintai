@@ -10,6 +10,15 @@
         = f.text_field :employee_number, class: 'form-control', value: @employee_number, readonly: true, required: true, disabled: true
     %tr
       %th
+        = f.label :department_id, class: 'form-label d-flex align-items-center' do
+          %span 部署
+          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
+      %td
+        = f.collection_select :department_id, @departments, :id, :name, { prompt: "未選択" }, class: "form-select"
+        .invalid-feedback
+          部署を選択してください
+    %tr
+      %th
         = f.label :date_of_hire, class: 'form-label d-flex align-items-center' do
           %span 入社日
           %span.badge.rounded-pill.text-bg-danger.mx-2 必須
@@ -29,15 +38,7 @@
           .invalid-feedback
             入力してください
 
-    %tr
-      %th
-        = f.label :department_id, class: 'form-label d-flex align-items-center' do
-          %span 部門
-          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
-      %td
-        = f.collection_select :department_id, @departments, :id, :name, { prompt: "未選択" }, class: "form-select"
-        .invalid-feedback
-          入力してください
+
 
 .headline 社員情報
 %table.vertical-table
