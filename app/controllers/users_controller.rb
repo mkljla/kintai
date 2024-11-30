@@ -18,22 +18,25 @@ class UsersController < ApplicationController
 
   # ユーザー一覧画面
   def index
+
     @sort_column = params[:sort_column] || 'employee_number' # デフォルトは社員番号
     @sort_direction = params[:sort_direction] || 'asc'      # デフォルトは昇順
-    @filter = params[:filter] || 'active'                      # デフォルトは「在職」
+    @filter = params[:filter] || 'active'                   # デフォルトは「在職」
+    @department_id = params[:department_id].presence || ''   # 部署ID（フィルター）、初期値は空
 
     @users = User.non_admin # アドミンユーザーを除外
-    @users = filter_users(@users, @filter)  # フィルターを適用
+    @users = filter_users(@users, @filter) # ステータスフィルターを適用
 
-    # 部門でソートする場合の処理
-    if @sort_column == 'department_sort_no'
-      @users = @users.joins(:department)
-                      .order("departments.sort_no #{@sort_direction}, users.id ASC")
-    else
-      # 並べ替え
-      @users = @users.order("#{sort_column} #{sort_direction}, id ASC")
+    # 部署IDが指定されている場合の絞り込み
+    if @department_id.present?
+      if @department_id == 'none'
+        @users = @users.where(department_id: nil) # 未選択（NULL）の場合
+      else
+        @users = @users.where(department_id: @department_id) # 指定された部署IDの場合
+      end
     end
-
+    # 並べ替え
+    @users = @users.order("#{sort_column} #{sort_direction}, id ASC")
   end
 
   # ユーザー作成画面
@@ -121,19 +124,21 @@ class UsersController < ApplicationController
 
   # フィルタリング条件に応じてユーザーを絞り込むメソッド
   def filter_users(users, filter)
+
     case filter
     when 'active'
-      users.active # 在職ユーザーのみを取得
+      users.active # 在職中
     when 'retired'
-      users.retired # 退職済みユーザーのみを取得
+      users.retired # 退職済
     else
-      users # 全ユーザーを返す
+      users # 全社員
     end
   end
 
+
   def sort_column
     # 許可されていないカラムの場合employee_numberを返す
-    %w[employee_number full_name_kana working_status date_of_hire date_of_termination department_sort_no ].include?(params[:sort_column]) ? params[:sort_column] : 'employee_number'
+    %w[employee_number full_name_kana working_status date_of_hire date_of_termination ].include?(params[:sort_column]) ? params[:sort_column] : 'employee_number'
   end
 
   def sort_direction
