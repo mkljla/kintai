@@ -1,6 +1,6 @@
 class Department < ApplicationRecord
   # アソシエーション
-  has_many :users, dependent: :destroy
+  has_many :users
 
   # バリデーション
   validates :name, presence: true

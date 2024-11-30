@@ -14,7 +14,7 @@ RETIREMENT_RATE = 30; # 退職率(%)
 
 # 部門データの作成
 def create_departments
-  departments = ['総務', '経理']
+  departments = ['人事部', '経理部', '総務部', 'システム部', '営業部']
   departments.each_with_index do |department_name, index|
     Department.create!(name: department_name, sort_no: index + 1)
   end
@@ -33,9 +33,11 @@ end
 def create_admin_user
   User.find_or_create_by!(employee_number: 0) do |user|
     user.family_name = "管理者"
-    user.first_name = "アカウント"
+    user.first_name = "太郎"
+    user.full_name = "管理者 太郎"
     user.family_name_kana = "かんりしゃ"
-    user.first_name_kana = "あかうんと"
+    user.first_name_kana = "たろう"
+    user.full_name_kana = "かんりしゃ たろう"
     user.birthday = Date.new(1950, 1, 1)
     user.date_of_hire = Date.new(1950, 1, 1)
     user.password = "admin"
@@ -61,12 +63,20 @@ def create_user
   { family_name: "佐藤", first_name: "三郎", family_name_kana: "さとう", first_name_kana: "さぶろう"},
   { family_name: "高橋", first_name: "四郎", family_name_kana: "たかはし", first_name_kana: "しろう"},
   { family_name: "山田", first_name: "五郎", family_name_kana: "やまだ", first_name_kana: "ごろう"},
-]
+  ]
   names.each_with_index do |name, index|
+
+  # 生年月日を作成
+  birthday =  generate_birthday_date
   # 入社日を作成
-  date_of_hire = generate_hire_date()
+  date_of_hire = generate_hire_date(birthday)
   # 退職日を作成
-  date_of_termination = randomly_retired? ? generate_termination_date(date_of_hire) : nil
+  date_of_termination = generate_termination_date(date_of_hire)
+  # 部門IDの一覧を取得
+  department_ids = Department.pluck(:id)
+  # 部門IDをランダムで選択
+  department_id = department_ids.sample
+
     user=User.create!(
       employee_number: index + 1,
       family_name: name[:family_name],
@@ -75,11 +85,11 @@ def create_user
       family_name_kana: name[:family_name_kana],
       first_name_kana: name[:first_name_kana],
       full_name_kana: "#{name[:family_name_kana]} #{name[:first_name_kana]}",
-      birthday: Date.new(1990, 1, 1),
+      birthday: birthday,
       date_of_hire: date_of_hire,
       date_of_termination: date_of_termination,
-      password: "password#{index + 1}",
-      department_id: nil
+      password: "password",
+      department_id: department_id,
     )
     # 業務作成
     create_works_for_user(user.id)
@@ -91,6 +101,17 @@ def create_user
     user.update(working_status: working_status)
 
   end
+end
+
+
+# 入社日を作成 (18歳以上の年齢に基づく)
+def generate_hire_date(birthday)
+  min_hire_year = birthday.year + 18
+  max_hire_year = [Date.today.year, min_hire_year + 47].min # 退職年齢が65歳未満の場合を考慮
+  year = rand(min_hire_year..max_hire_year)
+  month = rand(1..12)
+  day = rand(1..[Date.new(year, month, -1).day, Date.today.day].min)
+  Date.new(year, month, day)
 end
 
 # 勤務状態を決定するメソッド
@@ -169,15 +190,22 @@ def create_works_for_user(user_id)
   end
 end
 
-# 退職しているかを判定
-def randomly_retired?
-  rand(100) < RETIREMENT_RATE
-end
 
 
-# 退職日を生成
+
+# 退職日を作成 (入社日以降であること、存在確率10分の1)
 def generate_termination_date(date_of_hire)
-  Random.rand(date_of_hire..Date.today)
+  return nil unless rand(1..10) == RETIREMENT_RATE # 10分の1の確率で退職日を設定
+
+  min_termination_year = date_of_hire.year
+  max_termination_year = [Date.today.year, min_termination_year + 47].min # 65歳未満で退職を考慮
+  year = rand(min_termination_year..max_termination_year)
+  month = rand(1..12)
+  day = rand(1..[Date.new(year, month, -1).day, Date.today.day].min)
+  termination_date = Date.new(year, month, day)
+
+  # 退職日は入社日以降であることを保証
+  termination_date >= date_of_hire ? termination_date : date_of_hire + rand(1..365)
 end
 
 # 退職日していればtrueを返すメソッド
@@ -185,12 +213,25 @@ def retired?(user)
   user.date_of_termination.present? && user.date_of_termination < Date.today
 end
 
-# ランダムな入社日を生成
-def generate_hire_date
-  end_date = Date.today
-  start_year = 30
-  start_date = end_date - start_year * 365
-  Random.rand(start_date..end_date)
+# 生年月日を作成 (現在から18年以上前であること)
+def generate_birthday_date
+  today = Date.today
+  max_birth_year = today.year - 18
+  min_birth_year = max_birth_year - 47 # 仮に65歳未満までとする
+  year = rand(min_birth_year..max_birth_year)
+  month = rand(1..12)
+  day = rand(1..[Date.new(year, month, -1).day, today.day].min) # 過去日を保証
+  Date.new(year, month, day)
+end
+
+# 入社日を作成 (18歳以上の年齢に基づく)
+def generate_hire_date(birthday)
+  min_hire_year = birthday.year + 18
+  max_hire_year = [Date.today.year, min_hire_year + 47].min # 退職年齢が65歳未満の場合を考慮
+  year = rand(min_hire_year..max_hire_year)
+  month = rand(1..12)
+  day = rand(1..[Date.new(year, month, -1).day, Date.today.day].min)
+  Date.new(year, month, day)
 end
 
 # ランダムな出勤時間を生成

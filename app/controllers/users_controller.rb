@@ -24,8 +24,16 @@ class UsersController < ApplicationController
 
     @users = User.non_admin # アドミンユーザーを除外
     @users = filter_users(@users, @filter)  # フィルターを適用
-    # 並べ替え
-    @users = @users.order("#{sort_column} #{sort_direction}, id ASC") # 同じ値の場合idカラムの昇順に
+  
+    # 部門でソートする場合の処理
+    if @sort_column == 'department_sort_no'
+      @users = @users.joins(:department)
+                      .order("departments.sort_no #{@sort_direction}, users.id ASC")
+    else
+      # 並べ替え
+      @users = @users.order("#{sort_column} #{sort_direction}, id ASC")
+    end
+
   end
 
   # ユーザー作成画面
@@ -125,7 +133,7 @@ class UsersController < ApplicationController
 
   def sort_column
     # 許可されていないカラムの場合employee_numberを返す
-    %w[employee_number full_name_kana working_status date_of_hire date_of_termination].include?(params[:sort_column]) ? params[:sort_column] : 'employee_number'
+    %w[employee_number full_name_kana working_status date_of_hire date_of_termination department_sort_no ].include?(params[:sort_column]) ? params[:sort_column] : 'employee_number'
   end
 
   def sort_direction

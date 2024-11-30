@@ -12,6 +12,9 @@
         = link_to "社員番号", users_path( sort_column: "employee_number", sort_direction: @sort_column == 'employee_number' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
         = sort_icon('employee_number')
       %th
+        = link_to "部署", users_path(sort_column: "department_sort_no", sort_direction: @sort_column == 'department_sort_no' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
+        = sort_icon('department_sort_no')
+      %th
         = link_to "名前", users_path( sort_column: "full_name_kana", sort_direction: @sort_column == 'full_name_kana' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
         = sort_icon('full_name_kana')
       %th
@@ -29,6 +32,7 @@
     - @users.each do |user|
       %tr.align-middle
         %td= user.employee_number.to_s.rjust(4, '0') # 社員番号
+        %td= user.department&.name || "未設定" # 部署
         %td= link_to user.full_name, user_path(user.id) # 名前
         %td= user.working_status_str # ステータス
         %td= user.date_of_hire.strftime('%Y/%m/%d') # 入社日
