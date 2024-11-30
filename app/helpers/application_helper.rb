@@ -63,5 +63,9 @@ module ApplicationHelper
       content_tag(:i, '', class: 'fa-solid fa-sort')
     end
   end
+  # 管理者モードの状態をチェックするメソッド
+  def admin_mode_active?
+    session[:admin_mode] == true
+  end
 
 end

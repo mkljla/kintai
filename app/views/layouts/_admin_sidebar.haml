@@ -1,36 +1,6 @@
-%ul.nav.nav-pills.flex-column.mb-auto
+%ul.nav.nav-pills.flex-column.mb-auto.sidebar-container
+
   %li
-    .nav-item.dropdown
-      %a.nav-link{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}
-        .d-flex
-          .name_area.d-flex
-            %span.name
-              = current_user.full_name
-            %span.san さん
-          %i.bi.bi-caret-down-fill.mx-2
-
-      // ドロップダウン中身
-      %ul.dropdown-menu
-        %li
-          %a.dropdown-item{href:  user_path(current_user.id)}
-            %i.bi.bi-person.me-1
-            %span.menu-text 社員情報
-
-        %hr.my-2
-        %li
-          = link_to logout_path, method: :delete, class: 'dropdown-item' do
-            %i.bi.bi-box-arrow-right.me-1
-            ログアウト
-
-  %hr
-
-  %li.nav-item
-    %a.nav-link.link-body-emphasis{ href: users_path}
-      %i.bi.bi-person.mx-2
-      %span.menu-text 社員一覧
-  %li
-    %a.nav-link.link-body-emphasis{href: "#"}
-      %span.menu-text Products
-  %li
-    %a.nav-link.link-body-emphasis{href: "#"}
-      %span.menu-text Customers
+    %a.nav-link.link-body-emphasis{ href:users_path}
+      %i.bi.bi-person.mx-2.mx-2.text-dark
+      %span.menu-text.text-dark 社員一覧

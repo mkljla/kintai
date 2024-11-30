@@ -1,8 +1,11 @@
 class ApplicationController < ActionController::Base
     before_action :logged_in_user, unless: -> { controller_name == 'sessions' }
+    before_action :set_admin_mode
 
     #作成したヘルパーメソッドを全てのページで使えるようにする
     include SessionsHelper
+
+
 
     private
 
@@ -13,7 +16,6 @@ class ApplicationController < ActionController::Base
             redirect_to login_path
         end
     end
-
 
     def redirect_with_alert(message)
         flash[:alert] = message
@@ -86,4 +88,9 @@ class ApplicationController < ActionController::Base
             redirect_to login_path
         end
     end
+
+    def set_admin_mode
+        @admin_mode = session[:admin_mode]
+    end
+
 end

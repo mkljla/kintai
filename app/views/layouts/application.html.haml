@@ -23,7 +23,7 @@
           = render 'layouts/header'
         .main-layout
           .app-sidebar
-            - if current_user.is_admin
+            - if @admin_mode
               =render 'layouts/admin_sidebar'
             -else
               = render 'layouts/sidebar'

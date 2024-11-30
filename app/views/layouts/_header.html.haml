@@ -3,6 +3,11 @@
   .wrapper.app-header__wrapper
     .app-header__start
       %a.brand{href:home_users_path} 勤怠管理アプリケーション
+      - if current_user.is_admin?
+        -if @admin_mode
+          = button_to "管理者モード", toggle_admin_mode_path, method: :post, class: "btn btn-primary"
+        -else
+          = button_to "一般モード", toggle_admin_mode_path, method: :post, class: "btn btn-primary"
     .app-header__end.text-primary-emphasis
 
       // ステータス
@@ -34,6 +39,4 @@
             = link_to logout_path, method: :delete, class: 'dropdown-item' do
               %i.bi.bi-box-arrow-right.me-1
               ログアウト
-
-
 

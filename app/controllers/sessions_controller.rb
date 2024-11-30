@@ -11,14 +11,9 @@ class SessionsController < ApplicationController
             log_in user
             Rails.logger.info "Login successful for user: #{user.full_name} (Employee Number: #{user.employee_number})"
 
-            # 管理者か確認
-            if user.is_admin
-                flash[:notice] = "管理者としてログインしました"
-                redirect_to users_path
-            else
-                flash[:notice] = "ログインに成功しました"
-                redirect_to home_users_path
-            end
+            flash[:notice] = "ログインに成功しました"
+            redirect_to home_users_path
+
         else
             Rails.logger.warn "Login failed for employee number: #{session_params[:employee_number]}"
             flash.now[:alert] = "ログインに失敗しました。社員番号とパスワードを確認してください。"

@@ -27,6 +27,11 @@ Rails.application.routes.draw do
 
   end
 
+
+  post 'toggle_admin_mode', to: 'admin#toggle_admin_mode'
+
+
+
   # namespace :admin do
   #   root to: 'users#index'
   #   # ユーザー管理
