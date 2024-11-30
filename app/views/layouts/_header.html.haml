@@ -2,16 +2,17 @@
 
   .wrapper.app-header__wrapper
     .app-header__start
-      -if @admin_mode
-        %a.brand{href:users_path} 勤怠管理アプリケーション
-      -else
-        %a.brand{href:home_users_path} 勤怠管理アプリケーション
+      %a.brand{href: @admin_mode ? users_path : home_users_path} 勤怠管理アプリケーション
 
       - if current_user.is_admin?
-        -if @admin_mode
-          = button_to "管理者モード", toggle_admin_mode_path, method: :post, class: "btn btn-primary"
-        -else
-          = button_to "一般モード", toggle_admin_mode_path, method: :post, class: "btn btn-primary"
+        .dropdown
+          %button.btn.btn-primary.dropdown-toggle{type: "button", "data-bs-toggle" => "dropdown", "aria-expanded" => "false"}
+            = @admin_mode ? "管理者モード" : "一般モード"
+          %ul.dropdown-menu
+            %li
+              = link_to toggle_admin_mode_path, method: :post, class: 'dropdown-item' do
+                = @admin_mode ? "一般モードに切り替える" : "管理者モードに切り替える"
+
     .app-header__end.text-primary-emphasis
 
       // ステータス
