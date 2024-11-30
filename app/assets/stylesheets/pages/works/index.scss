@@ -1,38 +1,46 @@
 body[data-controller="works"][data-action="index"] {
-  table {
-    table-layout: auto; /* 内容に基づいて列幅を調整 */
-    width: auto; /* テーブル幅も内容に応じて可変 */
-    white-space: nowrap; /* テキストを1行に収める */
-    font-size: 0.9rem;
-    border-collapse: collapse;
-    thead {
-      tr {
-        th {
-          position: sticky;
-          top: 0;
-          z-index: 1;
-          padding: 0.4rem 1rem;
-        }
-      }
-    }
-    tbody {
-      border-top-color: #052c65;
+  .table-wrapper {
+    overflow-y: auto; // 縦スクロールを有効化
+    border: 1px solid #ddd; // 見やすくするための枠線
+    border-radius: 10px; // デザインを整えるための角丸
+    max-height: calc(100vh - 300px); // ビューポート高さからヘッダーと余白を引いた高さを設定
 
-      tr {
-        td {
-          padding: 0.4rem 1rem;
-        }
-        .sunday,
-        .holiday {
-          color: #d32f2f;
-          background-color: hsl(352, 100%, 97%);
-          .holiday_name {
-            font-size: 0.8rem;
+    table {
+      table-layout: auto; /* 内容に基づいて列幅を調整 */
+      width: auto; /* テーブル幅も内容に応じて可変 */
+      white-space: nowrap; /* テキストを1行に収める */
+      font-size: 0.9rem;
+      border-collapse: collapse;
+      width: 100%;
+      thead {
+        tr {
+          th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            padding: 0.4rem 1rem;
           }
         }
-        .saturday {
-          color: #1a237e;
-          background-color: hwb(205 95% 1%);
+      }
+      tbody {
+        border-top-color: #052c65;
+
+        tr {
+          td {
+            padding: 0.4rem 1rem;
+          }
+          .sunday,
+          .holiday {
+            color: #d32f2f;
+            background-color: hsl(352, 100%, 97%);
+            .holiday_name {
+              font-size: 0.8rem;
+            }
+          }
+          .saturday {
+            color: #1a237e;
+            background-color: hwb(205 95% 1%);
+          }
         }
       }
     }

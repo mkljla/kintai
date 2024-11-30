@@ -15,37 +15,37 @@
           = select_tag :filter, options_for_select([["在職中", "active"], ["退職済", "retired"], ["全社員", "all"]], params[:filter] || "active"), onchange: 'this.form.submit()', class: 'form-select form-select-sm'
     = button_to 'リセット', users_path, method: :get, class: "btn btn-secondary btn-sm"
   = button_to '新規作成', new_user_path, method: :get, class: "btn btn-primary"
-
-%table.table.table-bordered
-  %thead
-    %tr.align-middle
-      %th
-        = link_to "社員番号", users_path( sort_column: "employee_number", sort_direction: @sort_column == 'employee_number' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-        = sort_icon('employee_number')
-      %th 部署
-      %th
-        = link_to "名前", users_path( sort_column: "full_name_kana", sort_direction: @sort_column == 'full_name_kana' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-        = sort_icon('full_name_kana')
-      %th
-        = link_to "ステータス", users_path(sort_column: "working_status", sort_direction: @sort_column == 'working_status' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-        = sort_icon('working_status')
-      %th
-        = link_to "入社日", users_path( sort_column: "date_of_hire", sort_direction: @sort_column == 'date_of_hire' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-        = sort_icon('date_of_hire')
-      %th
-        = link_to "退職日", users_path( sort_column: "date_of_termination", sort_direction: @sort_column == 'date_of_termination' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-        = sort_icon('date_of_termination')
-      %th
-      %th
-
-  %tbody
-    - @users.each do |user|
+.table-wrapper
+  %table.table
+    %thead
       %tr.align-middle
-        %td.text-dark= user.employee_number.to_s.rjust(4, '0') # 社員番号
-        %td.text-dark= user.department&.name || "未設定" # 部署
-        %td.text-dark= link_to user.full_name, user_path(user.id) # 名前
-        %td.text-dark= user.working_status_str # ステータス
-        %td.text-dark= user.date_of_hire.strftime('%Y/%m/%d') # 入社日
-        %td.text-dark= user.date_of_termination ? user.date_of_termination : "" # 退職日
-        %td.text-dark= link_to '勤務履歴',  user_works_path(user.id), class: 'btn btn-primary btn-sm button-area' # 勤務履歴
-        %td.text-dark= link_to '削除',  user_path(user.id), method: :delete, data: {confirm: "削除しますか？"}, class: 'btn btn-danger btn-sm button-area' # 削除
+        %th
+          = link_to "社員番号", users_path( sort_column: "employee_number", sort_direction: @sort_column == 'employee_number' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
+          = sort_icon('employee_number')
+        %th 部署
+        %th
+          = link_to "名前", users_path( sort_column: "full_name_kana", sort_direction: @sort_column == 'full_name_kana' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
+          = sort_icon('full_name_kana')
+        %th
+          = link_to "ステータス", users_path(sort_column: "working_status", sort_direction: @sort_column == 'working_status' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
+          = sort_icon('working_status')
+        %th
+          = link_to "入社日", users_path( sort_column: "date_of_hire", sort_direction: @sort_column == 'date_of_hire' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
+          = sort_icon('date_of_hire')
+        %th
+          = link_to "退職日", users_path( sort_column: "date_of_termination", sort_direction: @sort_column == 'date_of_termination' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
+          = sort_icon('date_of_termination')
+        %th
+        %th
+
+    %tbody.table-group-divider
+      - @users.each do |user|
+        %tr.align-middle
+          %td.text-dark= user.employee_number.to_s.rjust(4, '0') # 社員番号
+          %td.text-dark= user.department&.name || "未設定" # 部署
+          %td.text-dark= link_to user.full_name, user_path(user.id) # 名前
+          %td.text-dark= user.working_status_str # ステータス
+          %td.text-dark= user.date_of_hire.strftime('%Y/%m/%d') # 入社日
+          %td.text-dark= user.date_of_termination ? user.date_of_termination : "" # 退職日
+          %td.text-dark= link_to '勤務履歴',  user_works_path(user.id), class: 'btn btn-primary btn-sm button-area' # 勤務履歴
+          %td.text-dark= link_to '削除',  user_path(user.id), method: :delete, data: {confirm: "削除しますか？"}, class: 'btn btn-danger btn-sm button-area' # 削除

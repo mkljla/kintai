@@ -1,27 +1,41 @@
 body[data-controller="users"][data-action="index"] {
-  table {
-    border-collapse: collapse;
-    white-space: nowrap;
-    margin-bottom: 1.5rem;
+  .table-wrapper {
+    overflow-y: auto; // 縦スクロールを有効化
+    border: 1px solid #ddd; // 見やすくするための枠線
+    border-radius: 10px; // デザインを整えるための角丸
+    max-height: calc(100vh - 300px); // ビューポート高さからヘッダーと余白を引いた高さを設定
+    table {
+      table-layout: auto; /* 内容に基づいて列幅を調整 */
+      width: auto; /* テーブル幅も内容に応じて可変 */
+      white-space: nowrap; /* テキストを1行に収める */
+      font-size: 0.9rem;
+      border-collapse: collapse;
+      width: 100%;
 
-    th,
-    td {
-      font-weight: normal;
-      padding: 0.3rem 0.7rem;
-    }
-
-    th {
-      a {
-        text-decoration: none;
-        color: $text-color;
+      th,
+      td {
+        font-weight: normal;
+        padding: 0.3rem 0.7rem;
       }
-    }
-    tbody {
-      .button-area {
-        display: flex;
-        justify-content: center;
-        padding-left: 0;
-        padding-right: 0;
+
+      th {
+        a {
+          text-decoration: none;
+          color: #052c65;
+          margin-right: 0.3rem;
+        }
+        i {
+          color: #052c65;
+        }
+      }
+      tbody {
+        border-top-color: #052c65;
+        .button-area {
+          display: flex;
+          justify-content: center;
+          padding-left: 0;
+          padding-right: 0;
+        }
       }
     }
   }
