@@ -2,6 +2,7 @@ body[data-controller="users"][data-action="show"] {
   .vertical-table {
     width: fit-content;
     border-collapse: collapse;
+    width: 25rem;
 
     th,
     td {
