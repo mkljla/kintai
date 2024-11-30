@@ -20,21 +20,26 @@
     %thead
       %tr.align-middle
         %th
-          = link_to "社員番号", users_path( sort_column: "employee_number", sort_direction: @sort_column == 'employee_number' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-          = sort_icon('employee_number')
+          = link_to users_path(sort_column: "employee_number", sort_direction: @sort_column == 'employee_number' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter]) do
+            社員番号
+            = sort_icon('employee_number')
         %th 部署
         %th
-          = link_to "名前", users_path( sort_column: "full_name_kana", sort_direction: @sort_column == 'full_name_kana' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-          = sort_icon('full_name_kana')
+          = link_to  users_path( sort_column: "full_name_kana", sort_direction: @sort_column == 'full_name_kana' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter]) do
+            名前
+            = sort_icon('full_name_kana')
         %th
-          = link_to "ステータス", users_path(sort_column: "working_status", sort_direction: @sort_column == 'working_status' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-          = sort_icon('working_status')
+          = link_to  users_path(sort_column: "working_status", sort_direction: @sort_column == 'working_status' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter]) do
+            ステータス
+            = sort_icon('working_status')
         %th
-          = link_to "入社日", users_path( sort_column: "date_of_hire", sort_direction: @sort_column == 'date_of_hire' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-          = sort_icon('date_of_hire')
+          = link_to  users_path( sort_column: "date_of_hire", sort_direction: @sort_column == 'date_of_hire' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter]) do
+            入社日
+            = sort_icon('date_of_hire')
         %th
-          = link_to "退職日", users_path( sort_column: "date_of_termination", sort_direction: @sort_column == 'date_of_termination' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])
-          = sort_icon('date_of_termination')
+          = link_to  users_path( sort_column: "date_of_termination", sort_direction: @sort_column == 'date_of_termination' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter]) do
+            退職日
+            = sort_icon('date_of_termination')
         %th
         %th
 
