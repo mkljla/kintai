@@ -6,9 +6,10 @@ crumb :users_index do
   link "社員一覧", users_path
 end
 
-crumb :users_show do |user|
+crumb :users_show do |user, admin_mode|
+
   link "社員詳細", user_path(params[:id])
-  if current_user.is_admin?
+  if admin_mode
     parent :users_index
   else
     parent :users_home
@@ -16,9 +17,13 @@ crumb :users_show do |user|
 end
 
 
-crumb :works_index  do |user|
+crumb :works_index  do |user, admin_mode|
   link "勤務履歴",  user_works_path(user)
-  parent :users_home
+  if admin_mode
+    parent :users_index
+  else
+    parent :users_home
+  end
 end
 
 crumb :works_show do |user, work|
