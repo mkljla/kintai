@@ -2,7 +2,11 @@
 
   .wrapper.app-header__wrapper
     .app-header__start
-      %a.brand{href:home_users_path} 勤怠管理アプリケーション
+      -if @admin_mode
+        %a.brand{href:users_path} 勤怠管理アプリケーション
+      -else
+        %a.brand{href:home_users_path} 勤怠管理アプリケーション
+
       - if current_user.is_admin?
         -if @admin_mode
           = button_to "管理者モード", toggle_admin_mode_path, method: :post, class: "btn btn-primary"
