@@ -1,4 +1,4 @@
-- breadcrumb :users_edit, @user
+- breadcrumb :users_edit, @user, @admin_mode
 - content_for(:title, '社員編集')
 
 = form_with model: @user, url: @user.new_record? ? users_path : user_path(@user), local: true, html: { class: 'needs-validation', novalidate: true } do |f|
