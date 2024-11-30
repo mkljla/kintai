@@ -9,16 +9,34 @@
       %th 社員番号
       %td= @user.employee_number.to_s.rjust(4, '0')
     %tr
+      %th 部門
+      %td=@user.department&.name || "-"
+    %tr
       %th 名前
       %td= @user.full_name
     %tr
       %th 入社日
-      %td= @user.date_of_hire
+      %td= @user.date_of_hire.strftime('%Y/%m/%d')
     %tr
       %th 退職日
-      %td= @user.date_of_termination || "-"
+      %td= @user.date_of_termination ? @user.date_of_termination.strftime('%Y/%m/%d') : "-"
+
+
+
+
+.headline 社員情報
+%table.vertical-table.mb-3
+  %tbody
+    %tr
+      %th 名前
+      %td= @user.full_name
+    %tr
+      %th 名前(かな)
+      %td= @user.full_name_kana
+    %tr
+      %th 生年月日
+      %td= @user.birthday.strftime('%Y/%m/%d')
 
 .d-flex.gap-2
-  = link_to '戻る', users_path, class: 'btn btn-secondary'
   = link_to '編集',  edit_user_path(@user), class: 'btn btn-primary'# 編集
 
