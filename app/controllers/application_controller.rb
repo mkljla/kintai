@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
     before_action :logged_in_user, unless: -> { controller_name == 'sessions' }
+    before_action :check_session_timeout, unless: -> { controller_name == 'sessions' }
+    before_action :update_last_activity_time, unless: -> { controller_name == 'sessions' }
     before_action :set_admin_mode
+
+    # セッションのタイムアウト時間
+    SESSION_TIMEOUT = 30.minutes
 
     #作成したヘルパーメソッドを全てのページで使えるようにする
     include SessionsHelper
@@ -91,6 +96,20 @@ class ApplicationController < ActionController::Base
 
     def set_admin_mode
         @admin_mode = session[:admin_mode]
+    end
+
+        # セッションのタイムアウトを確認
+    def check_session_timeout
+        if session[:last_activity_time] && Time.current > session[:last_activity_time].to_time + SESSION_TIMEOUT
+        log_out
+        flash[:alert] = "セッションがタイムアウトしました。再度ログインしてください。"
+        redirect_to login_path
+        end
+    end
+
+    # セッションの最終アクティビティ時間を更新
+    def update_last_activity_time
+        session[:last_activity_time] = Time.current if logged_in?
     end
 
 end
