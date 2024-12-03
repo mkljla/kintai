@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
             log_in user
             Rails.logger.info "Login successful for user: #{user.full_name} (Employee Number: #{user.employee_number})"
 
-            flash[:notice] = "ログインに成功しました"
+            flash[:notice] = "ログインに成功しました。"
             redirect_to home_users_path
 
         else
@@ -29,6 +29,7 @@ class SessionsController < ApplicationController
     def destroy
         # ログアウト処理
         log_out if logged_in?
+        flash[:notice] = "ログアウトしました。"
         redirect_to root_url
     end
 
