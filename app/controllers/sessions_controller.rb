@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
 
     # ログイン処理
     def create
+        reset_session # 古いセッションをクリア
         user = User.find_by(employee_number: params[:session][:employee_number].downcase)
         if user && user.authenticate(params[:session][:password])# パスワードの確認
             log_in user
