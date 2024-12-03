@@ -1,0 +1,34 @@
+body[data-controller="sessions"][data-action="new"] {
+  // 背景
+  .login-content {
+    height: 100vh;
+    display: flex;
+    width: 100%;
+    font-size: 1rem;
+    // 外枠
+    .form-signin {
+      background-color: white;
+      border-radius: 15px;
+      max-width: 330px;
+      padding: 2rem;
+      margin: auto;
+      .title {
+        font-size: 1.3rem;
+      }
+
+      .login-form {
+        .form-floating {
+          margin-bottom: 15px;
+          font-size: 1rem;
+          label {
+            font-size: 0.8rem;
+          }
+        }
+
+        button {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

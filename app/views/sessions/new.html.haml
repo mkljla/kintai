@@ -1,10 +1,10 @@
-- content_for(:title, 'ログイン')
-
-= form_with url: login_path, scope: :session, local: true do |f|
-  .mb-3
-    = f.label :employee_number, "社員番号", class: 'form-label'
-    = f.text_field :employee_number, class: 'form-control', pattern: '[0-9]{4,}', required: true, title: '4桁以上の数字を入力してください', id: 'inputEmployeeNumber'
-  .mb-3
-    = f.label :password, "パスワード", class: 'form-label'
-    = f.password_field :password, class: 'form-control', id: 'inputPassword'
-  = f.submit "ログイン", class: 'btn btn-primary'
+%main.form-signin.w-100.m-auto
+  = form_with url: login_path, scope: :session, local: true, class: 'login-form' do |f|
+    %h1.h3.mb-4.title 勤怠管理アプリケーション
+    .form-floating
+      = f.text_field :employee_number, class: 'form-control', id: 'floatingInput', placeholder: "社員番号", pattern: '[0-9]{4,}', required: true, title: '4桁以上の数字を入力してください'
+      %label{for: 'floatingInput'} 社員番号
+    .form-floating
+      = f.password_field :password, class: 'form-control', id: 'floatingPassword', placeholder: "パスワード"
+      %label{for: 'floatingPassword'} パスワード
+    %button.btn.btn-primary.w-100.py-2.mt-3{type: "submit"} ログイン

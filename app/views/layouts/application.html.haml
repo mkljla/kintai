@@ -41,16 +41,8 @@
       .app-footer
         = render 'layouts/footer'
     - else
-      .app-layout
-        .main-layout
-          .content-wrapper
-            .main-content
-              // ページタイトル
-              .page-title
-                = yield(:title)
-              //コンテンツ
-              .content-body
-                = yield
+      .login-content
+        = yield
     = display_flash_messages
 
     // JavaScript読み込み
