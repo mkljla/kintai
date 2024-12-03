@@ -92,25 +92,4 @@ class ApplicationController < ActionController::Base
         @latest_work = current_user.works.order(created_at: :desc).first
         @latest_break = current_user.breaks.order(created_at: :desc).first
     end
-
-
-
-
-
-
-
-    def redirect_with_alert(message)
-        flash[:alert] = message
-        redirect_to home_users_path
-    end
-
-    def redirect_with_notice(message)
-        flash[:notice] = message
-        redirect_to home_users_path
-    end
-
-
-
-
-
 end

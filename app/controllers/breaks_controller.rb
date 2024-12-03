@@ -4,12 +4,6 @@ class BreaksController < ApplicationController
   # 休憩開始処理
   def create
 
-    # 出勤していない場合の処理を早期リターンで処理
-    return redirect_with_alert("出勤していません。") unless current_user.working?
-
-    # 休憩開始している場合の処理を早期リターンで処理
-    return redirect_with_alert("すでに休憩中です。") if current_user.taking_a_break?
-
     # 休憩記録の新規作成
     break_record = Break.new(work_id: @latest_work.id, start_datetime: Time.current.change(sec: 0))
 
@@ -27,11 +21,6 @@ class BreaksController < ApplicationController
   end
 
   def update
-    # 出勤していない場合の処理を早期リターンで処理
-    return redirect_with_alert("出勤していません。") unless current_user.working?
-    # 休憩開始していない場合の処理を早期リターンで処理
-    return redirect_with_alert("休憩を開始していません。") unless current_user.taking_a_break?
-
     begin
       ActiveRecord::Base.transaction do
         # 休憩終了時間を登録
