@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    before_action :redirect_if_logged_in, only: [:new]
 
     def new
         # ログインフォームの表示
@@ -32,5 +33,12 @@ class SessionsController < ApplicationController
     private
     def session_params
         params.require(:session).permit(:employee_number, :password)
+    end
+
+    def redirect_if_logged_in
+        if logged_in?
+            flash[:notice] = "すでにログインしています。"
+            redirect_to home_users_path
+        end
     end
 end
