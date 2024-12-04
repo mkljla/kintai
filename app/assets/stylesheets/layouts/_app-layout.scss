@@ -49,6 +49,7 @@
         background-color: white;
         border-radius: 20px;
         padding: 1rem 2rem;
+        position: relative; // フラシュメッセージの配置のため
 
         .page-title {
           font-size: 1.4em;

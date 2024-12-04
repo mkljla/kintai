@@ -32,6 +32,7 @@
             .breadcrumb-container
               = breadcrumbs separator: " &nbsp;&rsaquo;&nbsp; "
             .main-content
+              = display_flash_messages
               // ページタイトル
               .page-title
                 = yield(:title)
@@ -42,8 +43,8 @@
         = render 'layouts/footer'
     - else
       .login-content
+        = display_flash_messages
         = yield
-    = display_flash_messages
 
     // JavaScript読み込み
     = javascript_include_tag 'application'
