@@ -57,7 +57,7 @@ def create_user
 
 
   names = [
-  { family_name: "田中", first_name: "太郎", family_name_kana: "たなか", first_name_kana: "たろう"},
+  { family_name: "管理者", first_name: "太郎", family_name_kana: "かんりしゃ", first_name_kana: "たろう"},
   { family_name: "鈴木", first_name: "次郎", family_name_kana: "すずき", first_name_kana: "じろう"},
   { family_name: "佐藤", first_name: "三郎", family_name_kana: "さとう", first_name_kana: "さぶろう"},
   { family_name: "高橋", first_name: "四郎", family_name_kana: "たかはし", first_name_kana: "しろう"},
@@ -95,16 +95,18 @@ def create_user
   ]
   names.each_with_index do |name, index|
 
-  # 生年月日を作成
-  birthday =  generate_birthday_date
-  # 入社日を作成
-  date_of_hire = generate_hire_date(birthday)
-  # 退職日を作成
-  date_of_termination = generate_termination_date(date_of_hire)
-  # 部門IDの一覧を取得
-  department_ids = Department.pluck(:id)
-  # 部門IDをランダムで選択
-  department_id = department_ids.sample
+    # 生年月日を作成
+    birthday =  generate_birthday_date
+    # 入社日を作成
+    date_of_hire = generate_hire_date(birthday)
+    # 管理者ユーザーの作成
+    is_admin = (index == 0)
+    # 退職日を管理者以外にのみ設定
+    date_of_termination = is_admin ? nil : generate_termination_date(date_of_hire)
+    # 部門IDの一覧を取得
+    department_ids = Department.pluck(:id)
+    # 部門IDをランダムで選択
+    department_id = department_ids.sample
 
     user=User.create!(
       employee_number: index + 1,
@@ -119,6 +121,7 @@ def create_user
       date_of_termination: date_of_termination,
       password: "password",
       department_id: department_id,
+      is_admin: is_admin,
     )
     # 業務作成
     create_works_for_user(user.id)
@@ -305,5 +308,4 @@ end
 # Seed実行
 create_departments
 create_m_work_hour_settings
-create_admin_user
 create_users_with_works

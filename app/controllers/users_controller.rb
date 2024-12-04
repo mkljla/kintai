@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     @filter = params[:filter] || 'active'                   # デフォルトは「在職」
     @department_id = params[:department_id].presence || ''   # 部署ID（フィルター）、初期値は空
 
-    @users = User.non_admin # アドミンユーザーを除外
+    @users = User.all
     @users = filter_users(@users, @filter) # ステータスフィルターを適用
 
     # 部署IDが指定されている場合の絞り込み
@@ -124,7 +124,6 @@ class UsersController < ApplicationController
 
   # フィルタリング条件に応じてユーザーを絞り込むメソッド
   def filter_users(users, filter)
-
     case filter
     when 'active'
       users.active # 在職中

@@ -2,9 +2,11 @@
   = form_with url: login_path, scope: :session, local: true, class: 'login-form' do |f|
     %h1.h3.mb-4.title 勤怠管理アプリケーション
     .form-floating
-      = f.text_field :employee_number, class: 'form-control', id: 'floatingInput', placeholder: "社員番号", pattern: '[0-9]{4,}', required: true, title: '4桁以上の数字を入力してください'
+      = f.text_field :employee_number, class: 'form-control', id: 'floatingInput', placeholder: "社員番号", value: '0001', pattern: '[0-9]{4,}', required: true, title: '4桁以上の数字を入力してください'
       %label{for: 'floatingInput'} 社員番号
     .form-floating
-      = f.password_field :password, class: 'form-control', id: 'floatingPassword', placeholder: "パスワード"
+      = f.password_field :password, class: 'form-control', id: 'floatingPassword', placeholder: "パスワード", value:'password'
       %label{for: 'floatingPassword'} パスワード
+      .password-toggle
+        %i.bi.bi-eye
     %button.btn.btn-primary.w-100.py-2.mt-3{type: "submit"} ログイン
