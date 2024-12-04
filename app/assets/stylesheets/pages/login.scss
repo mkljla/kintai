@@ -22,8 +22,16 @@
         label {
           font-size: 0.8rem;
         }
+        .password-toggle {
+          position: absolute;
+          font-size: 1.3rem;
+          top: 50%;
+          right: 1rem;
+          transform: translateY(-50%);
+          cursor: pointer; /* ポインターを表示 */
+          color: #6c757d;
+        }
       }
-
       button {
         font-size: 1rem;
       }
