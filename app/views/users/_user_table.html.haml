@@ -1,3 +1,46 @@
+#user-index-wrapper
+  %div.mb-2.d-flex.justify-content-between.align-items-center
+    %div.d-flex.align-items-center
+      %div.dropdown.me-3.align-items-center.d-flex
+        %label 部署：
+        %button.btn.btn-light.dropdown-toggle.text-dark.btn-sm{"data-bs-toggle" => "dropdown", "aria-expanded" => "false"}
+          - label = case @department_id
+          - when ''
+            - 'すべて'
+          - when 'none'
+            - '未設定'
+          - else
+            - Department.find_by(id: @department_id)&.name || 'すべて'
+          = label
+        %ul.dropdown-menu
+          %li
+            = link_to "すべて", users_path(department_id: "", filter: params[:filter]), remote: true, class: "dropdown-item #{'selected' if @department_id == ''}"
+          %li
+            = link_to "未設定", users_path(department_id: "none", filter: params[:filter]), remote: true, class: "dropdown-item #{'selected' if @department_id == 'none'}"
+          - Department.pluck(:name, :id).each do |label, value|
+            %li
+              = link_to label, users_path(department_id: value, filter: params[:filter]), remote: true, class: "dropdown-item #{'selected' if @department_id == value.to_s}"
+
+      %div.dropdown.me-3.align-items-center.d-flex
+        %label 社員：
+        %button.btn.btn-light.dropdown-toggle.text-dark.btn-sm{"data-bs-toggle" => "dropdown", "aria-expanded" => "false"}
+          - label = case @filter
+          - when 'active'
+            - '在職中'
+          - when 'retired'
+            - '退職済'
+          - else
+            - '全社員'
+          = label
+        %ul.dropdown-menu
+          %li
+            = link_to "在職中", users_path(filter: "active", department_id: params[:department_id]), remote: true, class: "dropdown-item #{'selected' if @filter == 'active'}"
+          %li
+            = link_to "退職済", users_path(filter: "retired", department_id: params[:department_id]), remote: true, class: "dropdown-item #{'selected' if @filter == 'retired'}"
+          %li
+            = link_to "全社員", users_path(filter: "all", department_id: params[:department_id]), remote: true, class: "dropdown-item #{'selected' if @filter == ''}"
+      = button_to 'リセット', users_path, method: :get,  class: "btn btn-secondary btn-sm", remote: true
+    = button_to '新規作成', new_user_path, method: :get, class: "btn btn-primary"
 .table-wrapper
   %table.table
     %thead

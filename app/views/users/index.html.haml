@@ -1,22 +1,5 @@
 - breadcrumb :users_index
 - content_for(:title, '社員一覧')
 
-
-%div.mb-2.d-flex.justify-content-between.align-items-center
-  %div.d-flex.align-items-center
-    = form_with url: users_path, method: :get, class: 'd-flex align-items-center', remote: true  do
-      %div.d-flex.align-items-center.me-3
-        %label 部署：
-        %div
-          = select_tag :department_id, options_for_select([["全て", ""]] + [["未設定", "none"]] + Department.pluck(:name, :id), params[:department_id]), onchange: 'this.form.submit()', class: 'form-select form-select-sm'
-      %div.d-flex.align-items-center.me-3
-        %label 社員：
-        %div
-          = select_tag :filter, options_for_select([["在職中", "active"], ["退職済", "retired"], ["全社員", "all"]], params[:filter] || "active"), onchange: 'this.form.submit()', class: 'form-select form-select-sm'
-    = button_to 'リセット', users_path, method: :get,  class: "btn btn-secondary btn-sm", remote: true
-  = button_to '新規作成', new_user_path, method: :get, class: "btn btn-primary"
-
-%div#user-table-wrapper
+#user-index-wrapper
   = render 'user_table'
-
-
