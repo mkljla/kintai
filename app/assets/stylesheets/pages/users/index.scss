@@ -3,7 +3,7 @@ body[data-controller="users"][data-action="index"] {
     overflow-y: auto; // 縦スクロールを有効化
     border: 1px solid #ddd; // 見やすくするための枠線
     border-radius: 10px; // デザインを整えるための角丸
-    max-height: calc(100vh - 250px); // ビューポート高さからヘッダーと余白を引いた高さを設定
+    max-height: calc(100vh - 30px); // ビューポート高さからヘッダーと余白を引いた高さを設定
 
     table {
       table-layout: auto; /* 内容に基づいて列幅を調整 */
