@@ -3,7 +3,7 @@
     %thead
       %tr.align-middle
         %th
-          = link_to users_path(sort_column: "employee_number", sort_direction: @sort_column == 'employee_number' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter])  do
+          = link_to users_path(sort_column: "employee_number", sort_direction: @sort_column == 'employee_number' && @sort_direction == 'desc' ? 'asc' : 'desc', filter: params[:filter]), remote: true  do
             社員番号
             = sort_icon('employee_number')
         %th 部署
