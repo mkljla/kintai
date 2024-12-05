@@ -1,0 +1,88 @@
+%nav.d-flex.align-items-center.mb-3
+  - # ナビゲーションリンクでの「前月」「翌月」の設定
+  - prev_month, prev_year = previous_month_and_year(@month, @year)
+  - next_month, next_year = next_month_and_year(@month, @year)
+
+  -# 今月
+  = link_to '今月', user_works_path(year: @current_year, month: @current_month ), remote: true, class: "btn btn-light text-dark  btn-sm me-3 "
+
+  -# 前月
+  = link_to user_works_path(year: prev_year, month: prev_month), remote: true, class: "btn btn-light text-dark btn-sm me-1" do
+    %i.fa-solid.fa-chevron-left
+
+  -# 次月
+  - if @year < @current_year || (@year == @current_year && @month < @current_month)
+    = link_to user_works_path(year: next_year, month: next_month), remote: true, class:"btn btn-light text-dark btn-sm " do
+      %i.fa-solid.fa-chevron-right
+
+  -# 年のドロップダウン
+  = form_with url: user_works_path, method: :get, class: "d-flex mx-2" do |f|
+    .dropdown.mx-1
+      %button.btn.btn.btn-light.dropdown-toggle.btn-sm.text-dark{"type" => "button", "data-bs-toggle" => "dropdown", "aria-expanded" => "false"}
+        = "#{@year} 年"
+      %ul.dropdown-menu
+        - (@current_year - 5..@current_year).to_a.reverse.each do |year|
+          %li
+            = link_to "#{year} 年", user_works_path(year: year, month: @month), remote: true, class: "dropdown-item #{'selected' if year == @year}", data: { turbo_frame: "user_table" }
+    -# 月のドロップダウン
+    .dropdown
+      %button.btn.btn-light.dropdown-toggle.btn-sm.text-dark{"type" => "button", "data-bs-toggle" => "dropdown", "aria-expanded" => "false"}
+        = "#{@month} 月"
+      %ul.dropdown-menu.text-dark
+        - months = (1..12).map { |m| [m, m] }
+        - max_month = (@year == @current_year) ? @current_month : 12
+        - months.select { |m| m[1] <= max_month }.each do |month, value|
+          %li
+            = link_to "#{month} 月", user_works_path(year: @year, month: value), remote: true, class: "dropdown-item #{'selected' if value == @month}", data: { turbo_frame: "user_table" }
+%div.mb-1
+  合計残業時間：
+  =minutes_to_hours_and_minutes(@total_monthly_overtime)
+.table-wrapper
+  %table.table
+    %thead
+      %tr
+        %th.text-primary-emphasis 日付
+        %th.text-primary-emphasis 出勤時間
+        %th.text-primary-emphasis 退勤時間
+        %th.text-primary-emphasis 休憩時間
+        %th.text-primary-emphasis 勤務時間
+        %th.text-primary-emphasis 残業時間
+        %th.text-primary-emphasis
+      %tr
+    %tbody.table-group-divider
+      - @dates.each do |date|
+        - holiday_name = @holidays[date] # 祝日名を取得
+        - is_holiday = @holidays.include?(date) # 祝日かどうか
+        - is_saturday = date.saturday? # 土曜かどうか
+        - is_sunday = date.sunday? # 日曜かどうか
+        - works = (@works_by_date[date] || []).sort_by { |work| work.start_datetime }
+        - if works.any?
+          - works.each_with_index do |work, index|
+            %tr.align-middle
+              - if index == 0
+                %td{ rowspan: works.size, class: ("holiday" if is_holiday) || ("saturday" if is_saturday) || ("sunday" if is_sunday) }
+                  .d-flex
+                    = formatted_date_with_weekday(date) # 日付
+                    - if is_holiday
+                      .holiday_name.ps-2.align-content-center= holiday_name # 祝日の名前を表示
+              - else
+
+              %td.text-dark= formatted_time_only(work.start_datetime) # 出勤時間
+              %td.text-dark= work.end_datetime.present? ? formatted_time_only(work.end_datetime) : "-"
+              %td.text-dark= minutes_to_hours_and_minutes(work.total_break_time_in_minutes) # 休憩時間
+              %td.text-dark= minutes_to_hours_and_minutes(work.actual_work_time_in_minutes) # 勤務時間
+              %td.text-dark= minutes_to_hours_and_minutes(work.total_overtime_in_minutes) # 残業時間
+              %td.text-dark= button_to '詳細', user_work_path(@user, work), method: :get, class: "btn btn-primary btn-sm"
+        - else
+          %tr
+            %td{ class: ("holiday" if is_holiday) || ("saturday" if is_saturday) || ("sunday" if is_sunday) }
+              .d-flex
+                = formatted_date_with_weekday(date) # 日付
+                - if is_holiday
+                  .holiday_name.ps-2.align-content-center= holiday_name # 祝日の名前を表示
+            %td.text-dark
+            %td.text-dark
+            %td.text-dark
+            %td.text-dark
+            %td.text-dark
+            %td.text-dark
