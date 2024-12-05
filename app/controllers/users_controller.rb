@@ -40,13 +40,8 @@ class UsersController < ApplicationController
 
     # 並べ替え
     @users = @users.order("#{sort_column} #{sort_direction}, id ASC")
-    # レンダリング形式の変更
-    respond_to do |format|
-      format.html # 通常のHTMLリクエストの場合
-      format.js   # JavaScriptリクエストの場合
-    end
   end
- 
+
   # ユーザー作成画面
   def new
     @departments = Department.sorted
