@@ -35,6 +35,9 @@ class UsersController < ApplicationController
         @users = @users.where(department_id: @department_id) # 指定された部署IDの場合
       end
     end
+    @department_label = department_filter_label(@department_id)
+    @employee_label = employee_filter_label(@filter)
+
     # 並べ替え
     @users = @users.order("#{sort_column} #{sort_direction}, id ASC")
     # レンダリング形式の変更
@@ -43,7 +46,7 @@ class UsersController < ApplicationController
       format.js   # JavaScriptリクエストの場合
     end
   end
-
+ 
   # ユーザー作成画面
   def new
     @departments = Department.sorted
@@ -139,6 +142,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def department_filter_label(id)
+    case id
+    when ''
+      'すべて'
+    when 'none'
+      '未設定'
+    else
+      department = Department.find_by(id: id)
+      department.name
+    end
+  end
+
+  def employee_filter_label(filter)
+    case filter
+      when 'active'
+        '在職中'
+      when 'retired'
+        '退職済'
+      else
+        '全社員'
+      end
+  end
 
   def sort_column
     # 許可されていないカラムの場合employee_numberを返す
