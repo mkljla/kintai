@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
         user = User.find_by(employee_number: params[:session][:employee_number].downcase)
         if user && user.authenticate(params[:session][:password])# パスワードの確認
             reset_session # 古いセッションをクリア
-            form_authenticity_token # 新しいCSRFトークンを生成
             log_in user
             Rails.logger.info "Login successful for user: #{user.full_name} (Employee Number: #{user.employee_number})"
 
