@@ -84,4 +84,9 @@ class User < ApplicationRecord
     end
   end
 
+  # 在職か判定
+  def active?
+    date_of_termination.nil? || date_of_termination >= Date.today
+  end
+
 end
