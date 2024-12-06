@@ -3,9 +3,9 @@ class User < ApplicationRecord
   # ===============
   # アソシエーション
   # ===============
-  has_many :works
+  has_many :works, dependent: :destroy
+  has_many :breaks, through: :works  # workを経由してbreaksを取得
   belongs_to :department, optional: true # nilを許容
-  has_many :breaks, through: :works # workを経由してbreaksを取得
 
   # ===============
   # enum 定義

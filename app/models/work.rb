@@ -5,7 +5,7 @@ class Work < ApplicationRecord
   # ===============
 
   belongs_to :user
-  has_many :breaks
+  has_many :breaks, dependent: :destroy
 
   # バリデーション
   validates :user_id, presence: true
