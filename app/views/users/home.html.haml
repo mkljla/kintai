@@ -1,17 +1,10 @@
 - breadcrumb :users_home
 - content_for(:title, 'ホーム')
 
-// ステータス
-%div.home_status_area.d-flex.badge.text-bg-light.rounded-pill
-  %span.status_icon.me-1
-    = working_status_icon(@current_user.working_status)
-  %span.status_text
-    = current_user.working_status_str
-
+.clock
 .date-container
   .date
   .weekday
-.clock
 .button_container.mx-auto.d-grid.gap-3.py-3
   -# 出勤ボタン
   .work-btn-group.d-flex.g-col-12.column-gap-3

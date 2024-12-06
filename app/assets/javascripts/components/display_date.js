@@ -12,10 +12,10 @@ setInterval(displayDate, 1000);
 function displayDate() {
   const now = new Date();
 
-  // 日本の表記で日付と曜日をそれぞれ取得
-  const dateOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
+  // 月と日をそれぞれ取得
+  const month = now.getMonth() + 1; // getMonth() は 0 ベースなので +1
+  const day = now.getDate();
   const weekdayOptions = { weekday: "short" };
-  const currentDate = now.toLocaleDateString("ja-JP", dateOptions);
   const currentWeekday = now.toLocaleDateString("ja-JP", weekdayOptions);
 
   // HTML要素を取得
@@ -24,7 +24,7 @@ function displayDate() {
 
   // 要素が存在する場合のみ表示を更新
   if (dateElement && weekdayElement) {
-    dateElement.textContent = currentDate; // 日付部分
+    dateElement.textContent = `${month}月${day}日`; // 月日部分
     weekdayElement.textContent = `(${currentWeekday})`; // 曜日部分
   }
 }
