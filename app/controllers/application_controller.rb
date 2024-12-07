@@ -53,6 +53,7 @@ class ApplicationController < ActionController::Base
     # セッションのタイムアウトを確認
     def check_session_timeout
         if session[:last_activity_time] && Time.current > session[:last_activity_time].to_time + SESSION_TIMEOUT
+        Rails.logger.info "Session timeout detected for user_id=#{current_user&.id}"
         log_out
         flash[:alert] = "セッションがタイムアウトしました。再度ログインしてください。"
         redirect_to login_path
@@ -61,6 +62,7 @@ class ApplicationController < ActionController::Base
 
     # セッションの最終アクティビティ時間を更新
     def update_last_activity_time
+        Rails.logger.debug "Updating last activity time for user_id=#{current_user&.id} at #{Time.current}"
         session[:last_activity_time] = Time.current if logged_in?
     end
 
@@ -68,12 +70,14 @@ class ApplicationController < ActionController::Base
 
     def require_admin
         unless current_user.is_admin
+            Rails.logger.warn "Unauthorized access attempt by user_id=#{current_user&.id}"
             flash[:alert] = "権限がありません"
             redirect_to login_path
         end
     end
 
     def set_admin_mode
+        Rails.logger.debug "Admin mode set to #{@admin_mode} for user_id=#{current_user&.id}"
         @admin_mode = session[:admin_mode]
     end
 
@@ -81,11 +85,13 @@ class ApplicationController < ActionController::Base
 
     # ログイン中のユーザーを設定
     def set_current_user
+        Rails.logger.debug "Setting current user: user_id=#{current_user&.id}"
         @user = current_user
     end
 
     # paramsを@userにセット
     def set_user(key = :id)
+        Rails.logger.debug "Fetching user by key=#{key}: params=#{params[key]}"
         @user = User.find(params[key])
     end
 
@@ -93,6 +99,7 @@ class ApplicationController < ActionController::Base
     def verify_user(key = :id)
         @user = User.find(params[key])
         unless @user == current_user
+            Rails.logger.warn "Unauthorized user access attempt: user_id=#{@user.id}, current_user_id=#{current_user&.id}"
             flash[:alert] = "不正なアクセスです"
             redirect_to(home_users_path)
         end
@@ -101,6 +108,7 @@ class ApplicationController < ActionController::Base
     # ログイン済みかどうか確認
     def logged_in_user
         unless logged_in?
+            Rails.logger.info "Access attempt without login: request_path=#{request.path}"
             flash[:alert] = "ログインしてください"
             redirect_to login_path
         end
@@ -110,6 +118,7 @@ class ApplicationController < ActionController::Base
 
     # params[:id]を@workにセット
     def set_work_by_id
+        Rails.logger.debug "Fetching work record by id: params[:id]=#{params[:id]}"
         @work = Work.find(params[:id])
     end
 
@@ -118,6 +127,7 @@ class ApplicationController < ActionController::Base
         @work = Work.find(params[:id])
         @user = User.find(params[:user_id])
         unless @work.user_id == @user.id
+            Rails.logger.warn "Invalid work access attempt: work_id=#{@work.id}, user_id=#{@user.id}, current_user_id=#{current_user&.id}"
             flash[:alert] = "不正なアクセスです"
             redirect_to(user_works_path(@user))
         end
@@ -127,6 +137,7 @@ class ApplicationController < ActionController::Base
     def set_latest_records
         @latest_work = current_user.works.order(created_at: :desc).first
         @latest_break = current_user.breaks.order(created_at: :desc).first
+        Rails.logger.debug "Latest work and break records set for user_id=#{current_user&.id}"
     end
 
 
