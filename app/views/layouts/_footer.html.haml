@@ -2,5 +2,13 @@
   %ul.md-flex
     %li
       %a{href: "#"} 設計書(準備中)
+  %ul.md-flex
+    %li
+      = link_to 'デモデータをリセット', '#', id: 'reset-demo-data-button'
+    #overlay{ style: 'display: none;' }
+      .overlay-content
+        %p デモデータをリセット中です。しばらくお待ちください
+        .spinner-border{role: "status"}
+          %span.visually-hidden Loading...
 
   %p.copyright © 2024 Ono. This application is a personal project developed for portfolio purposes.

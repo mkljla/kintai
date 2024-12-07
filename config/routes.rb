@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :breaks, only: [:index, :show, :create, :update]
 
   end
+  post 'reset_demo_data', to: 'application#reset_demo_data'
 
   # 管理者モードの切り替え
   post 'toggle_admin_mode', to: 'admin#toggle_admin_mode'

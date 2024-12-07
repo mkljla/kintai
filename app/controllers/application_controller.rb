@@ -10,6 +10,42 @@ class ApplicationController < ActionController::Base
     #作成したヘルパーメソッドを全てのページで使えるようにする
     include SessionsHelper
 
+    # seedファイル再作成
+    def reset_demo_data
+        Rails.logger.info "Starting demo data reset process"
+
+        # 開発環境・テスト環境でのみ実施する
+        unless Rails.env.development? || Rails.env.test?
+            Rails.logger.warn "Access denied: reset_demo_data is allowed only in development or test environments"
+            render plain: 'This operation is allowed only in development or test environments', status: :forbidden
+            return
+        end
+
+        begin
+            ActiveRecord::Base.transaction do
+                Rails.logger.info 'Resetting database...'
+                # データベース内の全データを削除
+                ActiveRecord::Base.connection.truncate_tables(*ActiveRecord::Base.connection.tables)
+
+                Rails.logger.info "Reloading seed data"
+                # シードデータを再実行
+                Rails.application.load_seed
+            end
+
+            Rails.logger.info "Demo data reset completed successfully"
+            flash[:notice] = 'デモデータがリセットされました。'
+            render json: { message: 'Reset successful' }, status: :ok
+
+            rescue => e
+            Rails.logger.error "An error occurred during the demo data reset: #{e.message}"
+            Rails.logger.debug "Backtrace:\n#{e.backtrace.join("\n")}"
+
+            flash[:alert] = 'デモデータのリセットに失敗しました。'
+            render json: { message: 'Reset failed' }, status: :internal_server_error
+        end
+    end
+
+
     private
 
     # --- セッション関連 ---
@@ -92,4 +128,6 @@ class ApplicationController < ActionController::Base
         @latest_work = current_user.works.order(created_at: :desc).first
         @latest_break = current_user.breaks.order(created_at: :desc).first
     end
+
+
 end
