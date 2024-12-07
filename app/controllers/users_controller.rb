@@ -77,10 +77,10 @@ class UsersController < ApplicationController
 
     user = User.find(params[:id])
     if user.destroy
-      flash[:notice] = "ユーザーを削除しました。"
+      flash[:notice] = "#{user.full_name}さんを削除しました。"
       redirect_to users_path
     else
-      flash[:alert] = "ユーザーの削除に失敗しました。"
+      flash[:alert] = "#{user.full_name}さんの削除に失敗しました。"
       redirect_to users_path
     end
 
@@ -106,11 +106,11 @@ class UsersController < ApplicationController
       password: Date.parse(user_params[:birthday]).strftime('%Y%m%d'),
 
       ))
-      flash[:notice] = "ユーザー情報を更新しました。"
+      flash[:notice] = "#{@user.full_name}さんの情報を更新しました。"
       redirect_to users_path
     else
       Rails.logger.debug("User update failed: #{@user.errors.full_messages}")
-      flash[:alert] = "ユーザー情報の更新に失敗しました。"
+      flash[:alert] = "#{user.full_name}さんの情報の更新に失敗しました。"
       render :edit
     end
   end
