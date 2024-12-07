@@ -90,16 +90,24 @@ class ApplicationController < ActionController::Base
     end
 
     # paramsを@userにセット
-    def set_user(key = :id)
-        Rails.logger.debug "Fetching user by key=#{key}: params=#{params[key]}"
-        @user = User.find(params[key])
+    def set_user_by_id
+        @user = User.find(params[:id])
+    end
+    def set_user_by_user_id
+        @user = User.find(params[:user_id])
     end
 
     # 正しいユーザーか確認
-    def verify_user(key = :id)
-        @user = User.find(params[key])
+    def verify_user_by_id
+        @user = User.find(params[:id])
         unless @user == current_user
-            Rails.logger.warn "Unauthorized user access attempt: user_id=#{@user.id}, current_user_id=#{current_user&.id}"
+            flash[:alert] = "不正なアクセスです"
+            redirect_to(home_users_path)
+        end
+    end
+    def verify_user_by_user_id
+        @user = User.find(params[:user_id])
+        unless @user == current_user
             flash[:alert] = "不正なアクセスです"
             redirect_to(home_users_path)
         end

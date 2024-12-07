@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_current_user, only:[:home] # ログイン中のユーザーを@userにセット
-  before_action -> { set_user(:id) }, only:[:show, :edit, :update] # params[:id]を@userにセット
-  before_action -> { verify_user(:id) }, only:[:show] , unless: -> { current_user.is_admin } # params[:id]とログイン中のユーザが一致するかチェック
+  before_action :set_user_by_id, only:[:show, :edit, :update] # params[:id]を@userにセット
+  before_action :verify_user_by_id, only:[:show] , unless: -> { current_user.is_admin } # params[:id]とログイン中のユーザが一致するかチェック
 
   before_action :require_admin, only:[:index, :new, :create, :destroy, :edit, :update]
 
