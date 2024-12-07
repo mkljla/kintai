@@ -1,6 +1,4 @@
 $(document).ready(function () {
-  console.log("ページが読み込まれました"); // デバッグ用
-
   $("#reset-demo-data-button").on("click", function () {
     if (!confirm("リセットした後はログアウトされます。実行しますか？")) {
       return; // 「キャンセル」時は処理を中断
@@ -19,7 +17,6 @@ $(document).ready(function () {
         window.location.reload();
       },
       error: function () {
-        console.log("リセット失敗");
         // オーバーレイを非表示にし、エラーメッセージを表示
         $("#overlay").hide();
 
