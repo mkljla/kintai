@@ -28,6 +28,16 @@ class ApplicationController < ActionController::Base
                 ActiveRecord::Base.connection.truncate_tables(*ActiveRecord::Base.connection.tables)
 
                 Rails.logger.info "Reloading seed data"
+                # シーケンスをリセットする
+                ActiveRecord::Base.connection.tables.each do |table|
+                    next if table == 'schema_migrations' || table == 'ar_internal_metadata'
+
+                        # PostgreSQLの場合のシーケンスリセット
+                        ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH 1") if ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
+                    end
+
+                Rails.logger.info "Reloading seed data"
+
                 # シードデータを再実行
                 Rails.application.load_seed
             end
