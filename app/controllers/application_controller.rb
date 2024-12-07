@@ -90,28 +90,33 @@ class ApplicationController < ActionController::Base
     end
 
     # paramsを@userにセット
-    def set_user_by_id
-        @user = User.find(params[:id])
-    end
-    def set_user_by_user_id
-        @user = User.find(params[:user_id])
+    def set_and_verify_user(key = :id, verify: true)
+
+        user_id = params[key]
+        Rails.logger.info "Fetching user with params[#{key}] = #{user_id}"
+
+        begin
+            @user = User.find(user_id)
+            return  if current_user.is_admin
+
+            if verify && @user != current_user
+                Rails.logger.warn "Unauthorized access attempt by user_id=#{current_user.id} to user_id=#{@user.id}"
+                flash[:alert] = "不正なアクセスです"
+                redirect_to(home_users_path) and return
+            end
+
+            Rails.logger.info "Access verified for user_id=#{@user.id}"
+        rescue ActiveRecord::RecordNotFound => e
+            Rails.logger.warn "User not found with #{key}=#{user_id}: #{e.message}"
+            if current_user.admin
+                flash[:alert] = "存在しないIDです"
+            else
+                flash[:alert] = "不正なアクセスです"
+            end
+            redirect_to(home_users_path) and return
+        end
     end
 
-    # 正しいユーザーか確認
-    def verify_user_by_id
-        @user = User.find(params[:id])
-        unless @user == current_user
-            flash[:alert] = "不正なアクセスです"
-            redirect_to(home_users_path)
-        end
-    end
-    def verify_user_by_user_id
-        @user = User.find(params[:user_id])
-        unless @user == current_user
-            flash[:alert] = "不正なアクセスです"
-            redirect_to(home_users_path)
-        end
-    end
 
     # ログイン済みかどうか確認
     def logged_in_user
@@ -125,21 +130,36 @@ class ApplicationController < ActionController::Base
     # --- 勤務関連 ---
 
     # params[:id]を@workにセット
-    def set_work_by_id
-        Rails.logger.debug "Fetching work record by id: params[:id]=#{params[:id]}"
-        @work = Work.find(params[:id])
-    end
-
     # ユーザーの所持する勤務履歴か確認
-    def verify_work_by_id
-        @work = Work.find(params[:id])
-        @user = User.find(params[:user_id])
-        unless @work.user_id == @user.id
-            Rails.logger.warn "Invalid work access attempt: work_id=#{@work.id}, user_id=#{@user.id}, current_user_id=#{current_user&.id}"
-            flash[:alert] = "不正なアクセスです"
-            redirect_to(user_works_path(@user))
+    def set_and_verify_work(key = :id, verify: true)
+        work_id = params[key]
+        Rails.logger.debug "Fetching work record by #{key}: params[#{key}]=#{work_id}"
+
+        begin
+            @work = Work.find(work_id)
+
+            # 管理者の場合はチェックしない
+            return if current_user.is_admin
+
+            # ログイン中のユーザーの勤務履歴であることを確認
+            unless @work.user_id == current_user.id
+                Rails.logger.warn "Invalid work access attempt: work_user_id=#{@work.user_id}, current_user_id=#{current_user&.id}"
+                flash[:alert] = "不正なアクセスです"
+                redirect_to(home_users_path) and return
+            end
+
+            Rails.logger.info "Access verified for work_id=#{@work.id}"
+        rescue ActiveRecord::RecordNotFound => e
+            Rails.logger.warn "Work not found with #{key}=#{work_id}: #{e.message}"
+            if current_user.admin
+                flash[:alert] = "存在しないIDです"
+            else
+                flash[:alert] = "不正なアクセスです"
+            end
+            redirect_to(home_users_path) and return
         end
     end
+
 
     # 最新の出勤記録と休憩記録を取得
     def set_latest_records
