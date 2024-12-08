@@ -65,18 +65,16 @@
       %th
         = f.label :family_name_kana, class: 'form-label d-flex align-items-center' do
           %span姓(かな)
-          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
       %td
-        = f.text_field :family_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}", required: true
+        = f.text_field :family_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
         .invalid-feedback
           姓(かな)は30字以内で、ひらがなで入力してください。
     %tr
       %th
         = f.label :first_name_kana, class: 'form-label d-flex align-items-center' do
           %span 名(かな)
-          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
       %td
-        = f.text_field :first_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}", required: true
+        = f.text_field :first_name_kana, class: 'form-control', pattern: "[ぁ-ん]{1,30}"
         .invalid-feedback
           名(かな)は30字以内で、ひらがなで入力してください。
     %tr
