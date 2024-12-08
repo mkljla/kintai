@@ -1,22 +1,23 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
-  username: postgres
-  password: password
-  pool: 5
-  timezone: "Asia/Tokyo" # タイムゾーンを日本時間に設定
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timezone: "Asia/Tokyo"
 
 development:
   <<: *default
   database: rails_app_development
-# test:
-#   <<: *default
-#   database: rails_app_test
+  host: db
+  username: postgres
+  password: password
 
-# production:
-#   <<: *default
-#   database: rails_app_production
-#   username: <%= ENV['POSTGRES_USERNAME'] %>
-#   password: <%= ENV['POSTGRES_PASWSWORD'] %>
-#   host: <%= ENV['POSTGRES_HOST'] %>
+test:
+  <<: *default
+  database: rails_app_test
+  host: db
+  username: postgres
+  password: password
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %> # Renderが提供するDATABASE_URLを使用
