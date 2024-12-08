@@ -49,18 +49,18 @@
           %span 姓
           %span.badge.rounded-pill.text-bg-danger.mx-2 必須
       %td
-        = f.text_field :family_name, class: 'form-control', required: true, pattern: "[ぁ-んァ-ン一-龥a-zA-Z]{1,30}"
+        = f.text_field :family_name, class: 'form-control', required: true, pattern: "[ぁ-んァ-ン一-龥a-zA-Z]{1,20}"
         .invalid-feedback.text-wrap
-          姓は30文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
+          姓は20文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
     %tr
       %th
         = f.label :first_name, class: 'form-label d-flex align-items-center' do
           %span 名
           %span.badge.rounded-pill.text-bg-danger.mx-2 必須
       %td
-        = f.text_field :first_name, class: 'form-control', required: true, pattern: "[ぁ-んァ-ン一-龥a-zA-Z]{1,30}"
+        = f.text_field :first_name, class: 'form-control', required: true, pattern: "[ぁ-んァ-ン一-龥a-zA-Z]{1,20}"
         .invalid-feedback
-          名は30文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
+          名は20文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
     %tr
       %th
         = f.label :family_name_kana, class: 'form-label d-flex align-items-center' do
