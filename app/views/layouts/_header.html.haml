@@ -28,7 +28,7 @@
           .d-flex
             .name_area.d-flex
               %span.name
-                = current_user.full_name
+                = truncate(current_user.full_name, length: 15)
               %span.san さん
             %i.bi.bi-chevron-down.mx-2
 

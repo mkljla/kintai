@@ -59,7 +59,7 @@
         %tr.align-middle
           %td.text-dark= user.employee_number.to_s.rjust(4, '0') # 社員番号
           %td.text-dark= user.department&.name || "未設定" # 部署
-          %td.text-dark= link_to user.full_name, user_path(user.id) # 名前
+          %td.text-dark= link_to truncate(user.full_name, length: 15), user_path(user.id) # 名前
           %td.text-dark= user.working_status_str # ステータス
           %td.text-dark= user.date_of_hire.strftime('%Y/%m/%d') # 入社日
           %td.text-dark= user.date_of_termination ? user.date_of_termination : "" # 退職日

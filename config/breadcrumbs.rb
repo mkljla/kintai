@@ -8,7 +8,7 @@ end
 
 crumb :users_show do |user, admin_mode|
 
-  link "社員詳細(#{user.full_name})", user_path(user)
+  link "社員詳細(#{truncate(user.full_name, length: 15)})", user_path(user)
   if admin_mode
     parent :users_index
   else
@@ -18,7 +18,7 @@ end
 
 
 crumb :works_index  do |user, admin_mode|
-  link "勤務履歴(#{user.full_name})",  user_works_path(user)
+  link "勤務履歴(#{truncate(user.full_name, length: 15)})",  user_works_path(user)
   if admin_mode
     parent :users_index
   else
