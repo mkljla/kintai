@@ -3,7 +3,6 @@ body[data-controller="users"][data-action="new"] {
   .vertical-table {
     width: fit-content;
     border-collapse: collapse;
-    width: 25rem;
     margin-bottom: 1.5rem;
 
     th,
@@ -14,6 +13,7 @@ body[data-controller="users"][data-action="new"] {
     }
 
     th {
+      width: 10rem;
       font-weight: normal;
       background-color: #f9f9f9;
       padding: 0.3rem 2rem 0.3rem 0.6rem;
@@ -29,6 +29,7 @@ body[data-controller="users"][data-action="new"] {
       }
     }
     td {
+      width: 15rem;
       font-size: 0.9rem;
       // padding: 0rem;
       padding: 0.3rem;
