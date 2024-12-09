@@ -121,6 +121,7 @@ def create_user
       date_of_hire: date_of_hire,
       date_of_termination: date_of_termination,
       password: "password",
+      password_confirmation: 'password',
       department_id: department_id,
       is_admin: is_admin,
     )
