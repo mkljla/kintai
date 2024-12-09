@@ -12,7 +12,7 @@
       %th
         = f.label :department_id, class: 'form-label d-flex align-items-center' do
           %span 部署
-          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
+
       %td
         = f.collection_select :department_id, @departments, :id, :name, { prompt: "未選択" }, class: "form-select"
         .invalid-feedback
