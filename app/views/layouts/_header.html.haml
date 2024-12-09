@@ -4,7 +4,7 @@
     .app-header__start
       %a.brand{href: @admin_mode ? admin_users_path :  home_users_path} 勤怠管理アプリケーション
 
-      - if current_user.is_admin?
+      - if current_user.is_admin
         .dropdown
           %button.btn.btn-primary.dropdown-toggle{type: "button", "data-bs-toggle" => "dropdown", "aria-expanded" => "false", class: @admin_mode ? 'btn-secondary' : 'btn-primary' }
             = @admin_mode ? "管理者モード" : "一般モード"
