@@ -14,12 +14,12 @@ class ApplicationController < ActionController::Base
     def reset_demo_data
         Rails.logger.info "Starting demo data reset process"
 
-        # 開発環境・テスト環境でのみ実施する
-        unless Rails.env.development? || Rails.env.test?
-            Rails.logger.warn "Access denied: reset_demo_data is allowed only in development or test environments"
-            render plain: 'This operation is allowed only in development or test environments', status: :forbidden
-            return
-        end
+        # # 開発環境・テスト環境でのみ実施する
+        # unless Rails.env.development? || Rails.env.test?
+        #     Rails.logger.warn "Access denied: reset_demo_data is allowed only in development or test environments"
+        #     render plain: 'This operation is allowed only in development or test environments', status: :forbidden
+        #     return
+        # end
 
         begin
             ActiveRecord::Base.transaction do
