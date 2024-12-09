@@ -22,8 +22,6 @@
       %td= @user.date_of_termination ? @user.date_of_termination.strftime('%Y/%m/%d') : "-"
 
 
-
-
 .headline 社員情報
 %table.vertical-table.mb-3
   %tbody
@@ -37,6 +35,7 @@
       %th 生年月日
       %td= @user.birthday.strftime('%Y/%m/%d')
 
-.d-flex.gap-2
-  = link_to '編集',  edit_admin_user_path(@user), class: 'btn btn-primary'# 編集
+- if current_user.is_admin && @admin_mode
+  .d-flex.gap-2
+    = link_to '編集',  edit_admin_user_path(@user), class: 'btn btn-primary'# 編集
 
