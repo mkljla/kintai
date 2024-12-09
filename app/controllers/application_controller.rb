@@ -84,11 +84,20 @@ class ApplicationController < ActionController::Base
             flash[:alert] = "権限がありません"
             redirect_to login_path
         end
+
+        unless @admin_mode
+            flash[:alert] = "管理者モードが無効です"
+            redirect_to home_users_path unless admin_mode_active?
+        end
     end
 
     def set_admin_mode
         Rails.logger.debug "Admin mode set to #{@admin_mode} for user_id=#{current_user&.id}"
         @admin_mode = session[:admin_mode]
+    end
+
+    def admin_mode_active?
+        @admin_mode
     end
 
     # --- ユーザー関連 ---
