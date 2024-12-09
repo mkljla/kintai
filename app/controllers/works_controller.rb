@@ -31,7 +31,7 @@ class WorksController < ApplicationController
   end
 
   def show
-    @breaks = Break.where(work_id: @work.id)
+    @breaks = Break.where(work_id: @work.id).order(:start_datetime, :id)
 
   end
 

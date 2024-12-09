@@ -55,7 +55,7 @@
         - is_holiday = @holidays.include?(date) # 祝日かどうか
         - is_saturday = date.saturday? # 土曜かどうか
         - is_sunday = date.sunday? # 日曜かどうか
-        - works = (@works_by_date[date] || []).sort_by { |work| work.start_datetime }
+        - works = (@works_by_date[date] || []).sort_by { |work| [work.start_datetime.to_i, work.id] }
         - if works.any?
           - works.each_with_index do |work, index|
             %tr.align-middle
