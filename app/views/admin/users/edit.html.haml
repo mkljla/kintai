@@ -1,8 +1,8 @@
 - breadcrumb :users_edit, @user, @admin_mode
 - content_for(:title, '社員編集')
 
-= form_with model: @user, url: @user.new_record? ? users_path : user_path(@user), local: true, html: { class: 'needs-validation', novalidate: true } do |f|
-  = render "users/user_form", { f: f, user: @user }
+= form_with model: @user, url: @user.new_record? ? admin_users_path : admin_user_path(@user), local: true, html: { class: 'needs-validation', novalidate: true } do |f|
+  = render "user_form", { f: f, user: @user }
   .d-flex.gap-2
     = link_to '戻る', user_path(@user), class: 'btn btn-secondary'
     = f.submit "更新", class: 'btn btn-primary'

@@ -1,5 +1,5 @@
-body[data-controller="users"][data-action="edit"],
-body[data-controller="users"][data-action="new"] {
+body[data-controller="admin/users"][data-action="edit"],
+body[data-controller="admin/users"][data-action="new"] {
   .vertical-table {
     width: fit-content;
     border-collapse: collapse;

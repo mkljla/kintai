@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'  # ログアウト処理
 
 
-  resources :users, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
+  resources :users, only: [:show] do
     collection do
       get 'home', to: 'users#home', as: 'home'
     end
@@ -26,6 +26,12 @@ Rails.application.routes.draw do
     resources :breaks, only: [:index, :show, :create, :update]
 
   end
+
+  # 管理者専用の操作
+  namespace :admin do
+    resources :users, only: [:index, :new, :create, :destroy, :edit, :update]
+  end
+
   post 'reset_demo_data', to: 'application#reset_demo_data'
 
   # 管理者モードの切り替え

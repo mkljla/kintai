@@ -2,7 +2,7 @@
 
   .wrapper.app-header__wrapper
     .app-header__start
-      %a.brand{href: @admin_mode ? users_path : home_users_path} 勤怠管理アプリケーション
+      %a.brand{href: @admin_mode ? admin_users_path :  home_users_path} 勤怠管理アプリケーション
 
       - if current_user.is_admin?
         .dropdown

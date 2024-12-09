@@ -15,12 +15,12 @@ class BreaksController < ApplicationController
     end
 
     flash[:notice] = "休憩を開始しました。"
-    redirect_to home_users_path
+    redirect_to  home_users_path
 
   rescue StandardError => e
     Rails.logger.error("Error during break creation: #{e.message}")
     flash[:alert] = "休憩時間の登録に失敗しました。"
-    redirect_to home_users_path
+    redirect_to  home_users_path
   end
 
   def update
@@ -44,13 +44,13 @@ class BreaksController < ApplicationController
     end
 
     flash[:notice] = "休憩を終了しました。"
-    redirect_to home_users_path
+    redirect_to  home_users_path
 
   rescue StandardError => e
     # 例外処理
     Rails.logger.error("Error during break update: #{e.message}")
     flash[:alert] = "休憩の終了に失敗しました"
-    redirect_to home_users_path
+    redirect_to  home_users_path
   end
 
 end

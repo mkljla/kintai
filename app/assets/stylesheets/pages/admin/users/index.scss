@@ -1,4 +1,4 @@
-body[data-controller="users"][data-action="index"] {
+body[data-controller="admin/users"][data-action="index"] {
   .table-wrapper {
     overflow-y: auto; // 縦スクロールを有効化
     border: 1px solid #ddd; // 見やすくするための枠線

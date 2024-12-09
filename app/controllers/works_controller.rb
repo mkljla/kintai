@@ -48,12 +48,12 @@ class WorksController < ApplicationController
     end
 
     flash[:notice] = "出勤時間を登録しました。"
-    redirect_to home_users_path
+    redirect_to  home_users_path
 
   rescue StandardError => e
     flash[:alert] = "出勤時間の登録に失敗しました。"
     Rails.logger.error("Error during work creation: #{e.message}")
-    redirect_to home_users_path
+    redirect_to  home_users_path
   end
 
 
@@ -80,14 +80,14 @@ class WorksController < ApplicationController
     end
 
     flash[:notice] = "退勤時間を登録しました。"
-    redirect_to home_users_path
+    redirect_to  home_users_path
 
 
   rescue StandardError => e
     # 例外処理
     flash[:alert] = "退勤時間の終了に失敗しました"
     Rails.logger.error("Error during work update: #{e.message}")
-    redirect_to home_users_path
+    redirect_to  home_users_path
   end
 
 

@@ -78,18 +78,7 @@ class ApplicationController < ActionController::Base
 
     # --- 権限関連 ---
 
-    def require_admin
-        unless current_user.is_admin
-            Rails.logger.warn "Unauthorized access attempt by user_id=#{current_user&.id}"
-            flash[:alert] = "権限がありません"
-            redirect_to login_path
-        end
 
-        unless @admin_mode
-            flash[:alert] = "管理者モードが無効です"
-            redirect_to home_users_path unless admin_mode_active?
-        end
-    end
 
     def set_admin_mode
         Rails.logger.debug "Admin mode set to #{@admin_mode} for user_id=#{current_user&.id}"
@@ -121,18 +110,18 @@ class ApplicationController < ActionController::Base
             if verify && @user != current_user
                 Rails.logger.warn "Unauthorized access attempt by user_id=#{current_user.id} to user_id=#{@user.id}"
                 flash[:alert] = "不正なアクセスです"
-                redirect_to(home_users_path) and return
+                redirect_to( home_users_path) and return
             end
 
             Rails.logger.info "Access verified for user_id=#{@user.id}"
         rescue ActiveRecord::RecordNotFound => e
             Rails.logger.warn "User not found with #{key}=#{user_id}: #{e.message}"
-            if current_user.admin
+            if current_user.is_admin
                 flash[:alert] = "存在しないIDです"
             else
                 flash[:alert] = "不正なアクセスです"
             end
-            redirect_to(home_users_path) and return
+            redirect_to( home_users_path) and return
         end
     end
 
@@ -164,7 +153,7 @@ class ApplicationController < ActionController::Base
             unless @work.user_id == current_user.id
                 Rails.logger.warn "Invalid work access attempt: work_user_id=#{@work.user_id}, current_user_id=#{current_user&.id}"
                 flash[:alert] = "不正なアクセスです"
-                redirect_to(home_users_path) and return
+                redirect_to( home_users_path) and return
             end
 
             Rails.logger.info "Access verified for work_id=#{@work.id}"
@@ -175,7 +164,7 @@ class ApplicationController < ActionController::Base
             else
                 flash[:alert] = "不正なアクセスです"
             end
-            redirect_to(home_users_path) and return
+            redirect_to( home_users_path) and return
         end
     end
 
