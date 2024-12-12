@@ -4,10 +4,10 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     create_table :users do |t|
       t.integer :employee_number, null: false, unique: true, comment: "社員番号"
       t.string :full_name, comment: "フルネーム"
-      t.string :family_name, null: false, comment: "姓"
-      t.string :first_name, null: false, comment: "名"
-      t.string :family_name_kana, null: false, comment: "姓(かな)"
-      t.string :first_name_kana, null: false, comment: "名(かな)"
+      t.string :family_name, null: false, comment: "姓", limit: 20
+      t.string :first_name, null: false, comment: "名", limit: 20
+      t.string :family_name_kana, null: false, comment: "姓(かな)", limit: 30
+      t.string :first_name_kana, null: false, comment: "名(かな)", limit: 30
       t.string :full_name_kana, comment: "フルネーム(かな)"
       t.date :birthday, null: false, comment: "生年月日"
       t.date :date_of_hire, null: false, comment: "入社日"
