@@ -9,17 +9,21 @@ class Work < ApplicationRecord
 
   # バリデーション
   validates :user_id, presence: true
+  validate :end_datetime_after_start_datetime, if: -> { end_datetime.present? }
 
   # ===============
   # スコープ
   # ===============
 
   # created_atカラムを降順で取得する
-  scope :sorted, -> { order(created_at: :desc) }
+  # scope :sorted, -> { order(created_at: :desc) } #NOTE 不要なら削除
+
   # 今日作成されたレコード
   scope :today, -> { where(created_at: Time.current.beginning_of_day..Time.current.end_of_day) }
   # 最新のレコード
   scope :latest_one, -> { order(created_at: :desc).limit(1) }
+
+
   # ===============
   # メソッド
   # ===============
@@ -46,5 +50,13 @@ class Work < ApplicationRecord
     overtime > 0 ? overtime : 0
   end
 
+  private
 
+  def end_datetime_after_start_datetime
+    return if start_datetime.blank?
+
+    if end_datetime <= start_datetime
+      errors.add(:end_datetime, "は出勤時間より後に設定してください")
+    end
+  end
 end
