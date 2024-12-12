@@ -9,15 +9,16 @@ class Work < ApplicationRecord
 
   # バリデーション
   validates :user_id, presence: true
-  validate :end_datetime_after_start_datetime, if: -> { end_datetime.present? }
+  validates :start_datetime, presence: true, on: :create
+  # validates :end_datetime, presence: true, on: :update #FIXME 適応タイミング不明
+  # validate :end_datetime_after_start_datetime, if: -> { end_datetime.present? } #FIXME 適応タイミング不明
 
   # ===============
   # スコープ
   # ===============
 
   # created_atカラムを降順で取得する
-  # scope :sorted, -> { order(created_at: :desc) } #NOTE 不要なら削除
-
+  scope :sorted, -> { order(created_at: :desc) }
   # 今日作成されたレコード
   scope :today, -> { where(created_at: Time.current.beginning_of_day..Time.current.end_of_day) }
   # 最新のレコード
