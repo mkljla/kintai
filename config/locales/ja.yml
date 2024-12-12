@@ -6,3 +6,40 @@ ja:
     errors:
       messages:
         record_invalid: "入力内容に不備があります。"
+
+    attributes:
+      user:
+        employee_number: "社員番号"
+        full_name: "フルネーム"
+        family_name: "姓"
+        first_name: "名"
+        family_name_kana: "姓(かな)"
+        first_name_kana: "名(かな)"
+        full_name_kana: "フルネーム(かな)"
+        birthday: "生年月日"
+        date_of_hire: "入社日"
+        date_of_termination: "退職日"
+        password_digest: "パスワード（ハッシュ）"
+        department_id: "部門ID"
+        is_admin: "管理者フラグ"
+        working_status: "ステータス"
+      department:
+        name: "部門名"
+        sort_no: "表示順"
+      work:
+        user_id: "ユーザーID"
+        start_datetime: "出勤時間"
+        end_datetime: "退勤時間"
+        total_work_time_in_minutes: "勤務開始から勤務終了までの合計時間"
+        total_break_time_in_minutes: "休憩時間の合計"
+        actual_work_time_in_minutes: "実労働時間"
+        total_overtime_in_minutes: "残業時間の合計"
+      break:
+        work_id: "勤務ID"
+        start_datetime: "休憩開始時間"
+        end_datetime: "休憩終了時間"
+        break_time_in_minutes: "休憩時間(分)"
+      m_work_hour_setting:
+        standard_working_time_minutes: "基本労働時間"
+        applicable_start_date: "適用開始日"
+        applicable_end_date: "適用終了日"
