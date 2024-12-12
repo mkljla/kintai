@@ -21,11 +21,27 @@ class User < ApplicationRecord
   # バリデーション
   # ===============
   has_secure_password # パスワードをハッシュ化
-  validates :employee_number, :first_name, :family_name, :birthday, :date_of_hire, presence: true
-  validates :employee_number, uniqueness: true
-  validates :first_name, :family_name, length: { maximum: 30 }, format: { with: /\A[ぁ-んァ-ン一-龥a-zA-Z]/ , message: "はひらがな、カタカナ、漢字、またはアルファベットで入力してください" }
-  validates :first_name_kana, :family_name_kana, allow_blank: true, length: { maximum: 30 }, format: { with: /\A[ぁ-ん]+\z/ , message: "はひらがなで入力してください" }
 
+  # Presence validations
+  validates:employee_number, :first_name, :family_name, :birthday, :date_of_hire, presence: true
+  # Uniqueness validation
+  validates :employee_number, uniqueness: true
+  # Length and format validations
+  with_options length: { maximum: 20 }, format: {
+    with: /\A[ぁ-んァ-ン一-龥a-zA-Z]/,
+    message: "はひらがな、カタカナ、漢字、またはアルファベットで入力してください"
+  } do
+    validates :first_name
+    validates :family_name
+  end
+
+  with_options length: { maximum: 30 }, allow_blank: true, format: {
+    with: /\A[ぁ-ん]+\z/,
+    message: "はひらがなで入力してください"
+  } do
+    validates :first_name_kana
+    validates :family_name_kana
+  end
 
   # ===============
   # スコープ
