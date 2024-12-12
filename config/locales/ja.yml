@@ -28,8 +28,8 @@ ja:
         sort_no: "表示順"
       work:
         user_id: "ユーザーID"
-        start_datetime: "出勤時間"
-        end_datetime: "退勤時間"
+        start_datetime: "出勤日時"
+        end_datetime: "退勤日時"
         total_work_time_in_minutes: "勤務開始から勤務終了までの合計時間"
         total_break_time_in_minutes: "休憩時間の合計"
         actual_work_time_in_minutes: "実労働時間"

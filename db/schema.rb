@@ -61,8 +61,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
 
   create_table "works", force: :cascade do |t|
     t.bigint "user_id", null: false, comment: "ユーザーID"
-    t.datetime "start_datetime", precision: nil, comment: "出勤時間"
-    t.datetime "end_datetime", precision: nil, comment: "退勤時間"
+    t.datetime "start_datetime", precision: nil, comment: "出勤日時"
+    t.datetime "end_datetime", precision: nil, comment: "退勤日時"
     t.integer "total_work_time_in_minutes", default: 0, comment: "勤務開始から勤務終了までの合計時間"
     t.integer "total_break_time_in_minutes", default: 0, comment: "休憩時間の合計"
     t.integer "actual_work_time_in_minutes", default: 0, comment: "実労働時間"
