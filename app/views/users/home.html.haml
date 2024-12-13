@@ -36,23 +36,25 @@
         %th.text-primary-emphasis 退勤時間
         %th.text-primary-emphasis 休憩開始時間
         %th.text-primary-emphasis 休憩終了時間
-
+        %th.text-primary-emphasis
     %tbody.table-group-divider
-      - # 出勤・退勤時間の行
+      - rowspan_value = @breaks.size.nonzero? || 1 # 休憩が存在する場合はその数、ない場合は1
+
       %tr.align-middle
-        %td.text-primary-emphasis{ rowspan: @breaks.any? ? @breaks.size : 1 }= formatted_time_only(@latest_work.start_datetime) # 出勤時間
-        %td.text-primary-emphasis{ rowspan: @breaks.any? ? @breaks.size : 1 }=@latest_work.end_datetime.present? ? formatted_time_only(@latest_work.end_datetime) : "-" # 退勤時間
+        %td.text-primary-emphasis{ rowspan: rowspan_value }= formatted_time_only(@latest_work.start_datetime) # 出勤時間
+        %td.text-primary-emphasis{ rowspan: rowspan_value }=@latest_work.end_datetime.present? ? formatted_time_only(@latest_work.end_datetime) : "-" # 退勤時間
 
-        - # 最初の休憩時間を表示（存在する場合）
-        - if @breaks.any?
-          - first_break = @breaks.first
-          %td.text-dark= first_break.start_datetime.present? ? formatted_time_only(first_break.start_datetime) : "-" # 最初の休憩開始時間
-          %td.text-dark= first_break.end_datetime.present? ? formatted_time_only(first_break.end_datetime) : "-" # 最初の休憩終了時間
-        - else
-          %td{"colspan" => 2} -
+        - if @breaks.any? # 休憩が存在する場合の処理
+          - first_break = @breaks.first # 最初の休憩データを取得
+          %td.text-dark= formatted_time_only(first_break.start_datetime) || "-" # 最初の休憩開始時間
+          %td.text-dark= formatted_time_only(first_break.end_datetime) || "-" # 最初の休憩終了時間
+        - else # 休憩がない場合の処理
+          %td -
+          %td -
+        %td.text-center.text-primary-emphasis{ rowspan: rowspan_value }= link_to '詳細', user_work_path(@user, @latest_work), class: "btn btn-primary btn-sm" # 詳細ボタン
 
-      - # 残りの休憩時間を行として表示
-      - @breaks.drop(1).each do |break_time|
+      - # 最初の休憩以外のデータをループ処理して出力
+      - @breaks.drop(1).each do |break_time| # 最初の休憩（index 0）はスキップ
         %tr.align-middle
-          %td.text-dark= break_time.start_datetime.present? ? formatted_time_only(break_time.start_datetime) : "-" # 休憩開始時間
-          %td.text-dark= break_time.end_datetime.present? ? formatted_time_only(break_time.end_datetime) : "-" # 休憩終了時間
+          %td.text-dark= formatted_time_only(break_time.start_datetime) || "-" # 休憩開始時間
+          %td.text-dark= formatted_time_only(break_time.end_datetime) || "-" # 休憩終了時間

@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def formatted_time_only(datetime)
-    Time.at((datetime).to_i).in_time_zone('Tokyo').strftime("%H:%M")
+    datetime.present? ? Time.at((datetime).to_i).in_time_zone('Tokyo').strftime("%H:%M"): nil
   end
 
   # 分を「時間:分」形式に変換するメソッド
