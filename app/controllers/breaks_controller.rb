@@ -33,10 +33,12 @@ class BreaksController < ApplicationController
       # 休憩時間を登録
       @latest_break.break_time_in_minutes = (break_seconds / 60).to_i
 
-      raise ActiveRecord::Rollback unless @latest_break.save
+      @latest_break.save!
 
       # 累計休憩時間を登録
       @latest_work.total_break_time_in_minutes = @latest_work.calculate_total_break_time
+      # バリデーションコンテキストを指定
+      @latest_work.validation_context = :break_update
 
       @latest_work.save!
       # ステータスを勤務中に更新

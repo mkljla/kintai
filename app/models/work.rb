@@ -7,11 +7,14 @@ class Work < ApplicationRecord
   belongs_to :user
   has_many :breaks, dependent: :destroy
 
+  # 仮想属性を設定
+  attr_accessor :validation_context
+
   # バリデーション
   validates :user_id, presence: true
   validates :start_datetime, presence: true, on: :create
-  # validates :end_datetime, presence: true, on: :update #FIXME 適応タイミング不明
-  # validate :end_datetime_after_start_datetime, if: -> { end_datetime.present? } #FIXME 適応タイミング不明
+  validates :end_datetime, :total_work_time_in_minutes, :actual_work_time_in_minutes, :total_overtime_in_minutes, presence: true, if: -> { validation_context == :work_update }
+  validates :total_break_time_in_minutes, presence: true, if: -> { validation_context == :break_update }
 
   # ===============
   # スコープ
@@ -53,11 +56,4 @@ class Work < ApplicationRecord
 
   private
 
-  def end_datetime_after_start_datetime
-    return if start_datetime.blank?
-
-    if end_datetime <= start_datetime
-      errors.add(:end_datetime, "は出勤時間より後に設定してください")
-    end
-  end
 end
