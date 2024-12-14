@@ -159,7 +159,7 @@ class ApplicationController < ActionController::Base
             Rails.logger.info "Access verified for work_id=#{@work.id}"
         rescue ActiveRecord::RecordNotFound => e
             Rails.logger.warn "Work not found with #{key}=#{work_id}: #{e.message}"
-            if current_user.admin
+            if current_user.is_admin
                 flash[:alert] = "存在しないIDです"
             else
                 flash[:alert] = "不正なアクセスです"
