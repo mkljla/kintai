@@ -84,3 +84,5 @@ gem 'pg'
 gem 'holiday_japan'
 
 gem 'gretel'
+
+gem "chartkick"
