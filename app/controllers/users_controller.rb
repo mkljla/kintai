@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   # ホーム画面
   def home
     @works_today = @user.works.today.includes(:breaks).sorted
-    @latest_work = @works_today.latest_one.first
-    @breaks =  @latest_work&.breaks&.order(:start_datetime, :id)
+    @work = @works_today.latest_one.first
+    @breaks =  @work&.breaks&.order(:start_datetime, :id)
   end
 
   # ユーザー詳細画面
