@@ -22,9 +22,10 @@ Rails.application.routes.draw do
       get 'home', to: 'users#home', as: 'home'
     end
 
-    resources :works, only: [:index, :show, :create, :update]
+    resources :works, only: [:index, :show, :create, :update] do
+      get 'get_timeline_data', on: :member  # タイムラインデータを取得するルート
+    end
     resources :breaks, only: [:index, :show, :create, :update]
-
   end
 
   # 管理者専用の操作

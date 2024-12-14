@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
-  before_action -> { set_and_verify_user(:user_id) }, only:[:index, :show]
-  before_action -> { set_and_verify_work(:id)}, only:[:show] # params[:id]を@workにセット
+  before_action -> { set_and_verify_user(:user_id) }, only:[:index, :show, :get_timeline_data]
+  before_action -> { set_and_verify_work(:id)}, only:[:show, :get_timeline_data] # params[:id]を@workにセット
   before_action :set_latest_records, only:[:update] # 最新のworkとbreakを取得
 
   def index
@@ -92,7 +92,38 @@ class WorksController < ApplicationController
     redirect_to  home_users_path
   end
 
+  def get_timeline_data
 
+    # @workがnilの場合、タイムラインデータを返さず、何も表示しない
+    if @work.nil?
+      render json: { message: '最新の勤務データはありません' }, status: :no_content
+      return
+    end
+    @breaks =  @work&.breaks&.order(:start_datetime, :id)
+
+    # 最新の勤務の開始・終了時間
+    start_time = @work.start_datetime
+    end_time = @work.end_datetime
+
+    # 休憩データを整形
+    breaks_data = @breaks.map do |b|
+      {
+        break_id: b.id,
+        start_time: b.start_datetime,
+        end_time: b.end_datetime
+      }
+    end
+
+    # タイムラインに必要なデータを整形
+    @timeline_data = {
+      start_time: start_time,
+      end_time: end_time,
+      breaks: breaks_data
+    }
+
+    # JSON形式でデータを返す
+    render json: @timeline_data
+  end
   private
 
 

@@ -80,3 +80,6 @@
           %td.text-dark= minutes_to_hours_and_minutes(@work.actual_work_time_in_minutes)
           %td.text-dark= minutes_to_hours_and_minutes(@work.total_break_time_in_minutes)
           %td.text-dark= minutes_to_hours_and_minutes(@work.total_overtime_in_minutes)
+
+#app{"data-user-id" => "#{@user.id}", "data-work-id" => "#{@work.id}"}
+%div{id: "timeline", style: "height: 200px;"}
