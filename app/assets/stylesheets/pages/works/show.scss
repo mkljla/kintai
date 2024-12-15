@@ -1,34 +1,29 @@
 body[data-controller="works"][data-action="show"] {
-  .tables-container {
-    width: fit-content;
-    table {
-      white-space: nowrap; /* テキストを1行に収める */
-      color: $text-color;
-      table-layout: auto; /* 内容に基づいて列幅を調整 */
-      width: auto; /* テーブル幅も内容に応じて可変 */
+  .date {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  .card {
+    .card-header {
+    }
 
-      font-size: 1rem;
-      border-collapse: collapse;
-      border: none;
-      thead {
-        tr {
-          th {
-            border: none;
-            font-size: 0.8rem;
-            padding-bottom: 0;
-          }
-        }
+    .card-body {
+      padding: 0.7rem;
+      gap:1rem;
+      display: flex;
+
+      gap: 0.5rem;
+      flex-direction: column;
+
+      .card-title {
+        font-weight: bold;
       }
-      tbody {
-        tr {
-          td {
-            border: none;
-            .date {
-            }
-            .time {
-            }
-          }
-        }
+      .card-text {
+      }
+      .sub-text {
+        margin-top: 0.5rem;
+        color: $muted-text-color;
+        font-size: 0.7rem;
       }
     }
   }
