@@ -33,6 +33,17 @@ class WorksController < ApplicationController
   def show
     @breaks = Break.where(work_id: @work.id).order(:start_datetime, :id)
 
+    # ユーザーが所持している勤務データを日付順（または適切な順序）で取得
+    user_works = @user.works.order(:start_datetime)
+
+    # 現在の @work の位置を見つける
+    work_index = user_works.index(@work)
+
+    # 前の勤務を取得
+    @prev_work = work_index > 0 ? user_works[work_index - 1] : nil
+    # 次の勤務を取得
+    @next_work = work_index < user_works.length - 1 ? user_works[work_index + 1] : nil
+
   end
 
   # 出勤処理
