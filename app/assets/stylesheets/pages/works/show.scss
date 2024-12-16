@@ -1,7 +1,16 @@
 body[data-controller="works"][data-action="show"] {
-  .date {
+  .date-group {
+    display: flex;
     margin-bottom: 1rem;
     font-size: 1rem;
+    align-items: center;
+    .date {
+    }
+    .btn {
+      i {
+        font-size: 0.9rem;
+      }
+    }
   }
   .card {
     .card-header {
@@ -9,7 +18,7 @@ body[data-controller="works"][data-action="show"] {
 
     .card-body {
       padding: 0.7rem;
-      gap:1rem;
+      gap: 1rem;
       display: flex;
 
       gap: 0.5rem;
