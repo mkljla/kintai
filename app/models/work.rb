@@ -50,7 +50,7 @@ class Work < ApplicationRecord
 
   # 残業時間を計算するメソッド
   def calculate_overtime(standard_work_in_minutes)
-    overtime = self.actual_work_time_in_minutes - (Company.find_by(id: 1)&.default_work_hours)
+    overtime = self.actual_work_time_in_minutes - standard_work_in_minutes
     overtime > 0 ? overtime : 0
   end
 
