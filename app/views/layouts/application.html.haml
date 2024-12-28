@@ -47,6 +47,8 @@
       .login-content
         = display_flash_messages
         = yield
+        .app-footer
+          = render 'layouts/footer'
 
     // JavaScript読み込み
     = javascript_include_tag 'application'
