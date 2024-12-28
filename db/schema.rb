@@ -38,14 +38,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "m_work_hour_settings", force: :cascade do |t|
-    t.integer "standard_working_time_minutes", comment: "基本労働時間"
-    t.date "applicable_start_date", comment: "適用開始日"
-    t.date "applicable_end_date", comment: "適用終了日"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.integer "employee_number", null: false, comment: "社員番号"
     t.string "full_name", comment: "フルネーム"
