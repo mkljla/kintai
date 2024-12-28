@@ -24,6 +24,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
     t.index ["work_id"], name: "index_breaks_on_work_id"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name", limit: 50, null: false, comment: "会社名"
+    t.integer "default_work_hours", null: false, comment: "基本労働時間"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false, comment: "部門名"
     t.integer "sort_no", comment: "表示順"
@@ -52,10 +59,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
     t.date "date_of_termination", comment: "退職日"
     t.string "password_digest", null: false, comment: "パスワード（ハッシュ）"
     t.bigint "department_id", comment: "部門ID"
+    t.bigint "company_id", null: false, comment: "会社ID"
     t.boolean "is_admin", default: false, null: false, comment: "管理者フラグ"
     t.integer "working_status", comment: "ステータス"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 
@@ -73,6 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
   end
 
   add_foreign_key "breaks", "works"
+  add_foreign_key "users", "companies"
   add_foreign_key "users", "departments"
   add_foreign_key "works", "users"
 end

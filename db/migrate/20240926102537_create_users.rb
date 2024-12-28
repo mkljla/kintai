@@ -14,6 +14,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.date :date_of_termination, comment: "退職日"
       t.string :password_digest, null: false, comment: "パスワード（ハッシュ）"
       t.references :department, foreign_key: true, comment: "部門ID"
+      t.references :company, foreign_key: true, null: false, comment: "会社ID"
       t.boolean :is_admin, default: false, null: false, comment: "管理者フラグ"
       t.integer :working_status, comment: "ステータス"
       t.timestamps

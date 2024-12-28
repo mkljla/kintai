@@ -82,7 +82,7 @@ class WorksController < ApplicationController
       # 実労働時間を計算
       @latest_work.actual_work_time_in_minutes = @latest_work.calculate_actual_work_time
       # 残業時間を計算
-      @latest_work.total_overtime_in_minutes = @latest_work.calculate_overtime(MWorkHourSetting.standard_work_in_minutes)
+      @latest_work.total_overtime_in_minutes = @latest_work.calculate_overtime(Company.find_by(id: 1)&.default_work_hours)
       # バリデーションコンテキストを指定
       @latest_work.validation_context = :work_update
 

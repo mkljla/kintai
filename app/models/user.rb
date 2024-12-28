@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :works, dependent: :destroy
   has_many :breaks, through: :works  # workを経由してbreaksを取得
   belongs_to :department, optional: true # nilを許容
+  belongs_to :company
 
   # ===============
   # enum 定義

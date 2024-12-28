@@ -11,21 +11,23 @@
 ATTENDANCE_COUNT = 100; # 作成する出勤記録の数
 RETIREMENT_RATE = 1; # 退職率(0.n%)
 
+# 会社
+def create_companies
+  name='テスト第一会社'
+  default_work_hours=8
+  Company.create!(
+    name: name,
+    default_work_hours: default_work_hours,
+
+  )
+end
+
 # 部門データの作成
 def create_departments
-  departments = ['人事部', '経理部', '総務部', 'システム部', '営業部']
+  departments = ['人事部', '経理部', '総務部', 'システム部', '営業部', 'その他']
   departments.each_with_index do |department_name, index|
     Department.create!(name: department_name, sort_no: index + 1)
   end
-end
-
-
-def create_m_work_hour_settings
-  MWorkHourSetting.create!(
-  standard_working_time_minutes: 8,
-  applicable_start_date: Date.new(1950, 1, 1),
-  applicable_end_date: nil
-  )
 end
 
 # 管理者ユーザーの作成
@@ -41,7 +43,8 @@ def create_admin_user
     user.date_of_hire = Date.new(1950, 1, 1)
     user.password = "admin"
     user.is_admin = true
-    user.department_id = nil
+    user.department_id = 1
+    user.company_id =1
   end
 end
 
@@ -124,6 +127,7 @@ def create_user
       password_confirmation: 'password',
       department_id: department_id,
       is_admin: is_admin,
+      company_id: 1,
     )
     # 業務作成
     create_works_for_user(user.id)
@@ -210,11 +214,11 @@ def create_works_for_user(user_id)
     # 実労働時間
     work.actual_work_time_in_minutes = total_working_time -  work.total_break_time_in_minutes
     # 残業時間
-    overtime = work.actual_work_time_in_minutes - MWorkHourSetting.first&.standard_working_time_minutes*60
-    if overtime < 0
-      overtime = 0
-    end
+    company_default_work_hours = Company.find_by(id: 1)&.default_work_hours
+    overtime = work.actual_work_time_in_minutes - (company_default_work_hours * 60)
+    overtime = [overtime, 0].max # マイナスにならないようにする
     work.total_overtime_in_minutes = overtime
+
     # 更新を保存
     work.save!
 
@@ -308,6 +312,6 @@ end
 
 
 # Seed実行
+create_companies
 create_departments
-create_m_work_hour_settings
 create_users_with_works
