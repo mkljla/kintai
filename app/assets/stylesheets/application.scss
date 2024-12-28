@@ -27,7 +27,7 @@
 @import "layouts/*"; // レイアウト (ページ全体の構造、ヘッダーやフッターなど)
 
 // 各ページスタイル
-@import "pages/login";
+@import "pages/sessions/*";
 @import "pages/users/*";
 @import "pages/works/*";
 @import "pages/admin/users/*";
