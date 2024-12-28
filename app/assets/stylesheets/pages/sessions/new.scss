@@ -3,6 +3,7 @@ body[data-controller="sessions"][data-action="new"] {
   .login-content {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     width: 100%;
     font-size: 1rem;
     position: relative; // フラシュメッセージの配置のため
@@ -38,8 +39,6 @@ body[data-controller="sessions"][data-action="new"] {
           font-size: 1rem;
         }
       }
-    }
-    .login-footer {
     }
   }
 }
