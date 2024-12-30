@@ -1,0 +1,10 @@
+%ul.nav.nav-pills.flex-column.mb-auto.sidebar-container
+
+  %li
+    %a.nav-link.link-body-emphasis{ href:admin_users_path}
+      %i.bi.bi-person.mx-2.mx-2.text-dark
+      %span.menu-text.text-dark 社員一覧
+  %li
+    %a.nav-link.link-body-emphasis{href: user_company_path(current_user.id, current_user.company_id)}
+      %i.bi.bi-info-circle.mx-2.text-dark
+      %span.menu-text.text-dark 会社情報
