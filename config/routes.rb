@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       get 'home', to: 'users#home', as: 'home'
     end
 
+    resources :companies, only: [:show]
+
     resources :works, only: [:index, :show, :create, :update] do
       get 'get_timeline_data', on: :member  # タイムラインデータを取得するルート
     end
@@ -31,6 +33,7 @@ Rails.application.routes.draw do
   # 管理者専用の操作
   namespace :admin do
     resources :users, only: [:index, :new, :create, :destroy, :edit, :update]
+    resources :companies, only: [:edit, :update]
   end
 
   post 'reset_demo_data', to: 'application#reset_demo_data'
