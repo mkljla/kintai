@@ -41,3 +41,23 @@ crumb :users_edit do |user,  admin_mode|
   link "社員編集", edit_admin_user_path(user)
   parent :users_show, user, admin_mode
 end
+
+crumb :companies_show do |user, company, admin_mode|
+
+  link "会社情報", user_company_path(user, company)
+  if admin_mode
+    parent :users_index
+  else
+    parent :users_home
+  end
+end
+
+crumb :companies_edit do |user, company, admin_mode|
+
+  link "会社情報編集", user_company_path(user, company)
+  if admin_mode
+    parent :users_index
+  else
+    parent :users_home
+  end
+end
