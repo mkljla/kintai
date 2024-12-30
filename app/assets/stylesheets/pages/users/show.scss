@@ -1,21 +1,2 @@
 body[data-controller="users"][data-action="show"] {
-  .vertical-table {
-    width: fit-content;
-    border-collapse: collapse;
-    width: 25rem;
-
-    th,
-    td {
-      border: 1px solid #ddd;
-      padding: 0.3rem 2rem 0.3rem 0.6rem;
-      text-align: left;
-    }
-
-    th {
-      font-weight: normal;
-      background-color: #f9f9f9;
-    }
-    td {
-    }
-  }
 }
