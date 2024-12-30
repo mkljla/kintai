@@ -1,20 +1,39 @@
 .vertical-table {
   width: fit-content;
   border-collapse: collapse;
-  width: 25rem;
   margin-bottom: 1rem;
+  min-width: fit-content;
 
   th,
   td {
     border: 1px solid #ddd;
     padding: 0.3rem 2rem 0.3rem 0.6rem;
     text-align: left;
+    white-space: nowrap;
   }
 
   th {
     font-weight: normal;
     background-color: #f9f9f9;
+    label {
+      margin-bottom: 0rem;
+      .badge {
+        font-size: 0.6rem;
+        padding: 0.3rem 0.5rem;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+    }
   }
   td {
+    width: 15rem;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.5rem;
+    input,
+    select {
+      font-size: 0.9rem;
+      padding: 0.25rem 0.5rem;
+    }
   }
 }
