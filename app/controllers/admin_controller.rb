@@ -13,6 +13,12 @@ class AdminController < ApplicationController
     end
   end
 
+  def require_admin_mode
+    unless @admin_mode
+        flash[:alert] = "管理者モードが無効です"
+        redirect_to  home_users_path unless admin_mode_active?
+    end
+  end
 
   private
 

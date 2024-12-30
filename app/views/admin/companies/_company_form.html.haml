@@ -1,0 +1,20 @@
+%table.vertical-table
+  %tbody
+    %tr
+      %th
+        = f.label :name, class: ' d-flex align-items-center' do
+          %span 会社名
+          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
+      %td
+        = f.text_field :name, class: 'form-control', required: true, pattern: "[ぁ-んァ-ン一-龥a-zA-Z]{1,50}"
+        .invalid-feedback
+          会社名は50文字以内で、ひらがな、カタカナ、漢字、ローマ字を使用してください
+    %tr
+      %th
+        = f.label :default_work_hours, class: 'form-label d-flex align-items-center' do
+          %span 基本労働時間（h）
+          %span.badge.rounded-pill.text-bg-danger.mx-2 必須
+      %td
+        = f.text_field :default_work_hours, class: 'form-control', required: true, pattern: '\d+(\.\d{1,1})?', title: '数字を入力してください'
+        .invalid-feedback
+          数字で入力してください

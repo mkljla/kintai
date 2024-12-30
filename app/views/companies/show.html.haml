@@ -3,7 +3,7 @@
 
 .headline 基本情報
 
-%table.vertical-table.mb-3
+%table.vertical-table
   %tbody
     %tr
       %th 会社名
@@ -13,5 +13,5 @@
       %td="#{@company.default_work_hours}時間"
 - if current_user.is_admin && @admin_mode
   .d-flex.gap-2
-    = link_to '編集',  edit_admin_user_path(@user), class: 'btn btn-primary'# 編集
+    = link_to '編集',  edit_admin_company_path(@company), class: 'btn btn-primary'# 編集
 

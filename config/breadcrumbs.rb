@@ -45,19 +45,12 @@ end
 crumb :companies_show do |user, company, admin_mode|
 
   link "会社情報", user_company_path(user, company)
-  if admin_mode
-    parent :users_index
-  else
-    parent :users_home
-  end
+
 end
 
 crumb :companies_edit do |user, company, admin_mode|
 
-  link "会社情報編集", user_company_path(user, company)
-  if admin_mode
-    parent :users_index
-  else
-    parent :users_home
-  end
+  link "会社情報編集", user_company_path(company)
+  parent :companies_show, user, company, admin_mode
+
 end
