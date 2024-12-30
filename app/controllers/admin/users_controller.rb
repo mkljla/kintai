@@ -1,5 +1,4 @@
 class Admin::UsersController < AdminController
-
   before_action :require_admin_mode
   before_action -> { set_and_verify_user(:id) }, only:[ :edit, :update]
 
@@ -156,10 +155,4 @@ class Admin::UsersController < AdminController
     %w[asc desc].include?(params[:sort_direction]) ? params[:sort_direction] : 'asc'
   end
 
-  def require_admin_mode
-    unless @admin_mode
-        flash[:alert] = "管理者モードが無効です"
-        redirect_to  home_users_path unless admin_mode_active?
-    end
-  end
 end
