@@ -1,0 +1,17 @@
+- breadcrumb :companies_show, @user, @company, @admin_mode
+- content_for(:title, '会社情報')
+
+.headline 基本情報
+
+%table.vertical-table.mb-3
+  %tbody
+    %tr
+      %th 会社名
+      %td= @company.name
+    %tr
+      %th 基本労働時間
+      %td="#{@company.default_work_hours}時間"
+- if current_user.is_admin && @admin_mode
+  .d-flex.gap-2
+    = link_to '編集',  edit_admin_user_path(@user), class: 'btn btn-primary'# 編集
+
