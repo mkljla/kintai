@@ -2,7 +2,7 @@
 - content_for(:title, '会社情報編集')
 
 = form_with model: @company, url:admin_company_path(@company), local: true, html: { class: 'needs-validation', novalidate: true } do |f|
-  = render "company_form", { f: f, user: @company }
+  = render "company_form", { f: f, company: @company }
   .d-flex.gap-2
     = link_to '戻る', user_company_path(@company), class: 'btn btn-secondary'
     = f.submit "更新", class: 'btn btn-primary'
