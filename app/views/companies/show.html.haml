@@ -9,8 +9,8 @@
       %th 会社名
       %td= @company.name
     %tr
-      %th 基本労働時間
-      %td="#{@company.default_work_hours}時間"
+      %th 基本労働時間（h）
+      %td=@company.default_work_hours
 - if current_user.is_admin && @admin_mode
   .d-flex.gap-2
     = link_to '編集',  edit_admin_company_path(@company), class: 'btn btn-primary'# 編集
