@@ -1,45 +1,47 @@
 ja:
   date:
-    day_names: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+    day_names:
+      ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
     abbr_day_names: ["日", "月", "火", "水", "木", "金", "土"]
   activerecord:
     errors:
+      format: "%{attribute}：%{message}"
       messages:
-        record_invalid: "入力内容に不備があります。"
+        blank: "：入力が必須です"
+        invalid: "：不正な値です"
 
     attributes:
       user:
-        employee_number: "社員番号"
-        full_name: "フルネーム"
-        family_name: "姓"
-        first_name: "名"
-        family_name_kana: "姓(かな)"
-        first_name_kana: "名(かな)"
-        full_name_kana: "フルネーム(かな)"
-        birthday: "生年月日"
-        date_of_hire: "入社日"
-        date_of_termination: "退職日"
-        password_digest: "パスワード（ハッシュ）"
-        department_id: "部門ID"
-        is_admin: "管理者フラグ"
-        working_status: "ステータス"
+        employee_number: "employee_number"
+        full_name: "full_name"
+        family_name: "family_name"
+        first_name: "first_name"
+        family_name_kana: "family_name_kana"
+        first_name_kana: "first_name_kana"
+        full_name_kana: "full_name_kana"
+        birthday: "birthday"
+        date_of_hire: "date_of_hire"
+        date_of_termination: "date_of_termination"
+        password_digest: "password_digest"
+        department_id: "department_id"
+        is_admin: "is_admin"
+        working_status: "working_status"
       department:
-        name: "部門名"
-        sort_no: "表示順"
+        name: "name"
+        sort_no: "sort_no"
       work:
-        user_id: "ユーザーID"
-        start_datetime: "出勤日時"
-        end_datetime: "退勤日時"
-        total_work_time_in_minutes: "勤務開始から勤務終了までの合計時間"
-        total_break_time_in_minutes: "休憩時間の合計"
-        actual_work_time_in_minutes: "実労働時間"
-        total_overtime_in_minutes: "残業時間の合計"
+        user_id: "user_id"
+        start_datetime: "start_datetime"
+        end_datetime: "end_datetime"
+        total_work_time_in_minutes: "total_work_time_in_minutes"
+        total_break_time_in_minutes: "total_break_time_in_minutes"
+        actual_work_time_in_minutes: "actual_work_time_in_minutes"
+        total_overtime_in_minutes: "total_overtime_in_minutes"
       break:
-        work_id: "勤務ID"
-        start_datetime: "休憩開始時間"
-        end_datetime: "休憩終了時間"
-        break_time_in_minutes: "休憩時間(分)"
-      m_work_hour_setting:
-        standard_working_time_minutes: "基本労働時間"
-        applicable_start_date: "適用開始日"
-        applicable_end_date: "適用終了日"
+        work_id: "work_id"
+        start_datetime: "start_datetime"
+        end_datetime: "end_datetime"
+        break_time_in_minutes: "break_time_in_minutes"
+      company:
+        name: "name"
+        default_work_hours: "default_work_hours"
