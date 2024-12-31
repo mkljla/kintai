@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_31_153036) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name", limit: 50, null: false, comment: "会社名"
-    t.integer "default_work_hours", null: false, comment: "基本労働時間"
+    t.float "default_work_hours", null: false, comment: "基本労働時間"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
