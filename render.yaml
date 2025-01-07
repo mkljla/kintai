@@ -1,7 +1,7 @@
 databases:
-  - name: kintai_db # Render上でのデータベースの名前
-    databaseName: kintai_db_wad1 # PostgreSQL内部のデータベース名
-    user: kintai_db_wad1_user # データベースユーザー名
+  - name: kintai_db_2 # Render上でのデータベースの名前
+    databaseName: kintai_db_2 # PostgreSQL内部のデータベース名
+    user: kintai_db_2_user # データベースユーザー名
     plan: free # 無料プラン（Free Planを使用している場合）
 
 services:
